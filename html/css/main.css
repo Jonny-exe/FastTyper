@@ -82,12 +82,15 @@ table {
   width: 100%;
   font-size: 30px;
 }
-#Top1 {
+.Top1 {
   font-size: 200%;
+  background-color: rgb(255,215,0);
 }
-#Top2 {
+.Top2 {
   font-size: 160%;
+  background-color: rgb(192,192,192);
 }
-#Top3 {
+.Top3 {
   font-size: 130%;
+  background-color: rgb(205, 127, 50);
 }

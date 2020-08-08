@@ -1,136 +1,187 @@
-
 <!DOCTYPE html>
+
 <html>
+
 <head>
-<title>TrRankings</title>
-<link href="css/main.css" rel="stylesheet" type="text/css"/>
+  <title>TrRankings</title>
+  <link href="css/main.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
 
-<table id="ranking">
-  <tr>
-    <td>
-      <span id="Top1" >Top 1</span>
-    </td>
-    <td>
-      <span id="place1"></span>
-    </td>
-    <td>
-      <span id="1st"></span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <span id="Top2">Top 2</span>
-    </td>
-    <td>
-      <span id="place2"></span>
-    </td>
-    <td>
-      <span id="2st"></span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <span id="Top3">Top 3</span>
-    </td>
-    <td>
-      <span id="place3"></span>
-    </td>
-    <td>
-      <span id="3st"></span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <span>Top 4</span>
-    </td>
-    <td>
-      <span id="place4"></span>
-    </td>
-    <td>
-      <span id="4st"></span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <span>Top 5</span>
-    </td>
-    <td>
-      <span id="place5"></span>
-    </td>
-    <td>
-      <span id="5st"></span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <span>Top 6</span>
-    </td>
-    <td>
-      <span id="place6"></span>
-    </td>
-    <td>
-      <span id="6st"></span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <span>Top 7</span>
-    </td>
-    <td>
-      <span id="place7"></span>
-    </td>
-    <td>
-      <span id="7st"></span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <span>Top 8</span>
-    </td>
-    <td>
-      <span id="place8"></span>
-    </td>
-    <td>
-      <span id="8st"></span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <span>Top 9</span>
-    </td>
-    <td>
-      <span id="place9"></span>
-    </td>
-    <td>
-      <span id="9st"></span>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <span>Top 10</span>
-    </td>
-    <td>
-      <span id="place10"></span>
-    </td>
-    <td>
-      <span id="10st"></span>
-    </td>
-  </tr>
-</table>
-<form>
+  <table id="ranking">
+    <tr>
+      <td>
+        <span class="Top1">Top 1</span>
+      </td>
+      <td>
+        <span class="Top1" id="place1"></span>
+      </td>
+      <td>
+        <span class="Top1" id="1st"></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="Top2">Top 2</span>
+      </td>
+      <td>
+        <span class="Top2" id="place2"></span>
+      </td>
+      <td>
+        <span class="Top2" id="2st"></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="Top3">Top 3</span>
+      </td>
+      <td>
+        <span class="Top3" id="place3"></span>
+      </td>
+      <td>
+        <span class="Top3" id="3st"></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span>Top 4</span>
+      </td>
+      <td>
+        <span id="place4"></span>
+      </td>
+      <td>
+        <span id="4st"></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span>Top 5</span>
+      </td>
+      <td>
+        <span id="place5"></span>
+      </td>
+      <td>
+        <span id="5st"></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span>Top 6</span>
+      </td>
+      <td>
+        <span id="place6"></span>
+      </td>
+      <td>
+        <span id="6st"></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span>Top 7</span>
+      </td>
+      <td>
+        <span id="place7"></span>
+      </td>
+      <td>
+        <span id="7st"></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span>Top 8</span>
+      </td>
+      <td>
+        <span id="place8"></span>
+      </td>
+      <td>
+        <span id="8st"></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span>Top 9</span>
+      </td>
+      <td>
+        <span id="place9"></span>
+      </td>
+      <td>
+        <span id="9st"></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span>Top 10</span>
+      </td>
+      <td>
+        <span id="place10"></span>
+      </td>
+      <td>
+        <span id="10st"></span>
+      </td>
+    </tr>
+  </table>
+  <form>
 
-<a href="Tr.html">Home</a>
-// TODO: Make rakings work
-</form>
-<script type="text/javascript" src="js/Tr.js"></script>
-<script type"module" src="js/Tr.js"></script>
-<script type="text/javascript">
-  import { topList } from 'js/Tr.js';
-  document.getElementById('1st').innerHTML = top1 +  'cpm';
-  document.getElementById('place1').innerHTML = guy1;
+    <a href="Tr.html">Home</a>
+    // TODO: Make rakings work
+  </form>
+  <script type="text/javascript" src="js/Tr.js"></script>
+  <script type"module" src="js/Tr.js"></script>
+  <script type="text/javascript">
+    username = localStorage.getItem('username');
+    //  import {
+    //    topList
+    //  } from 'js/Tr.js';
+    const queryString = window.location.search;
+    // ?product=shirt&color=blue&newuser&size=m
+    //We can then parse the query string’s parameters using URLSearchParams:
 
-</script>
+    const urlParams = new URLSearchParams(queryString);
+    var top1 = urlParams.get('top1');
+    var guy1 = urlParams.get('guy1');
+    var top2 = urlParams.get('top2');
+    var guy2 = urlParams.get('guy2');
+    var top3 = urlParams.get('top3');
+    var guy3 = urlParams.get('guy3');
+    var top4 = urlParams.get('top4');
+    var guy4 = urlParams.get('guy4');
+    var top5 = urlParams.get('top5');
+    var guy5 = urlParams.get('guy5');
+    var top6 = urlParams.get('top6');
+    var guy6 = urlParams.get('guy6');
+    var top7 = urlParams.get('top7');
+    var guy7 = urlParams.get('guy7');
+    var top8 = urlParams.get('top8');
+    var guy8 = urlParams.get('guy8');
+    var top9 = urlParams.get('top9');
+    var guy9 = urlParams.get('guy9');
+    var top10 = urlParams.get('top10');
+    var guy10 = urlParams.get('guy10');
+    console.log(top1);
+    console.log(guy1);
+    document.getElementById('1st').innerHTML = top1 + 'cpm';
+    document.getElementById('place1').innerHTML = 'From ' + guy1;
+    document.getElementById('2st').innerHTML = top2 + 'cpm';
+    document.getElementById('place2').innerHTML = 'From ' + guy2;
+    document.getElementById('3st').innerHTML = top3 + 'cpm';
+    document.getElementById('place3').innerHTML = 'From ' + guy3;
+    document.getElementById('4st').innerHTML = top4 + 'cpm';
+    document.getElementById('place4').innerHTML = 'From ' + guy4;
+    document.getElementById('5st').innerHTML = top5 + 'cpm';
+    document.getElementById('place5').innerHTML = 'From ' + guy5;
+    document.getElementById('6st').innerHTML = top6 + 'cpm';
+    document.getElementById('place6').innerHTML = 'From ' + guy6;
+    document.getElementById('7st').innerHTML = top7 + 'cpm';
+    document.getElementById('place7').innerHTML = 'From ' + guy7;
+    document.getElementById('8st').innerHTML = top8 + 'cpm';
+    document.getElementById('place8').innerHTML = 'From ' + guy8;
+    document.getElementById('9st').innerHTML = top9 + 'cpm';
+    document.getElementById('place9').innerHTML = 'From ' + guy9;
+    document.getElementById('10st').innerHTML = top10 + 'cpm';
+    document.getElementById('place10').innerHTML = 'From ' + guy10;
+    console.log(guy1, top1);
+  </script>
 </body>
+
 </html>

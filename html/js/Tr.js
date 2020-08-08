@@ -279,29 +279,6 @@ function finalAutoCheck() {
 
 var topList = [];
 
-function exportTops() {
-  return top1,
-    top2,
-    top3,
-    top4,
-    top5,
-    top6,
-    top7,
-    top8,
-    top9,
-    top10,
-    guy1,
-    guy2,
-    guy3,
-    guy4,
-    guy5,
-    guy6,
-    guy7,
-    guy8,
-    guy9,
-    guy10;
-}
-
 function setCheckTops() {
   guy = username;
   points = cpmResult;
@@ -309,59 +286,95 @@ function setCheckTops() {
 }
 
 function checkTops() {
-  console.log(points, username);
   if (points > top1) {
     lastTop = top1;
     lastGuy = guy1;
     top1 = points;
     guy1 = guy;
+    checkTops();
   } else if (points > top2) {
     lastTop = top2;
     lastGuy = guy2;
     top2 = points;
     guy2 = guy;
+    checkTops();
   } else if (points > top3) {
     lastTop = top3;
     lastGuy = guy3;
     top3 = points;
     guy3 = guy;
+    checkTops();
   } else if (points > top4) {
     lastTop = top4;
     lastGuy = guy4;
     top4 = points;
     guy4 = guy;
+    checkTops();
   } else if (points > top5) {
     lastTop = top5;
     lastGuy = guy5;
     top5 = points;
     guy5 = guy;
+    checkTops();
   } else if (points > top6) {
     lastTop = top6;
     lastGuy = guy6;
     top6 = points;
     guy6 = guy;
+    checkTops();
   } else if (points > top7) {
     lastTop = top7;
     lastGuy = guy7;
     top7 = points;
     guy7 = guy;
+    checkTops();
   } else if (points > top8) {
     lastTop = top8;
     lastGuy = guy8;
     top8 = points;
     guy8 = guy;
+    checkTops();
   } else if (points > top9) {
     lastTop = top9;
     lastGuy = guy9;
     top9 = points;
     guy9 = guy;
+    checkTops();
   } else if (points > top10) {
     lastTop = top10;
     lastGuy = guy10;
     top10 = points;
     guy10 = guy;
+    checkTops();
   }
 
-  console.log(top1, guy1);
-  exportTops();
+  console.log("top 10" + top10);
+  localStorage.setItem("top1", top1);
+  localStorage.setItem("guy1", guy1);
+  localStorage.setItem("top1", top1);
+  localStorage.setItem("guy1", guy1);
+  localStorage.setItem("top1", top1);
+  localStorage.setItem("guy1", guy1);
+  localStorage.setItem("top1", top1);
+  localStorage.setItem("guy1", guy1);
+  localStorage.setItem("top1", top1);
+  localStorage.setItem("guy1", guy1);
+  localStorage.setItem("top1", top1);
+  localStorage.setItem("guy1", guy1);
+  localStorage.setItem("top1", top1);
+  localStorage.setItem("guy1", guy1);
+  localStorage.setItem("top1", top1);
+  localStorage.setItem("guy1", guy1);
+  localStorage.setItem("top1", top1);
+  localStorage.setItem("guy1", guy1);
+  localStorage.setItem("top1", top1);
+  localStorage.setItem("guy1", guy1);
+
+}
+
+function setLink() {
+  location.href = "TrRankings.html?guy1=" + guy1 + "&top1=" + top1 + "&guy2=" + guy2 + "&top2=" + top2 + "&guy3=" + guy3 +
+    "&top3=" + top3 + "&guy4=" + guy4 + "&top4=" + top4 + "&guy5=" + guy5 + "&top5=" + top5 + "&guy6=" + guy6 + "&top6=" +
+     top6 + "&guy7=" + guy7 + "&top7=" + top7 + "&guy8=" + guy8 + "&top8=" + top8 + "&guy9=" + guy9 + "&top9=" + top9 +
+      "&guy10=" + guy10 + "&top10=" + top10;
 }
