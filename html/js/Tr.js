@@ -58,15 +58,38 @@ var checkOrNot;
 var lastInput = "";
 var accCount = 0;
 var accPercentage = 100;
+var getJSON = function(url, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.responseType = 'json';
+  xhr.onload = function() {
+    var status = xhr.status;
+    if (status === 200) {
+      callback(null, xhr.response);
+    } else {
+      callback(status, xhr.response);
+    }
+  };
+
+  xhr.send();
+};
 
 //var key = event.keyCode;
 function startup() {
   document.getElementById("myInput").disabled = true;
   document.getElementById("myInput").value = "";
-  document.getElementById("writeSentence").innerHTML = sentence;
+  changeSentence();
   input = document.getElementById("myInput").value;
   count = input.length;
   document.getElementById("optionsOne").style.visibility = "hidden";
+  document.getElementById("optionsTwo").style.visibility = "hidden";
+  document.getElementById("optionsThree").style.visibility = "hidden";
+  document.getElementById("optionsCheckOne").style.visibility = "hidden";
+  document.getElementById("optionsCheckTwo").style.visibility = "hidden";
+  document.getElementById("optionsCheckOneSpan").style.visibility = "hidden";
+  document.getElementById("optionsCheckTwoSpan").style.visibility = "hidden";
+  document.getElementById("optionsCheckOne").checked = true;
+  document.getElementById("optionsCheckTwo").checked = true;
   // Retrieve
   username = localStorage.getItem("username");
   if (username == null) {
@@ -106,11 +129,33 @@ function unregister() {
 }
 
 function changeSentence() {
-  sentence = sentences[Math.floor(Math.random() * sentences.length)];
-  document.getElementById("writeSentence").innerHTML = sentence;
   document.getElementById("myInput").disabled = true;
   document.getElementById("myInput").value = "";
 
+  getJSON('https://raw.githubusercontent.com/dwyl/quotes/master/quotes.json',
+    function(err, data) {
+      if (err !== null) {
+        alert('Something went wrong: ' + err);
+      } else {
+        //data is an array, inside the array there are dictionari, with 2 key  value pairs, author and text
+
+        el = data[Math.floor(Math.random() * data.length)];
+        sentence = el.text;
+        if (document.getElementById("optionsCheckOne").checked == true) {
+          if (sentence.length > 100) {
+            document.getElementById("writeSentence").innerHTML = sentence;
+          } else {changeSentence();}
+
+        } else {
+          if (document.getElementById("optionsCheckTwo").checked == true) {
+            if (sentence.length < 100) {
+              document.getElementById("writeSentence").innerHTML = sentence;
+            }
+          } else {changeSentence();}
+        }
+      }
+    }
+  );
 }
 
 function start(time) {
@@ -171,9 +216,29 @@ function toggleOptions() {
 
   if (showHid == "hidden") {
     document.getElementById("optionsOne").style.visibility = "visible";
-
+    document.getElementById("optionsTwo").style.visibility = "visible";
+    document.getElementById("optionsThree").style.visibility = "visible";
   } else {
     document.getElementById("optionsOne").style.visibility = "hidden";
+    document.getElementById("optionsTwo").style.visibility = "hidden";
+    document.getElementById("optionsThree").style.visibility = "hidden";
+  }
+}
+
+function toggleCheckOptions() {
+  var showHid = document.getElementById("optionsCheckOne").style.visibility;
+
+  if (showHid == "hidden") {
+    document.getElementById("optionsCheckOne").style.visibility = "visible";
+    document.getElementById("optionsCheckTwo").style.visibility = "visible";
+    document.getElementById("optionsCheckOneSpan").style.visibility = "visible";
+    document.getElementById("optionsCheckTwoSpan").style.visibility = "visible";
+
+  } else {
+    document.getElementById("optionsCheckOne").style.visibility = "hidden";
+    document.getElementById("optionsCheckTwo").style.visibility = "hidden";
+    document.getElementById("optionsCheckOneSpan").style.visibility = "hidden";
+    document.getElementById("optionsCheckTwoSpan").style.visibility = "hidden";
 
   }
 }
@@ -371,10 +436,10 @@ function checkTops() {
   localStorage.setItem("guy1", guy1);
 
 }
-
-function setLink() {
+// TODO: How to write from java script to a public github gist
+function setRankingsLink() {
   location.href = "TrRankings.html?guy1=" + guy1 + "&top1=" + top1 + "&guy2=" + guy2 + "&top2=" + top2 + "&guy3=" + guy3 +
     "&top3=" + top3 + "&guy4=" + guy4 + "&top4=" + top4 + "&guy5=" + guy5 + "&top5=" + top5 + "&guy6=" + guy6 + "&top6=" +
-     top6 + "&guy7=" + guy7 + "&top7=" + top7 + "&guy8=" + guy8 + "&top8=" + top8 + "&guy9=" + guy9 + "&top9=" + top9 +
-      "&guy10=" + guy10 + "&top10=" + top10;
+    top6 + "&guy7=" + guy7 + "&top7=" + top7 + "&guy8=" + guy8 + "&top8=" + top8 + "&guy9=" + guy9 + "&top9=" + top9 +
+    "&guy10=" + guy10 + "&top10=" + top10;
 }

@@ -19,6 +19,10 @@ span::before {
   text-align: center;
   font-size: 40px;
 }
+#welcomeText {
+  font-size: 200%;
+}
+
 #myInput{
 background-color: white;
 font-size: 23px;
@@ -29,6 +33,7 @@ padding: 10px;
 .options {
   width: 10%;
   float: right;
+
 }
 #image{
   width: 5%;
@@ -41,6 +46,13 @@ padding: 10px;
 }
 #cpmCount{
   color: #;
+}
+a:link {
+  text-decoration: none;
+  text-decoration-color: black;
+}
+a:visited {
+  color: black;
 }
 
 .button {
@@ -93,4 +105,7 @@ table {
 .Top3 {
   font-size: 130%;
   background-color: rgb(205, 127, 50);
+}
+.creditsText{
+  font-size: 200%;
 }
