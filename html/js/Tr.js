@@ -30,6 +30,7 @@ var takeTimeBoth = (takeTimeTwo - takeTimeOne);
 var cpmResult = Math.round((count * 60) / takeTimeResult);
 var tip = tips[Math.floor(Math.random() * tips.length)];
 var autocheckOrNot;
+var lastTop = 0;
 var points = 0;
 var top1 = 0;
 var top2 = 0;
@@ -41,6 +42,7 @@ var top7 = 0;
 var top8 = 0;
 var top9 = 0;
 var top10 = 0;
+var lastGuy = 0;
 var guy = 0;
 var guy1 = 0;
 var guy2 = 0;
@@ -301,63 +303,65 @@ function exportTops() {
 }
 
 function setCheckTops() {
-  username = guy;
+  guy = username;
   points = cpmResult;
+  checkTops();
 }
 
 function checkTops() {
-
-  if (points > top10) {
-    if (top10 > top9) {
-      if (top9 > top8) {
-        if (top8 > top7) {
-          if (top7 > top6) {
-            if (top6 > top5) {
-              if (top5 > top4) {
-                if (top4 > top3) {
-                  if (top3 > top2) {
-                    if (top2 > top1) {
-                      points = top1;
-                      guy = guy1;
-                      top1 = cpmResult;
-                      guy1 = usename;
-                    } else {
-                      top2 = cpmResult;
-                      guy2 = username;
-                    }
-                  } else {
-                    top3 = cpmResult;
-                    guy3 = username;
-                  }
-                } else {
-                  top4 = cpmResult;
-                  guy4 = username;
-                }
-              } else {
-                top5 = cpmResult;
-                guy5 = username;
-              }
-            } else {
-              top6 = cpmResult;
-              guy6 = username;
-            }
-          } else {
-            top7 = cpmResult;
-            guy7 = username;
-          }
-        } else {
-          top8 = cpmResult;
-          guy8 = username;
-        }
-      } else {
-        top9 = cpmResult;
-        guy9 = username;
-      }
-    } else {
-      top10 = cpmResult;
-      guy10 = username;
-    }
+  console.log(points, username);
+  if (points > top1) {
+    lastTop = top1;
+    lastGuy = guy1;
+    top1 = points;
+    guy1 = guy;
+  } else if (points > top2) {
+    lastTop = top2;
+    lastGuy = guy2;
+    top2 = points;
+    guy2 = guy;
+  } else if (points > top3) {
+    lastTop = top3;
+    lastGuy = guy3;
+    top3 = points;
+    guy3 = guy;
+  } else if (points > top4) {
+    lastTop = top4;
+    lastGuy = guy4;
+    top4 = points;
+    guy4 = guy;
+  } else if (points > top5) {
+    lastTop = top5;
+    lastGuy = guy5;
+    top5 = points;
+    guy5 = guy;
+  } else if (points > top6) {
+    lastTop = top6;
+    lastGuy = guy6;
+    top6 = points;
+    guy6 = guy;
+  } else if (points > top7) {
+    lastTop = top7;
+    lastGuy = guy7;
+    top7 = points;
+    guy7 = guy;
+  } else if (points > top8) {
+    lastTop = top8;
+    lastGuy = guy8;
+    top8 = points;
+    guy8 = guy;
+  } else if (points > top9) {
+    lastTop = top9;
+    lastGuy = guy9;
+    top9 = points;
+    guy9 = guy;
+  } else if (points > top10) {
+    lastTop = top10;
+    lastGuy = guy10;
+    top10 = points;
+    guy10 = guy;
   }
 
+  console.log(top1, guy1);
   exportTops();
 }
