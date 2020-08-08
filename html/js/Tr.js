@@ -349,7 +349,7 @@ function setCheckTops() {
   points = cpmResult;
   checkTops();
 }
-
+//TODO: make sort work
 function checkTops() {
   if (points > top1) {
     lastTop = top1;
