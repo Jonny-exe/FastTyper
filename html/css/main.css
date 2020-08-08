@@ -1,0 +1,92 @@
+body {
+  margin: 6%;
+  background-color: lightgrey;
+  font-family: coolvetica;
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+<span data-unselectable="unselectable content"></span>
+span::before {
+  content: attr(data-unselectable);
+}
+
+}
+#mainTitle{
+  text-align: center;
+  font-size: 40px;
+}
+#myInput{
+background-color: white;
+font-size: 23px;
+font-family: coolvetica;
+width: 98%;
+padding: 10px;
+}
+.options {
+  width: 10%;
+  float: right;
+}
+#image{
+  width: 5%;
+}
+#writeSentence{
+  font-size: 30px;
+}
+#time{
+  font-size: 50px;
+}
+#cpmCount{
+  color: #;
+}
+
+.button {
+  background-color: light-grey; /* Green */
+  border: none;
+  color: black;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 2px;
+  font-family: coolvetica;
+}
+#tips{
+  font-size: 30px;
+}
+.loginText {
+  text-align: right;
+}
+
+table {
+  width: 100%;
+  margin: 0;
+}
+.values{
+  width: 20%;
+  font-size: 150%;
+}
+#tableValues{
+  width: 60%;
+}
+.third {
+ width: 33%;
+}
+#ranking {
+  width: 100%;
+  font-size: 30px;
+}
+#Top1 {
+  font-size: 200%;
+}
+#Top2 {
+  font-size: 160%;
+}
+#Top3 {
+  font-size: 130%;
+}

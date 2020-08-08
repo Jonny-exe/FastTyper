@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Tr</title>
+  <link href="css/main.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <script type="text/javascript" src="js/Tr.js"></script>
+
+  <table>
+
+    <tr>
+      <td colspan="1">
+        <span id="welcomeText"></span>
+      </td>
+      <td colspan="2">
+        <img onclick="toggleOptions()" class=options id=image src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn0.iconfinder.com%2Fdata%2Ficons%2Ficonico-3%2F1024%2F37.png&f=1&nofb=1">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <a id="optionsOne" class=options href="TrRankings.html">Rankings</a>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <h1 id="mainTitle">Copy the sentence without mistakes</h1>
+      </td>
+      <td class=third>
+        <div class="loginText">
+          <p>Write a username so your score can go on the leaderboard.</p>
+          <p><input type="text" max=15 value="" id=loginText>
+            <button type="button" id=register onclick="register()">Register</button>
+            <button type="button" id=unregister onclick="unregister()">Logout</button>
+          </p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <h2 id="writeSentence"></h2>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+
+        <form autocomplete="off">
+          <input type="text" max=999 id="myInput" value="">
+          <!-- use type=button, so the page doesnt refresh -->
+          <p>
+            <button class="button" type="button" onclick="changeSentence()">Change sentence</button>
+            <button class="button" type="button" onclick="start('time')">Lets go</button>
+          </p>
+        </form>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <p id="time"></p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <table id=tableValues>
+          <tr>
+            <td class=values>
+              <span id=timeCourse>&nbsp;</span>
+            </td>
+            <td class=values>
+              <span id=valueCpm>&nbsp;</span>
+            </td>
+            <td class=values>
+              <span id=accuracyCount>&nbsp;</span>
+            </td>
+            <td class=values>
+              <span id=accPercent>&nbsp;</span>
+            </td>
+            <td class=values>
+              <span id=cpmCount>&nbsp;</span>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td colspan=3>
+        <p id=notify></p>
+      </td>
+    </tr>
+  </table>
+
+  <p id="tips" onclick="tipsFunction()">Tips</p>
+  <p id="username"></p>
+
+
+
+  <script>
+    startup();
+  </script>
+
+</body>
+
+</html>
