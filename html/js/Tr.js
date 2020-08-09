@@ -341,6 +341,7 @@ function finalAutoCheck() {
 
   setTimeout(finalAutoCheck, 500);
 }
+console.log(guy1, top1);
 
 var topList = [];
 
@@ -356,84 +357,104 @@ function checkTops() {
     lastGuy = guy1;
     top1 = points;
     guy1 = guy;
+    points = lastTop;
+    guy = lastGuy;
     checkTops();
   } else if (points > top2) {
     lastTop = top2;
     lastGuy = guy2;
     top2 = points;
     guy2 = guy;
+    points = lastTop;
+    guy = lastGuy;
     checkTops();
   } else if (points > top3) {
     lastTop = top3;
     lastGuy = guy3;
     top3 = points;
     guy3 = guy;
+    points = lastTop;
+    guy = lastGuy;
     checkTops();
   } else if (points > top4) {
     lastTop = top4;
     lastGuy = guy4;
     top4 = points;
     guy4 = guy;
+    points = lastTop;
+    guy = lastGuy;
     checkTops();
   } else if (points > top5) {
     lastTop = top5;
     lastGuy = guy5;
     top5 = points;
     guy5 = guy;
+    points = lastTop;
+    guy = lastGuy;
     checkTops();
   } else if (points > top6) {
     lastTop = top6;
     lastGuy = guy6;
     top6 = points;
     guy6 = guy;
+    points = lastTop;
+    guy = lastGuy;
     checkTops();
   } else if (points > top7) {
     lastTop = top7;
     lastGuy = guy7;
     top7 = points;
     guy7 = guy;
+    points = lastTop;
+    guy = lastGuy;
     checkTops();
   } else if (points > top8) {
     lastTop = top8;
     lastGuy = guy8;
     top8 = points;
     guy8 = guy;
+    points = lastTop;
+    guy = lastGuy;
     checkTops();
   } else if (points > top9) {
     lastTop = top9;
     lastGuy = guy9;
     top9 = points;
     guy9 = guy;
+    points = lastTop;
+    guy = lastGuy;
     checkTops();
   } else if (points > top10) {
     lastTop = top10;
     lastGuy = guy10;
     top10 = points;
     guy10 = guy;
+    points = lastTop;
+    guy = lastGuy;
     checkTops();
   }
 
-  console.log("top 10" + top10);
+  console.log("top 1" + top10);
   localStorage.setItem("top1", top1);
   localStorage.setItem("guy1", guy1);
-  localStorage.setItem("top1", top1);
-  localStorage.setItem("guy1", guy1);
-  localStorage.setItem("top1", top1);
-  localStorage.setItem("guy1", guy1);
-  localStorage.setItem("top1", top1);
-  localStorage.setItem("guy1", guy1);
-  localStorage.setItem("top1", top1);
-  localStorage.setItem("guy1", guy1);
-  localStorage.setItem("top1", top1);
-  localStorage.setItem("guy1", guy1);
-  localStorage.setItem("top1", top1);
-  localStorage.setItem("guy1", guy1);
-  localStorage.setItem("top1", top1);
-  localStorage.setItem("guy1", guy1);
-  localStorage.setItem("top1", top1);
-  localStorage.setItem("guy1", guy1);
-  localStorage.setItem("top1", top1);
-  localStorage.setItem("guy1", guy1);
+  localStorage.setItem("top2", top2);
+  localStorage.setItem("guy2", guy2);
+  localStorage.setItem("top3", top3);
+  localStorage.setItem("guy3", guy3);
+  localStorage.setItem("top4", top4);
+  localStorage.setItem("guy4", guy4);
+  localStorage.setItem("top5", top5);
+  localStorage.setItem("guy5", guy5);
+  localStorage.setItem("top6", top6);
+  localStorage.setItem("guy6", guy6);
+  localStorage.setItem("top7", top7);
+  localStorage.setItem("guy7", guy7);
+  localStorage.setItem("top8", top8);
+  localStorage.setItem("guy8", guy8);
+  localStorage.setItem("top9", top9);
+  localStorage.setItem("guy9", guy9);
+  localStorage.setItem("top10", top10);
+  localStorage.setItem("guy10", guy10);
 
 }
 // TODO: How to write from java script to a public github gist
@@ -442,4 +463,27 @@ function setRankingsLink() {
     "&top3=" + top3 + "&guy4=" + guy4 + "&top4=" + top4 + "&guy5=" + guy5 + "&top5=" + top5 + "&guy6=" + guy6 + "&top6=" +
     top6 + "&guy7=" + guy7 + "&top7=" + top7 + "&guy8=" + guy8 + "&top8=" + top8 + "&guy9=" + guy9 + "&top9=" + top9 +
     "&guy10=" + guy10 + "&top10=" + top10;
+}
+
+function getTops() {
+   top1 = localStorage.getItem("top1");
+   guy1 = localStorage.getItem("guy1");
+   top2 = localStorage.getItem("top2");
+   guy2 = localStorage.getItem("guy2");
+   top3 = localStorage.getItem("top3");
+   guy3 = localStorage.getItem("guy3");
+   top4 = localStorage.getItem("top4");
+   guy4 = localStorage.getItem("guy4");
+   top5 = localStorage.getItem("top5");
+   guy5 = localStorage.getItem("guy5");
+   top6 = localStorage.getItem("top6");
+   guy6 = localStorage.getItem("guy6");
+   top7 = localStorage.getItem("top7");
+   guy7 = localStorage.getItem("guy7");
+   top8 = localStorage.getItem("top8");
+   guy8 = localStorage.getItem("guy8");
+   top9 = localStorage.getItem("top9");
+   guy9 = localStorage.getItem("guy9");
+   top10 = localStorage.getItem("top10");
+   guy10 = localStorage.getItem("guy10");
 }

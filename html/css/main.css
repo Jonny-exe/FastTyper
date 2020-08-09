@@ -1,62 +1,67 @@
 body {
   margin: 6%;
   background-color: lightgrey;
-  font-family: coolvetica;
--webkit-touch-callout: none;
--webkit-user-select: none;
--khtml-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
-<span data-unselectable="unselectable content"></span>
-span::before {
-  content: attr(data-unselectable);
+  font-family: Franklin Gothic;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  <span data-unselectable="unselectable content"></span>span::before {
+    content: attr(data-unselectable);
+  }
 }
 
-
-}
-#mainTitle{
+#mainTitle {
   text-align: center;
   font-size: 40px;
 }
+
 #welcomeText {
   font-size: 200%;
 }
 
-#myInput{
-background-color: white;
-font-size: 23px;
-font-family: coolvetica;
-width: 98%;
-padding: 10px;
+#myInput {
+  background-color: white;
+  font-size: 23px;
+  font-family: consolas;
+  width: 98%;
+  padding: 10px;
 }
+
 .options {
   width: 10%;
   float: right;
-
 }
-#image{
+
+#image {
   width: 5%;
 }
-#writeSentence{
+
+#writeSentence {
   font-size: 30px;
 }
-#time{
+
+#time {
   font-size: 50px;
 }
-#cpmCount{
+
+#cpmCount {
   color: #;
 }
-a:link {
-  text-decoration: none;
-  text-decoration-color: black;
-}
-a:visited {
-  color: black;
+
+.options {
+  a:link, a:visited {
+    text-decoration: none;
+    color: black;
+  }
 }
 
 .button {
-  background-color: light-grey; /* Green */
+  background-color: light-grey;
+  /* Green */
   border: none;
   color: black;
   padding: 10px;
@@ -67,11 +72,12 @@ a:visited {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 2px;
-  font-family: coolvetica;
 }
-#tips{
+
+#tips {
   font-size: 30px;
 }
+
 .loginText {
   text-align: right;
 }
@@ -80,32 +86,40 @@ table {
   width: 100%;
   margin: 0;
 }
-.values{
+
+.values {
   width: 20%;
   font-size: 150%;
 }
-#tableValues{
+
+#tableValues {
   width: 60%;
 }
+
 .third {
- width: 33%;
+  width: 33%;
 }
+
 #ranking {
   width: 100%;
   font-size: 30px;
 }
+
 .Top1 {
   font-size: 200%;
-  background-color: rgb(255,215,0);
+  background-color: rgb(255, 215, 0);
 }
+
 .Top2 {
   font-size: 160%;
-  background-color: rgb(192,192,192);
+  background-color: rgb(192, 192, 192);
 }
+
 .Top3 {
   font-size: 130%;
   background-color: rgb(205, 127, 50);
 }
-.creditsText{
+
+.creditsText {
   font-size: 200%;
 }
