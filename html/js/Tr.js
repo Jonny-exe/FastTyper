@@ -81,15 +81,7 @@ function startup() {
   changeSentence();
   input = document.getElementById("myInput").value;
   count = input.length;
-  document.getElementById("optionsOne").style.visibility = "hidden";
-  document.getElementById("optionsTwo").style.visibility = "hidden";
-  document.getElementById("optionsThree").style.visibility = "hidden";
-  document.getElementById("optionsCheckOne").style.visibility = "hidden";
-  document.getElementById("optionsCheckTwo").style.visibility = "hidden";
-  document.getElementById("optionsCheckOneSpan").style.visibility = "hidden";
-  document.getElementById("optionsCheckTwoSpan").style.visibility = "hidden";
-  document.getElementById("optionsCheckOne").checked = true;
-  document.getElementById("optionsCheckTwo").checked = true;
+  setOptionsVisivility();
   // Retrieve
   username = localStorage.getItem("username");
   if (username == null) {
@@ -99,6 +91,26 @@ function startup() {
     console.log("username " + username);
     document.getElementById("welcomeText").innerHTML = "Welcome " + username;
   }
+}
+
+function setOptionsVisivility() {
+  document.getElementById("optionsOne").style.visibility = "hidden";
+  document.getElementById("optionsTwo").style.visibility = "hidden";
+  document.getElementById("optionsThree").style.visibility = "hidden";
+  document.getElementById("optionsCheckOne").style.visibility = "hidden";
+  document.getElementById("optionsCheckTwo").style.visibility = "hidden";
+  document.getElementById("optionsCheckOneSpan").style.visibility = "hidden";
+  document.getElementById("optionsCheckTwoSpan").style.visibility = "hidden";
+  document.getElementById("optionsCheckThreeSpan").style.visibility = "hidden";
+  document.getElementById("optionsCheckFourSpan").style.visibility = "hidden";
+  document.getElementById("optionsCheckFiveSpan").style.visibility = "hidden";
+
+  document.getElementById("optionsCheckOne").checked = true;
+  document.getElementById("optionsCheckTwo").checked = true;
+  document.getElementById("optionsCheckThree").checked = false;
+  document.getElementById("optionsCheckFour").checked = true;
+  document.getElementById("optionsCheckFive").checked = false;
+
 }
 
 //	var timerValue = false;
@@ -131,31 +143,116 @@ function unregister() {
 function changeSentence() {
   document.getElementById("myInput").disabled = true;
   document.getElementById("myInput").value = "";
-
-  getJSON('https://raw.githubusercontent.com/dwyl/quotes/master/quotes.json',
-    function(err, data) {
-      if (err !== null) {
-        alert('Something went wrong: ' + err);
-      } else {
-        //data is an array, inside the array there are dictionari, with 2 key  value pairs, author and text
-
-        el = data[Math.floor(Math.random() * data.length)];
-        sentence = el.text;
-        if (document.getElementById("optionsCheckOne").checked == true) {
-          if (sentence.length > 100) {
-            document.getElementById("writeSentence").innerHTML = sentence;
-          } else {changeSentence();}
-
+//TODO: make random sentences write work
+  if (document.getElementById("optionsCheckFive").checked == true) {
+    getJSON('https://raw.githubusercontent.com/sindresorhus/mnemonic-words/master/words.json',
+      function(err, data) {
+        if (err !== null) {
+          alert('Something went wrong: ' + err);
         } else {
-          if (document.getElementById("optionsCheckTwo").checked == true) {
-            if (sentence.length < 100) {
+          //data is an array
+
+          el = data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " ";
+          sentence = el;
+          if (document.getElementById("optionsCheckThree").checked == true) {
+            if (sentence.includes(1, 2, 3, 4, 5, 6, 7, 8, 9)) {
               document.getElementById("writeSentence").innerHTML = sentence;
+              if (document.getElementById("optionsCheckOne").checked == true) {
+                if (sentence.length > 100) {
+                  document.getElementById("writeSentence").innerHTML = sentence;
+                } else {
+                  changeSentence();
+                }
+
+              } else {
+
+                if (document.getElementById("optionsCheckTwo").checked == true) {
+                  if (sentence.length < 100) {
+                    document.getElementById("writeSentence").innerHTML = sentence;
+                  }
+                } else {
+                  changeSentence();
+                }
+              }
+            } else {
+              changeSentence();
             }
-          } else {changeSentence();}
+          } else {
+
+            if (document.getElementById("optionsCheckOne").checked == true) {
+              if (sentence.length > 100) {
+                document.getElementById("writeSentence").innerHTML = sentence;
+              } else {
+                changeSentence();
+              }
+
+            } else {
+              if (document.getElementById("optionsCheckTwo").checked == true) {
+                if (sentence.length < 100) {
+                  document.getElementById("writeSentence").innerHTML = sentence;
+                }
+              } else {
+                changeSentence();
+              }
+            }
+          }
         }
       }
-    }
-  );
+    );
+  } else {
+    getJSON('https://raw.githubusercontent.com/dwyl/quotes/master/quotes.json',
+      function(err, data) {
+        if (err !== null) {
+          alert('Something went wrong: ' + err);
+        } else {
+          //data is an array, inside the array there are dictionari, with 2 key  value pairs, author and text
+
+          el = data[Math.floor(Math.random() * data.length)];
+          sentence = el.text;
+          if (document.getElementById("optionsCheckThree").checked == true) {
+            if (sentence.includes(1, 2, 3, 4, 5, 6, 7, 8, 9)) {
+              document.getElementById("writeSentence").innerHTML = sentence;
+              if (document.getElementById("optionsCheckOne").checked == true) {
+                if (sentence.length > 100) {
+                  document.getElementById("writeSentence").innerHTML = sentence;
+                } else {
+                  changeSentence();
+                }
+
+              } else {
+                if (document.getElementById("optionsCheckTwo").checked == true) {
+                  if (sentence.length < 100) {
+                    document.getElementById("writeSentence").innerHTML = sentence;
+                  }
+                } else {
+                  changeSentence();
+                }
+              }
+            } else {
+              changeSentence();
+            }
+          } else {
+            if (document.getElementById("optionsCheckOne").checked == true) {
+              if (sentence.length > 100) {
+                document.getElementById("writeSentence").innerHTML = sentence;
+              } else {
+                changeSentence();
+              }
+
+            } else {
+              if (document.getElementById("optionsCheckTwo").checked == true) {
+                if (sentence.length < 100) {
+                  document.getElementById("writeSentence").innerHTML = sentence;
+                }
+              } else {
+                changeSentence();
+              }
+            }
+          }
+        }
+      }
+    );
+  }
 }
 
 function start(time) {
@@ -218,6 +315,9 @@ function toggleOptions() {
     document.getElementById("optionsOne").style.visibility = "visible";
     document.getElementById("optionsTwo").style.visibility = "visible";
     document.getElementById("optionsThree").style.visibility = "visible";
+
+
+
   } else {
     document.getElementById("optionsOne").style.visibility = "hidden";
     document.getElementById("optionsTwo").style.visibility = "hidden";
@@ -225,20 +325,41 @@ function toggleOptions() {
   }
 }
 
+function toggleCheckOptionsTwo() {
+  var activateDeactivate = (document.getElementById("optionsCheckFour").checked = true);
+  console.log(activateDeactivate);
+  if (showHid == true) {
+    document.getElementById("optionsCheckFour").checked = true;
+    document.getElementById("optionsCheckFive").checked = false;
+
+//TODO: make toggleCheckOptionsTwo work
+
+  } else {
+    document.getElementById("optionsCheckFour").checked = false;
+    document.getElementById("optionsCheckFour").checked = true;
+    }
+}
+
 function toggleCheckOptions() {
   var showHid = document.getElementById("optionsCheckOne").style.visibility;
 
   if (showHid == "hidden") {
-    document.getElementById("optionsCheckOne").style.visibility = "visible";
-    document.getElementById("optionsCheckTwo").style.visibility = "visible";
+    document.getElementById("optionsCheckFiveSpan").style.visibility = "visible";
+    document.getElementById("optionsCheckFourSpan").style.visibility = "visible";
     document.getElementById("optionsCheckOneSpan").style.visibility = "visible";
     document.getElementById("optionsCheckTwoSpan").style.visibility = "visible";
+    document.getElementById("optionsCheckThreeSpan").style.visibility = "visible";
+    document.getElementById("optionsCheckOne").style.visibility = "visible";
+    document.getElementById("optionsCheckTwo").style.visibility = "visible";
 
   } else {
+    document.getElementById("optionsCheckFiveSpan").style.visibility = "hidden";
+    document.getElementById("optionsCheckFourSpan").style.visibility = "hidden";
+    document.getElementById("optionsCheckOneSpan").style.visibility = "hidden";
+    document.getElementById("optionsCheckThreeSpan").style.visibility = "hidden";
+    document.getElementById("optionsCheckTwoSpan").style.visibility = "hidden";
     document.getElementById("optionsCheckOne").style.visibility = "hidden";
     document.getElementById("optionsCheckTwo").style.visibility = "hidden";
-    document.getElementById("optionsCheckOneSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckTwoSpan").style.visibility = "hidden";
 
   }
 }
@@ -350,7 +471,7 @@ function setCheckTops() {
   points = cpmResult;
   checkTops();
 }
-//TODO: make sort work
+
 function checkTops() {
   if (points > top1) {
     lastTop = top1;
@@ -466,24 +587,24 @@ function setRankingsLink() {
 }
 
 function getTops() {
-   top1 = localStorage.getItem("top1");
-   guy1 = localStorage.getItem("guy1");
-   top2 = localStorage.getItem("top2");
-   guy2 = localStorage.getItem("guy2");
-   top3 = localStorage.getItem("top3");
-   guy3 = localStorage.getItem("guy3");
-   top4 = localStorage.getItem("top4");
-   guy4 = localStorage.getItem("guy4");
-   top5 = localStorage.getItem("top5");
-   guy5 = localStorage.getItem("guy5");
-   top6 = localStorage.getItem("top6");
-   guy6 = localStorage.getItem("guy6");
-   top7 = localStorage.getItem("top7");
-   guy7 = localStorage.getItem("guy7");
-   top8 = localStorage.getItem("top8");
-   guy8 = localStorage.getItem("guy8");
-   top9 = localStorage.getItem("top9");
-   guy9 = localStorage.getItem("guy9");
-   top10 = localStorage.getItem("top10");
-   guy10 = localStorage.getItem("guy10");
+  top1 = localStorage.getItem("top1");
+  guy1 = localStorage.getItem("guy1");
+  top2 = localStorage.getItem("top2");
+  guy2 = localStorage.getItem("guy2");
+  top3 = localStorage.getItem("top3");
+  guy3 = localStorage.getItem("guy3");
+  top4 = localStorage.getItem("top4");
+  guy4 = localStorage.getItem("guy4");
+  top5 = localStorage.getItem("top5");
+  guy5 = localStorage.getItem("guy5");
+  top6 = localStorage.getItem("top6");
+  guy6 = localStorage.getItem("guy6");
+  top7 = localStorage.getItem("top7");
+  guy7 = localStorage.getItem("guy7");
+  top8 = localStorage.getItem("top8");
+  guy8 = localStorage.getItem("guy8");
+  top9 = localStorage.getItem("top9");
+  guy9 = localStorage.getItem("guy9");
+  top10 = localStorage.getItem("top10");
+  guy10 = localStorage.getItem("guy10");
 }

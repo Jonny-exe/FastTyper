@@ -53,6 +53,7 @@ body {
 }
 
 .options {
+  float: right;
   a:link, a:visited {
     text-decoration: none;
     color: black;
