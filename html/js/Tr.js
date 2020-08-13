@@ -1,6 +1,6 @@
 // jscs:disable
 // jscs:enable
-// jscs:enable validateQuoteMarks
+// jscs:disable validateQuoteMarks
 // jscs:disable maximumLineLength
 // jscs:disable requireSpacesInAnonymousFunctionExpression
 // jscs:disable requirePaddingNewLinesBeforeLineComments
@@ -19,6 +19,8 @@ var tips = [
   'Dont overuse any fingers',
   'Dont look at your keyboard while you are typing',
 ];
+var words;
+var el = "";
 var input;
 var username;
 var sentence = sentences[Math.floor(Math.random() * sentences.length)];
@@ -75,6 +77,7 @@ var getJSON = function(url, callback) {
 
   xhr.send();
 };
+
 console.log("hi");
 
 //var key = event.keyCode;
@@ -102,17 +105,17 @@ function setOptionsVisivility() {
   document.getElementById("optionsOne").style.visibility = "hidden";
   document.getElementById("optionsTwo").style.visibility = "hidden";
   document.getElementById("optionsThree").style.visibility = "hidden";
-  document.getElementById("optionsCheckOne").style.visibility = "hidden";
-  document.getElementById("optionsCheckTwo").style.visibility = "hidden";
-  document.getElementById("optionsCheckOneSpan").style.visibility = "hidden";
-  document.getElementById("optionsCheckTwoSpan").style.visibility = "hidden";
-  document.getElementById("optionsCheckThreeSpan").style.visibility = "hidden";
+  document.getElementById("optionsCheckLong").style.visibility = "hidden";
+  document.getElementById("optionsCheckShort").style.visibility = "hidden";
+  document.getElementById("optionsCheckLongSpan").style.visibility = "hidden";
+  document.getElementById("optionsCheckShortSpan").style.visibility = "hidden";
+  document.getElementById("optionsCheckNumbersSpan").style.visibility = "hidden";
   document.getElementById("optionsCheckRandomSpan").style.visibility = "hidden";
   document.getElementById("optionsCheckNormalSpan").style.visibility = "hidden";
 
-  document.getElementById("optionsCheckOne").checked = true;
-  document.getElementById("optionsCheckTwo").checked = true;
-  document.getElementById("optionsCheckThree").checked = false;
+  document.getElementById("optionsCheckLong").checked = true;
+  document.getElementById("optionsCheckShort").checked = true;
+  document.getElementById("optionsCheckNumbers").checked = false;
   document.getElementById("optionsCheckRandom").checked = false;
   document.getElementById("optionsCheckNormal").checked = true;
 
@@ -144,8 +147,10 @@ function unregister() {
     document.getElementById("notify").innerHTML = "Sorry, your browser does not support Web Storage...";
   }
 }
-
+//TODO: maybe try makeing the first caracter CAPS with toUpperCase()
 function changeSentence() {
+  sentence = "";
+  el = "";
   document.getElementById("myInput").disabled = true;
   document.getElementById("myInput").value = "";
 
@@ -155,28 +160,129 @@ function changeSentence() {
         if (err !== null) {
           alert('Something went wrong: ' + err);
         } else {
-          //data is an array
+          if (document.getElementById("optionsCheckNumbers").checked == true) {
+            if (document.getElementById("optionsCheckShort").checked == false && document.getElementById("optionsCheckLong").checked == true) {
+              for (i = 0; i < 20; i++) {
+                if (i == 4 || i == 9 || i == 14 || i == 19) {
+                  if (i == 19) {
 
-          el = data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)];
-          sentence = el;
+                    words = data[Math.floor(Math.random() * data.length)] + " " + Math.floor((Math.random() * 9999)) + ".";
+                    el = el + words;
+                    console.log("last")
+                    //data is an array
+                  } else {
+                    words = data[Math.floor(Math.random() * data.length)] + " " + Math.floor((Math.random() * 9999)) + " ";
+                    " ";
+                    el = el + words;
+                    sentence = el;
+                    console.log("number");
+                  }
+                } else {
+                  words = data[Math.floor(Math.random() * data.length)] + " ";
+                  el = el + words;
+                  sentence = el;
+                }
+              }
+              sentence = el;
+              document.getElementById("writeSentence").innerHTML = sentence;
+            }
+            if (document.getElementById("optionsCheckShort").checked == true && document.getElementById("optionsCheckLong").checked == false) {
+              for (i = 0; i < 10; i++) {
+                if (i == 4 || i == 9) {
+                  if (i == 9) {
 
-          if (document.getElementById("optionsCheckThree").checked == true && document.getElementById("optionsCheckOne").checked == true) {
+                    words = data[Math.floor(Math.random() * data.length)] + " " + Math.floor((Math.random() * 9999)) + ".";
+                    el = el + words;
+                    console.log("last")
+                    //data is an array
+                  } else {
+                    words = data[Math.floor(Math.random() * data.length)] + " " + Math.floor((Math.random() * 9999)) + " ";
+                    " ";
+                    el = el + words;
+                    sentence = el;
+                    console.log("number");
+                  }
+                } else {
+                  words = data[Math.floor(Math.random() * data.length)] + " ";
+                  el = el + words;
+                  sentence = el;
+                }
+              }
+              sentence = el;
+              document.getElementById("writeSentence").innerHTML = sentence;
+            }
 
-            el = data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + Math.floor(Math.random() * 9999) + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + Math.floor(Math.random() * 9999) + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + Math.floor(Math.random() * 9999) + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + Math.floor(Math.random() * 9999) + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + Math.floor(Math.random() * 9999);
-            sentence = el;
-            document.getElementById("writeSentence").innerHTML = sentence;
           }
-          console.log("lolazo");
-          if (document.getElementById("optionsCheckThree").checked == true && document.getElementById("optionsCheckTwo").checked == true) {
-            el = data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + Math.floor(Math.random() * 9999) + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + Math.floor(Math.random() * 9999) + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + data[Math.floor(Math.random() * data.length)] + " " + Math.floor(Math.random() * 9999);
-            sentence = el;
-            document.getElementById("writeSentence").innerHTML = sentence;
-          }
-          if (document.getElementById("optionsCheckThree").checked == false && document.getElementById("optionsCheckTwo").checked == false && document.getElementById("optionsCheckOne").checked == true) {
-            sentence = el;
-            document.getElementById("writeSentence").innerHTML = sentence;
+          if (document.getElementById("optionsCheckNumbers").checked == false) {
+            if (document.getElementById("optionsCheckShort").checked == true && document.getElementById("optionsCheckLong").checked == false) {
+
+              for (i = 0; i < 10; i++) {
+                if (i == 9) {
+                  words = data[Math.floor(Math.random() * data.length)] + ".";
+                  el = el + words;
+                  //data is an array
+                } else {
+                  words = data[Math.floor(Math.random() * data.length)] + " ";
+                  el = el + words;
+                }
+              }
+              sentence = el;
+              document.getElementById("writeSentence").innerHTML = sentence;
+            }
+
+
+            if (document.getElementById("optionsCheckShort").checked == false && document.getElementById("optionsCheckLong").checked == true) {
+
+              for (i = 0; i < 20; i++) {
+                if (i == 19) {
+                  words = data[Math.floor(Math.random() * data.length)] + ".";
+                  el = el + words;
+                  //data is an array
+                } else {
+                  words = data[Math.floor(Math.random() * data.length)] + " ";
+                  el = el + words;
+                }
+              }
+              sentence = el;
+              document.getElementById("writeSentence").innerHTML = sentence;
+            }
+
+
+            if (document.getElementById("optionsCheckShort").checked == true && document.getElementById("optionsCheckLong").checked == true) {
+              var ranNum = Math.floor((Math.random() * 2) + 1);
+              if (ranNum == 2) {
+                console.log(" ranNum = 2")
+                for (i = 0; i < 10; i++) {
+                  if (i == 9) {
+                    words = data[Math.floor(Math.random() * data.length)] + ".";
+                    el = el + words;
+                    //data is an array
+                  } else {
+                    words = data[Math.floor(Math.random() * data.length)] + " ";
+                    el = el + words;
+                  }
+                }
+                sentence = el;
+                document.getElementById("writeSentence").innerHTML = sentence;
+              } else {
+                console.log(" ranNum = 1")
+                for (i = 0; i < 20; i++) {
+                  if (i == 19) {
+                    words = data[Math.floor(Math.random() * data.length)] + ".";
+                    el = el + words;
+                    //data is an array
+                  } else {
+                    words = data[Math.floor(Math.random() * data.length)] + " ";
+                    el = el + words;
+                  }
+                }
+                sentence = el;
+                document.getElementById("writeSentence").innerHTML = sentence;
+              }
+            }
           }
         }
+
       }
     );
   }
@@ -190,19 +296,18 @@ function changeSentence() {
 
           el = data[Math.floor(Math.random() * data.length)];
           sentence = el.text;
-          if (document.getElementById("optionsCheckThree").checked == true) {
+          if (document.getElementById("optionsCheckNumbers").checked == true) {
             if (sentence.includes(1, 2, 3, 4, 5, 6, 7, 8, 9)) {
               document.getElementById("writeSentence").innerHTML = sentence;
-              if (document.getElementById("optionsCheckOne").checked == true) {
+              if (document.getElementById("optionsCheckLong").checked == true) {
                 if (sentence.length > 100) {
                   document.getElementById("writeSentence").innerHTML = sentence;
                 } else {
-                  console.log()
                   changeSentence();
                 }
 
               } else {
-                if (document.getElementById("optionsCheckTwo").checked == true) {
+                if (document.getElementById("optionsCheckShort").checked == true) {
                   if (sentence.length < 100) {
                     document.getElementById("writeSentence").innerHTML = sentence;
                   }
@@ -214,7 +319,7 @@ function changeSentence() {
               changeSentence();
             }
           }
-          if (document.getElementById("optionsCheckTwo").checked == false && document.getElementById("optionsCheckOne").checked == true) {
+          if (document.getElementById("optionsCheckShort").checked == false && document.getElementById("optionsCheckLong").checked == true) {
             console.log("long");
             if (sentence.length > 100) {
               document.getElementById("writeSentence").innerHTML = sentence;
@@ -223,7 +328,7 @@ function changeSentence() {
             }
           }
 
-          if (document.getElementById("optionsCheckTwo").checked == true && document.getElementById("optionsCheckOne").checked == false) {
+          if (document.getElementById("optionsCheckShort").checked == true && document.getElementById("optionsCheckLong").checked == false) {
             console.log("short");
             if (sentence.length < 100) {
               document.getElementById("writeSentence").innerHTML = sentence;
@@ -232,7 +337,7 @@ function changeSentence() {
             }
           }
 
-          if (document.getElementById("optionsCheckOne").checked == true && document.getElementById("optionsCheckTwo").checked == true) {
+          if (document.getElementById("optionsCheckLong").checked == true && document.getElementById("optionsCheckShort").checked == true) {
             document.getElementById("writeSentence").innerHTML = sentence;
 
           }
@@ -240,6 +345,7 @@ function changeSentence() {
       }
 
     );
+
   }
 }
 
@@ -309,11 +415,11 @@ function toggleOptions() {
     document.getElementById("optionsThree").style.visibility = "hidden";
     document.getElementById("optionsCheckNormalSpan").style.visibility = "hidden";
     document.getElementById("optionsCheckRandomSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckOneSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckThreeSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckTwoSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckOne").style.visibility = "hidden";
-    document.getElementById("optionsCheckTwo").style.visibility = "hidden";
+    document.getElementById("optionsCheckLongSpan").style.visibility = "hidden";
+    document.getElementById("optionsCheckNumbersSpan").style.visibility = "hidden";
+    document.getElementById("optionsCheckShortSpan").style.visibility = "hidden";
+    document.getElementById("optionsCheckLong").style.visibility = "hidden";
+    document.getElementById("optionsCheckShort").style.visibility = "hidden";
 
   }
 }
@@ -333,25 +439,25 @@ function toggleCheckOptionsNormal() {
 }
 
 function toggleCheckOptions() {
-  var showHid = document.getElementById("optionsCheckOne").style.visibility;
+  var showHid = document.getElementById("optionsCheckLong").style.visibility;
 
   if (showHid == "hidden") {
     document.getElementById("optionsCheckNormalSpan").style.visibility = "visible";
     document.getElementById("optionsCheckRandomSpan").style.visibility = "visible";
-    document.getElementById("optionsCheckOneSpan").style.visibility = "visible";
-    document.getElementById("optionsCheckTwoSpan").style.visibility = "visible";
-    document.getElementById("optionsCheckThreeSpan").style.visibility = "visible";
-    document.getElementById("optionsCheckOne").style.visibility = "visible";
-    document.getElementById("optionsCheckTwo").style.visibility = "visible";
+    document.getElementById("optionsCheckLongSpan").style.visibility = "visible";
+    document.getElementById("optionsCheckShortSpan").style.visibility = "visible";
+    document.getElementById("optionsCheckNumbersSpan").style.visibility = "visible";
+    document.getElementById("optionsCheckLong").style.visibility = "visible";
+    document.getElementById("optionsCheckShort").style.visibility = "visible";
 
   } else {
     document.getElementById("optionsCheckNormalSpan").style.visibility = "hidden";
     document.getElementById("optionsCheckRandomSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckOneSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckThreeSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckTwoSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckOne").style.visibility = "hidden";
-    document.getElementById("optionsCheckTwo").style.visibility = "hidden";
+    document.getElementById("optionsCheckLongSpan").style.visibility = "hidden";
+    document.getElementById("optionsCheckNumbersSpan").style.visibility = "hidden";
+    document.getElementById("optionsCheckShortSpan").style.visibility = "hidden";
+    document.getElementById("optionsCheckLong").style.visibility = "hidden";
+    document.getElementById("optionsCheckShort").style.visibility = "hidden";
 
   }
 }
