@@ -19,7 +19,10 @@ var tips = [
   'Dont overuse any fingers',
   'Dont look at your keyboard while you are typing',
 ];
-var words;
+var ranNumber;
+var finalNumber;
+_u = _.noConflict();
+var words = "";
 var el = "";
 var input;
 var username;
@@ -74,11 +77,11 @@ var getJSON = function(url, callback) {
       callback(status, xhr.response);
     }
   };
-
   xhr.send();
 };
 
 console.log("hi");
+
 
 //var key = event.keyCode;
 function startup() {
@@ -147,7 +150,41 @@ function unregister() {
     document.getElementById("notify").innerHTML = "Sorry, your browser does not support Web Storage...";
   }
 }
+
+
+// numbers: boolean, true ... mix numbers into words; false ... do not use any numbers
+// noOfWords: integer, number of words, e.g. 10 or 20 or any other number
+// numbersPerWords: add a number after every N-th word, e.g. if set to 5, after 5 words a number will be placed
+function computeRandomSentence(noOfWords, numbers, numbersPerWords) {
+  getJSON('https://raw.githubusercontent.com/sindresorhus/mnemonic-words/master/words.json',
+    function(err, data) {
+      if (err !== null) {
+        alert('Something went wrong: ' + err);
+      } else {
+        sentence = "";
+        for (i = 0; i < noOfWords; i++) {
+          if ((numbers) && ((i % numbersPerWords) == (numbersPerWords - 1))) {
+            // use number
+            words = data[Math.floor(Math.random() * data.length)] + " " + Math.floor((Math.random() * 9999));
+          } else {
+            // dont use numbers
+            words = data[Math.floor(Math.random() * data.length)];
+          }
+          if (i == (noOfWords - 1))
+            words += ".";
+          else
+            words += " ";
+          sentence += words;
+          console.log("sentence is: " + sentence);
+        }
+        document.getElementById("writeSentence").innerHTML = sentence;
+      }
+    }
+  );
+}
+//TODO: maybe try makeing an number input field, and that will determing the lenght of the random sentence
 //TODO: maybe try makeing the first caracter CAPS with toUpperCase()
+//TODO: learn VIM
 function changeSentence() {
   sentence = "";
   el = "";
@@ -160,125 +197,32 @@ function changeSentence() {
         if (err !== null) {
           alert('Something went wrong: ' + err);
         } else {
+          ranNumber = _u.shuffle([10, 20]);
+          finalNumber = ranNumber[0];
           if (document.getElementById("optionsCheckNumbers").checked == true) {
             if (document.getElementById("optionsCheckShort").checked == false && document.getElementById("optionsCheckLong").checked == true) {
-              for (i = 0; i < 20; i++) {
-                if (i == 4 || i == 9 || i == 14 || i == 19) {
-                  if (i == 19) {
-
-                    words = data[Math.floor(Math.random() * data.length)] + " " + Math.floor((Math.random() * 9999)) + ".";
-                    el = el + words;
-                    console.log("last")
-                    //data is an array
-                  } else {
-                    words = data[Math.floor(Math.random() * data.length)] + " " + Math.floor((Math.random() * 9999)) + " ";
-                    " ";
-                    el = el + words;
-                    sentence = el;
-                    console.log("number");
-                  }
-                } else {
-                  words = data[Math.floor(Math.random() * data.length)] + " ";
-                  el = el + words;
-                  sentence = el;
-                }
-              }
-              sentence = el;
-              document.getElementById("writeSentence").innerHTML = sentence;
+              sentence = computeRandomSentence(20, true, 5);
             }
+
             if (document.getElementById("optionsCheckShort").checked == true && document.getElementById("optionsCheckLong").checked == false) {
-              for (i = 0; i < 10; i++) {
-                if (i == 4 || i == 9) {
-                  if (i == 9) {
-
-                    words = data[Math.floor(Math.random() * data.length)] + " " + Math.floor((Math.random() * 9999)) + ".";
-                    el = el + words;
-                    console.log("last")
-                    //data is an array
-                  } else {
-                    words = data[Math.floor(Math.random() * data.length)] + " " + Math.floor((Math.random() * 9999)) + " ";
-                    " ";
-                    el = el + words;
-                    sentence = el;
-                    console.log("number");
-                  }
-                } else {
-                  words = data[Math.floor(Math.random() * data.length)] + " ";
-                  el = el + words;
-                  sentence = el;
-                }
-              }
-              sentence = el;
-              document.getElementById("writeSentence").innerHTML = sentence;
+              sentence = computeRandomSentence(10, true, 5);
             }
 
+            if (document.getElementById("optionsCheckShort").checked == true && document.getElementById("optionsCheckLong").checked == true) {
+              sentence = computeRandomSentence(finalNumber, true, 5);
+            }
           }
           if (document.getElementById("optionsCheckNumbers").checked == false) {
             if (document.getElementById("optionsCheckShort").checked == true && document.getElementById("optionsCheckLong").checked == false) {
-
-              for (i = 0; i < 10; i++) {
-                if (i == 9) {
-                  words = data[Math.floor(Math.random() * data.length)] + ".";
-                  el = el + words;
-                  //data is an array
-                } else {
-                  words = data[Math.floor(Math.random() * data.length)] + " ";
-                  el = el + words;
-                }
-              }
-              sentence = el;
-              document.getElementById("writeSentence").innerHTML = sentence;
+              sentence = computeRandomSentence(10, false, 5);
             }
-
 
             if (document.getElementById("optionsCheckShort").checked == false && document.getElementById("optionsCheckLong").checked == true) {
-
-              for (i = 0; i < 20; i++) {
-                if (i == 19) {
-                  words = data[Math.floor(Math.random() * data.length)] + ".";
-                  el = el + words;
-                  //data is an array
-                } else {
-                  words = data[Math.floor(Math.random() * data.length)] + " ";
-                  el = el + words;
-                }
-              }
-              sentence = el;
-              document.getElementById("writeSentence").innerHTML = sentence;
+              sentence = computeRandomSentence(20, false, 5);
             }
 
-
             if (document.getElementById("optionsCheckShort").checked == true && document.getElementById("optionsCheckLong").checked == true) {
-              var ranNum = Math.floor((Math.random() * 2) + 1);
-              if (ranNum == 2) {
-                console.log(" ranNum = 2")
-                for (i = 0; i < 10; i++) {
-                  if (i == 9) {
-                    words = data[Math.floor(Math.random() * data.length)] + ".";
-                    el = el + words;
-                    //data is an array
-                  } else {
-                    words = data[Math.floor(Math.random() * data.length)] + " ";
-                    el = el + words;
-                  }
-                }
-                sentence = el;
-                document.getElementById("writeSentence").innerHTML = sentence;
-              } else {
-                console.log(" ranNum = 1")
-                for (i = 0; i < 20; i++) {
-                  if (i == 19) {
-                    words = data[Math.floor(Math.random() * data.length)] + ".";
-                    el = el + words;
-                    //data is an array
-                  } else {
-                    words = data[Math.floor(Math.random() * data.length)] + " ";
-                    el = el + words;
-                  }
-                }
-                sentence = el;
-                document.getElementById("writeSentence").innerHTML = sentence;
-              }
+              sentence = computeRandomSentence(finalNumber, false, 5);
             }
           }
         }
@@ -652,6 +596,8 @@ function checkTops() {
     guy = lastGuy;
     checkTops();
   }
+
+
 
   console.log("top 1" + top10);
   localStorage.setItem("top1", top1);
