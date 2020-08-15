@@ -95,6 +95,15 @@ function startup() {
   count = input.length;
   setOptionsVisivility();
   // Retrieve
+
+  localStorage.getItem("lightningMode");
+  if (  localStorage.getItem("lightningMode") == "dark") {
+    setDarkMode(true);
+    document.getElementById("optionsCheckDark").checked = true;
+  } else {
+    setDarkMode(false);
+    document.getElementById("optionsCheckDark").checked = false;
+  }
   username = localStorage.getItem("username");
   if (username == null) {
     console.log("no user registered");
@@ -180,6 +189,7 @@ function computeRandomSentence(noOfWords, numbers, numbersPerWords) {
           sentence += words;
           console.log("sentence is: " + sentence);
         }
+        sentence = sentence.charAt(0).toUpperCase() + sentence.slice(1);
         document.getElementById("writeSentence").innerHTML = sentence;
       }
     }
@@ -337,12 +347,13 @@ function able() {
 }
 
 function toggleDarkMode() {
-  var toggleDarkMode = document.getElementById("optionsCheckDark").checked
+  var toggleDarkMode = document.getElementById("optionsCheckDark").checked;
   if (toggleDarkMode == true) {
     setDarkMode(true);
+    localStorage.setItem("lightningMode", "dark");
   } else {
     setDarkMode(false);
-
+    localStorage.setItem("lightningMode", "light");
   }
 }
 
