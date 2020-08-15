@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-<!--TODO: make the dark mode with this https://stackoverflow.com/questions/8710442/how-to-specify-multiple-conditions-in-an-if-statement-in-javascript -->
+
 <head>
   <title>Tr</title>
-  <link href="css/main.css" rel="stylesheet" type="text/css" />
+  <link id=link href="css/main.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -46,7 +46,7 @@
       <td colspan="3">
         <span class=options>
           <label id=optionsCheckNormalSpan class=container> Normal sentences
-            <input type=checkbox checked="checked" onclick=toggleCheckOptionsNormal() id="optionsCheckNormal"> </input>
+            <input type=checkbox checked="checked" onclick=toggleCheckOptionsNormal(true) id="optionsCheckNormal"> </input>
             <span class=checkmark></span>
           </label>
         </span>
@@ -56,7 +56,7 @@
       <td colspan="3">
         <span class=options>
           <label id=optionsCheckRandomSpan class=container> Random words
-            <input type=checkbox onclick="toggleCheckOptionsRandom()" id=optionsCheckRandom> </input>
+            <input type=checkbox onclick="toggleCheckOptionsNormal(false)" id=optionsCheckRandom> </input>
             <span class=checkmark></span>
           </label>
         </span>
@@ -87,6 +87,16 @@
         <span class=options>
           <label id=optionsCheckNumbersSpan class=container> Numbers
             <input type=checkbox checked="checked" id=optionsCheckNumbers> </input>
+            <span class=checkmark></span>
+          </label>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <span class=options>
+          <label id=optionsCheckDarkSpan class=container> Light / Dark
+            <input type=checkbox onclick="toggleDarkMode()" id=optionsCheckDark> </input>
             <span class=checkmark></span>
           </label>
         </span>
@@ -166,7 +176,7 @@
 
 
   <script>
-startup();
+    startup();
   </script>
 
 </body>

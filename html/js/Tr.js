@@ -24,6 +24,7 @@ var finalNumber;
 _u = _.noConflict();
 var words = "";
 var el = "";
+var link = document.getElementById("link");
 var input;
 var username;
 var sentence = sentences[Math.floor(Math.random() * sentences.length)];
@@ -115,12 +116,14 @@ function setOptionsVisivility() {
   document.getElementById("optionsCheckNumbersSpan").style.visibility = "hidden";
   document.getElementById("optionsCheckRandomSpan").style.visibility = "hidden";
   document.getElementById("optionsCheckNormalSpan").style.visibility = "hidden";
-
+  document.getElementById("optionsCheckDark").style.visibility = "hidden";
+  document.getElementById("optionsCheckDarkSpan").style.visibility = "hidden";
   document.getElementById("optionsCheckLong").checked = true;
   document.getElementById("optionsCheckShort").checked = true;
   document.getElementById("optionsCheckNumbers").checked = false;
   document.getElementById("optionsCheckRandom").checked = false;
   document.getElementById("optionsCheckNormal").checked = true;
+  document.getElementById("optionsCheckDark").checked = false;
 
 }
 
@@ -326,23 +329,31 @@ function start(time) {
   setTimeout(finalAutoCheck, 50);
   autocheckOrNot = 1;
   checkOrNot = 1;
-
-  //setTimeout(keyEnter, 4000);
-
-  //var timeTF = 0;
 }
 
-// function keyEnter() {
-//   var key = event.keyCode;
-//   if (key == 13) {
-//     finalCheck;
-//     key = 0;
-//     setTimeout(keyEnter, 100);
-//   }
-// }
 //document.body.innerHTML = "test"; SO YOU DONT NEED AN ID!!!
 function able() {
   document.getElementById("myInput").disabled = false;
+}
+
+function toggleDarkMode() {
+  var toggleDarkMode = document.getElementById("optionsCheckDark").checked
+  if (toggleDarkMode == true) {
+    setDarkMode(true);
+  } else {
+    setDarkMode(false);
+
+  }
+}
+
+//darkMode: boolean...true: set dark mode; false: set light mode;
+
+function setDarkMode(darkMode) {
+  if (darkMode == true) {
+    link.setAttribute("href", "css/dark.css");
+  } else {
+    link.setAttribute("href", "css/main.css");
+  }
 }
 
 //When you write var you are creating a local scoped var.
@@ -362,24 +373,22 @@ function toggleOptions() {
     document.getElementById("optionsCheckLongSpan").style.visibility = "hidden";
     document.getElementById("optionsCheckNumbersSpan").style.visibility = "hidden";
     document.getElementById("optionsCheckShortSpan").style.visibility = "hidden";
+    document.getElementById("optionsCheckDarkSpan").style.visibility = "hidden";
     document.getElementById("optionsCheckLong").style.visibility = "hidden";
     document.getElementById("optionsCheckShort").style.visibility = "hidden";
+    document.getElementById("optionsCheckDark").style.visibility = "hidden";
 
   }
 }
 
-function toggleCheckOptionsRandom() {
-
-  console.log("i");
-  document.getElementById("optionsCheckRandom").checked = true;
-  document.getElementById("optionsCheckNormal").checked = false;
-
-}
-
-function toggleCheckOptionsNormal() {
-  document.getElementById("optionsCheckRandom").checked = false;
-  document.getElementById("optionsCheckNormal").checked = true;
-
+function toggleCheckOptionsNormal(optionsNormal) {
+  if (optionsNormal == true) {
+    document.getElementById("optionsCheckRandom").checked = false;
+    document.getElementById("optionsCheckNormal").checked = true;
+  } else {
+    document.getElementById("optionsCheckRandom").checked = true;
+    document.getElementById("optionsCheckNormal").checked = false;
+  }
 }
 
 function toggleCheckOptions() {
@@ -393,6 +402,8 @@ function toggleCheckOptions() {
     document.getElementById("optionsCheckNumbersSpan").style.visibility = "visible";
     document.getElementById("optionsCheckLong").style.visibility = "visible";
     document.getElementById("optionsCheckShort").style.visibility = "visible";
+    document.getElementById("optionsCheckDark").style.visibility = "visible";
+    document.getElementById("optionsCheckDarkSpan").style.visibility = "visible";
 
   } else {
     document.getElementById("optionsCheckNormalSpan").style.visibility = "hidden";
@@ -402,7 +413,8 @@ function toggleCheckOptions() {
     document.getElementById("optionsCheckShortSpan").style.visibility = "hidden";
     document.getElementById("optionsCheckLong").style.visibility = "hidden";
     document.getElementById("optionsCheckShort").style.visibility = "hidden";
-
+    document.getElementById("optionsCheckDark").style.visibility = "hidden";
+    document.getElementById("optionsCheckDarkSpan").style.visibility = "hidden";
   }
 }
 

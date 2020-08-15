@@ -1,0 +1,240 @@
+body {
+  margin: 6%;
+  background-color: rgb(32, 32, 32);
+  font-family: Franklin Gothic;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: white;
+  <span data-unselectable="unselectable content"></span>span::before {
+    content: attr(data-unselectable);
+  }
+}
+
+#mainTitle {
+  text-align: center;
+  font-size: 40px;
+}
+
+#welcomeText {
+  font-size: 200%;
+}
+
+#myInput {
+  background-color: white;
+  font-size: 23px;
+  font-family: consolas;
+  width: 98%;
+  padding: 10px;
+}
+
+.options {
+  width: 10%;
+  float: right;
+}
+
+#image {
+  width: 5%;
+}
+
+#writeSentence {
+  font-size: 30px;
+}
+
+#time {
+  font-size: 50px;
+}
+
+#cpmCount {
+  color: #;
+}
+.optionsBig {
+  font-size: 130%;
+}
+.options {
+  float: right;
+
+  a:link, a:visited {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+
+
+
+/* CHECKBOXES START */
+
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 100%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input{
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+
+/* Create a custom checkbox */
+.checkmark{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* When the checkbox is checked, add a blue background
+.options input:checked ~ #checkMark1, #checkMark2, #checkMark3 {
+  background-color: #2196F3;
+}
+ */
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+
+#checkMark1, #checkMark2, #checkMark3 {
+  height: 18px;
+  width: 18px;
+  background-color: #eee;
+  margin-right: 1%;
+}
+
+
+
+/* CHECKMARKS END */
+
+
+
+.button {
+  background-color: light-grey;
+  /* Green */
+  border: none;
+  color: black;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.buttonsRegister {
+  background-color: light-grey;
+  /* Green */
+  border: none;
+  color: black;
+  padding: 7px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+#tips {
+  font-size: 30px;
+}
+
+#loginText {
+  text-align: right;
+  padding: 2%;
+}
+
+table {
+  width: 100%;
+  margin: 0;
+}
+
+.values {
+  width: 20%;
+  font-size: 150%;
+}
+
+#tableValues {
+  width: 60%;
+}
+
+.third {
+  width: 33%;
+}
+
+#ranking {
+  width: 100%;
+  font-size: 30px;
+}
+
+.Top1 {
+  font-size: 200%;
+  background-color: rgb(255, 215, 0);
+}
+
+.Top2 {
+  font-size: 160%;
+  background-color: rgb(192, 192, 192);
+}
+
+.Top3 {
+  font-size: 130%;
+  background-color: rgb(205, 127, 50);
+}
+
+.creditsText {
+  font-size: 200%;
+}
