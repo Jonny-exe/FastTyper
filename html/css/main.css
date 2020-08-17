@@ -9,9 +9,6 @@ body {
   -ms-user-select: none;
   user-select: none;
 
-  <span data-unselectable="unselectable content"></span>span::before {
-    content: attr(data-unselectable);
-  }
 }
 
 #mainTitle {
@@ -25,11 +22,24 @@ body {
 
 #myInput {
   background-color: white;
+  background-color: rgb(224, 224, 224);
+  border: none;
+  border-bottom: 1px solid rgb(92, 92, 92);
   font-size: 23px;
   font-family: consolas;
   width: 98%;
   padding: 10px;
 }
+
+#loginText {
+  border: none;
+  background-color: rgb(224, 224, 224);
+  border-bottom: 1px solid rgb(92, 92, 92);
+  text-align: left;
+}
+
+
+
 
 .options {
   width: 10%;
@@ -161,7 +171,7 @@ body {
 .button {
   background-color: light-grey;
   /* Green */
-  border: none;
+  border: 1px solid rgb(91, 91, 91);
   color: black;
   padding: 10px;
   text-align: center;
@@ -173,9 +183,15 @@ body {
   border-radius: 2px;
 }
 
-.buttonsRegister {
+.button:hover {
+  background-color: rgb(91, 91, 91);
+  color: white;
+}
+
+
+
+/*.buttonsRegister {
   background-color: light-grey;
-  /* Green */
   border: none;
   color: black;
   padding: 7px;
@@ -186,14 +202,14 @@ body {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 2px;
-}
+}*/
 
 #tips {
   font-size: 30px;
 }
 
 #loginText {
-  text-align: right;
+  text-align: left;
   padding: 2%;
 }
 

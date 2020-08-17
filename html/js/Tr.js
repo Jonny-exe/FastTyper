@@ -19,9 +19,12 @@ var tips = [
   'Dont overuse any fingers',
   'Dont look at your keyboard while you are typing',
 ];
+var part1;
+var part2;
 var ranNumber;
 var finalNumber;
 _u = _.noConflict();
+var sentenceWrite;
 var words = "";
 var el = "";
 var link = document.getElementById("link");
@@ -97,7 +100,7 @@ function startup() {
   // Retrieve
 
   localStorage.getItem("lightningMode");
-  if (  localStorage.getItem("lightningMode") == "dark") {
+  if (localStorage.getItem("lightningMode") == "dark") {
     setDarkMode(true);
     document.getElementById("optionsCheckDark").checked = true;
   } else {
@@ -190,12 +193,13 @@ function computeRandomSentence(noOfWords, numbers, numbersPerWords) {
           console.log("sentence is: " + sentence);
         }
         sentence = sentence.charAt(0).toUpperCase() + sentence.slice(1);
-        document.getElementById("writeSentence").innerHTML = sentence;
+        writeSentence();
       }
     }
   );
 }
-//TODO: maybe try makeing an number input field, and that will determing the lenght of the random sentence
+
+//TODO: maybe try makeing an number input field, and that will determing the length of the random sentence
 //TODO: maybe try makeing the first caracter CAPS with toUpperCase()
 //TODO: learn VIM
 function changeSentence() {
@@ -255,10 +259,10 @@ function changeSentence() {
           sentence = el.text;
           if (document.getElementById("optionsCheckNumbers").checked == true) {
             if (sentence.includes(1, 2, 3, 4, 5, 6, 7, 8, 9)) {
-              document.getElementById("writeSentence").innerHTML = sentence;
+              writeSentence();
               if (document.getElementById("optionsCheckLong").checked == true) {
                 if (sentence.length > 100) {
-                  document.getElementById("writeSentence").innerHTML = sentence;
+                  writeSentence();
                 } else {
                   changeSentence();
                 }
@@ -266,7 +270,7 @@ function changeSentence() {
               } else {
                 if (document.getElementById("optionsCheckShort").checked == true) {
                   if (sentence.length < 100) {
-                    document.getElementById("writeSentence").innerHTML = sentence;
+                    writeSentence();
                   }
                 } else {
                   changeSentence();
@@ -279,7 +283,7 @@ function changeSentence() {
           if (document.getElementById("optionsCheckShort").checked == false && document.getElementById("optionsCheckLong").checked == true) {
             console.log("long");
             if (sentence.length > 100) {
-              document.getElementById("writeSentence").innerHTML = sentence;
+              writeSentence();
             } else {
               changeSentence();
             }
@@ -288,14 +292,14 @@ function changeSentence() {
           if (document.getElementById("optionsCheckShort").checked == true && document.getElementById("optionsCheckLong").checked == false) {
             console.log("short");
             if (sentence.length < 100) {
-              document.getElementById("writeSentence").innerHTML = sentence;
+              writeSentence();
             } else {
               changeSentence();
             }
           }
 
           if (document.getElementById("optionsCheckLong").checked == true && document.getElementById("optionsCheckShort").checked == true) {
-            document.getElementById("writeSentence").innerHTML = sentence;
+            writeSentence();
 
           }
         }
@@ -311,7 +315,6 @@ function start(time) {
   document.getElementById("timeCourse").innerHTML = "";
   document.getElementById("valueCpm").innerHTML = "";
   document.getElementById("timeCourse").innerHTML = "";
-
   document.getElementById("myInput").value = "";
 
   setTimeout(function() {
@@ -337,6 +340,8 @@ function start(time) {
   setTimeout(cpm, 4000);
   setTimeout(setTimer, 4000);
   setTimeout(finalAutoCheck, 50);
+  setTimeout(changeSentenceColor, 4000);
+
   autocheckOrNot = 1;
   checkOrNot = 1;
 }
@@ -344,6 +349,9 @@ function start(time) {
 //document.body.innerHTML = "test"; SO YOU DONT NEED AN ID!!!
 function able() {
   document.getElementById("myInput").disabled = false;
+  var input = document.getElementById('myInput');
+  input.select();
+  input.focus();
 }
 
 function toggleDarkMode() {
@@ -358,12 +366,14 @@ function toggleDarkMode() {
 }
 
 //darkMode: boolean...true: set dark mode; false: set light mode;
-
+//TODO:make this beetter
 function setDarkMode(darkMode) {
   if (darkMode == true) {
-    link.setAttribute("href", "css/dark.css");
+    document.body.style.backgroundColor = "#333333";
+    document.body.style.color = "#ffffff";
   } else {
-    link.setAttribute("href", "css/main.css");
+    document.body.style.backgroundColor = "#E0E0E0";
+    document.body.style.color = "#000000";
   }
 }
 
@@ -484,6 +494,30 @@ function checkError() {
   setTimeout(checkError, 50);
 
 }
+//TODO: make a way to not have to use the dark css file.
+//TODO: make the part of the sentece you wrote change the color.
+
+
+function writeSentence() {
+  document.getElementById("writeSentence").innerHTML = changeSentenceColor();
+}
+
+function changeSentenceColor() {
+  input = document.getElementById("myInput").value;
+  part1 = sentence.substring(0, input.length);
+  part2 = sentence.substring(input.length, sentence.length);
+  //TODO: change this color for dark mode a fix a bug that the check error doesenet work good;
+  part1 = part1.fontcolor("#ffffff");
+  fullPart = part1 + part2;
+
+  if (checkOrNot == 1) {
+    document.getElementById("writeSentence").innerHTML = fullPart;
+    setTimeout(changeSentenceColor, 200);
+  }
+  sentenceWrite = fullPart;
+  return sentenceWrite;
+}
+
 
 function tipsFunction() {
   tip = tips[Math.floor(Math.random() * tips.length)];
@@ -491,6 +525,7 @@ function tipsFunction() {
 }
 
 function finalAutoCheck() {
+  console.log("check");
   takeTimeTwo = Date.now();
   takeTimeBoth = (takeTimeTwo - takeTimeOne);
   takeTimeResult = takeTimeBoth / 1000;
@@ -500,7 +535,7 @@ function finalAutoCheck() {
     if (input == sentence) {
       alert("Well done");
       checkOrNot = 0;
-      document.getElementById("myInput").style.backgroundColor = 'white';
+      document.getElementById("myInput").style.backgroundColor = 'rgb(224, 224, 224)';
       document.getElementById("timeCourse").innerHTML = "This took you " + Math.round(takeTimeResult) + " s";
       document.getElementById("myInput").disabled = true;
       setCheckTops();
@@ -520,14 +555,12 @@ function finalAutoCheck() {
         }
       }
 
-      setTimeout(finalAutoCheck, 500);
       autocheckOrNot = 0;
     }
   }
 
-  setTimeout(finalAutoCheck, 500);
+  setTimeout(finalAutoCheck, 200);
 }
-console.log(guy1, top1);
 
 var topList = [];
 
@@ -622,7 +655,6 @@ function checkTops() {
 
 
 
-  console.log("top 1" + top10);
   localStorage.setItem("top1", top1);
   localStorage.setItem("guy1", guy1);
   localStorage.setItem("top2", top2);

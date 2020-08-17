@@ -1,6 +1,6 @@
 body {
   margin: 6%;
-  background-color: rgb(32, 32, 32);
+  background-color: rgb(92, 92, 92);
   font-family: Franklin Gothic;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -157,6 +157,9 @@ body {
 /* CHECKMARKS END */
 
 
+.loginText {
+  height: 50%;
+}
 
 .button {
   background-color: light-grey;

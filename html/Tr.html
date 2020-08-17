@@ -95,7 +95,7 @@
     <tr>
       <td colspan="3">
         <span class=options>
-          <label id=optionsCheckDarkSpan class=container> Light / Dark
+          <label id=optionsCheckDarkSpan class=container> Dark mode
             <input type=checkbox onclick="toggleDarkMode()" id=optionsCheckDark> </input>
             <span class=checkmark></span>
           </label>
@@ -109,9 +109,10 @@
       <td class=third>
         <div class="loginText">
           <p>Write a username so your score can go on the leaderboard.</p>
-          <p><input type="text" max=15 value="" id=loginText>
-            <button type="button" class=buttonsRegister id=register onclick="register()">Register</button>
-            <button type="button" class=buttonsRegister id=unregister onclick="unregister()">Logout</button>
+          <p>
+            <input type="text" max=15 value="" id=loginText placeholder="Enter name">
+            <button type="button" class="button" id=register onclick="register()">Register</button>
+            <button type="button" class="button" id=unregister onclick="unregister()">Logout</button>
           </p>
         </div>
       </td>
@@ -124,7 +125,6 @@
     </tr>
     <tr>
       <td colspan="3">
-
         <form autocomplete="off">
           <input type="text" max=999 id="myInput" value="">
           <!-- use type=button, so the page doesnt refresh -->
