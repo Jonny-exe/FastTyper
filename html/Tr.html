@@ -4,181 +4,544 @@
 <head>
   <title>Tr</title>
   <link id=link href="css/main.css" rel="stylesheet" type="text/css" />
+  <link rel="icon" href="favicon-tr.ico" type="image/icon">
 </head>
 
 <body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"> </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-  <script type="text/javascript" src="js/Tr.js"></script>
+  <div class=main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" integrity="sha512-DkPsH9LzNzZaZjCszwKrooKwgjArJDiEjA5tTgr3YX4E6TYv93ICS8T41yFHJnnSmGpnf0Mvb5NhScYbwvhn2w==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" integrity="sha512-DkPsH9LzNzZaZjCszwKrooKwgjArJDiEjA5tTgr3YX4E6TYv93ICS8T41yFHJnnSmGpnf0Mvb5NhScYbwvhn2w==" crossorigin="anonymous"></script>
 
-  <table>
 
-    <tr>
-      <td colspan="1">
-        <span id="welcomeText"></span>
-      </td>
-      <td colspan="2">
-        <img onclick="toggleOptions()" class=options id=image src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn0.iconfinder.com%2Fdata%2Ficons%2Ficonico-3%2F1024%2F37.png&f=1&nofb=1">
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <span class=optionsBig>
-          <span id="optionsOne" class=options onclick="setRankingsLink()">Rankings</span>
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <span class=optionsBig>
-          <a id="optionsThree" class=options href="TrCredits.html">Credits</a>
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <span class=optionsBig>
-          <span id="optionsTwo" style="text-decoration: none;" class=options onclick="toggleCheckOptions()">Text options</span>
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
+
+
+    <div class=welcomeText>
+      <span id="welcomeText"></span>
+    </div>
+    <div class=optionsImage>
+      <img onclick="toggleOptions()" class=options id="image" src="https://image.flaticon.com/icons/png/512/17/17789.png">
+    </div>
+    <div class=alloptions>
+      <div class=rankings>
+        <p>
+          <label class="optionsBig options">
+            <span id="optionsOne" onclick="setRankingsLink()">Rankings</span>
+          </label>
+        </p>
+      </div>
+      <div class=credits>
+        <p>
+          <label class="optionsBig options">
+            <a id="optionsThree" href="TrCredits.html">Credits</a>
+          </label>
+        </p>
+      </div>
+      <div class=moreOp>
+        <p class=optionsBig >
+          <label class="options">
+          <span id="optionsTwo" onclick="toggleCheckOptions()">Text options</span>
+        </label>
+        </p>
+      </div>
+    </div>
+    <div class=smallOptions>
+      <div class=normal>
         <span class=options>
           <label id=optionsCheckNormalSpan class=container> Normal sentences
             <input type=checkbox checked="checked" onclick=toggleCheckOptionsNormal(true) id="optionsCheckNormal"> </input>
             <span class=checkmark></span>
           </label>
         </span>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
+      </div>
+      <div class=random>
         <span class=options>
           <label id=optionsCheckRandomSpan class=container> Random words
             <input type=checkbox onclick="toggleCheckOptionsNormal(false)" id=optionsCheckRandom> </input>
             <span class=checkmark></span>
           </label>
         </span>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
+      </div>
+      <div class=long>
         <span class=options>
           <label id=optionsCheckLongSpan class=container> Long sentences
             <input type=checkbox checked="checked" id="optionsCheckLong"> </input>
             <span class=checkmark></span>
           </label>
         </span>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
+      </div>
+      <div class=short>
         <span class=options>
           <label id=optionsCheckShortSpan class=container> Short sentences
             <input type=checkbox checked="checked" id="optionsCheckShort"> </input>
             <span class=checkmark></span>
           </label>
         </span>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
+      </div>
+      <div class=numbers>
         <span class=options>
           <label id=optionsCheckNumbersSpan class=container> Numbers
             <input type=checkbox checked="checked" id=optionsCheckNumbers> </input>
             <span class=checkmark></span>
           </label>
         </span>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
+      </div>
+      <div class=dark>
         <span class=options>
           <label id=optionsCheckDarkSpan class=container> Dark mode
             <input type=checkbox onclick="toggleDarkMode()" id=optionsCheckDark> </input>
             <span class=checkmark></span>
           </label>
         </span>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <h1 id="mainTitle">Copy the sentence without mistakes</h1>
-      </td>
-      <td class=third>
-        <div class="loginText">
-          <p>Write a username so your score can go on the leaderboard.</p>
-          <p>
-            <input type="text" max=15 value="" id=loginText placeholder="Enter name">
-            <button type="button" class="button" id=register onclick="register()">Register</button>
-            <button type="button" class="button" id=unregister onclick="unregister()">Logout</button>
-          </p>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <h2 id="writeSentence"></h2>
+      </div>
+      <div class=keysOp>
+        <span class=options>
+          <label id=optionsCheckKeysSpan class=container> Keys on/off
+            <input type=checkbox onclick="toggleKeys()" id=optionsCheckKeys> </input>
+            <span class=checkmark></span>
+          </label>
+        </span>
+      </div>
+    </div>
+    <div class=mainTitle>
+      <h1 id="mainTitle">Copy the sentence without mistakes</h1>
+    </div>
+    <div class=loginText>
+      <p>Write a username so your score can go on the leaderboard.</p>
+      <p>
+        <input type="text" max=15 value="" id=loginText placeholder="Enter name">
+        <button type="button" class="button" id=register onclick="registerFunc()">Register</button>
+        <button type="button" class="button" id=unregister onclick="unregisterFunc()">Logout</button>
+      </p>
+    </div>
+
+    <div class=writeSentence>
+      <h2 id="writeSentence"></h2>
+      <p>
+    </div>
+    <div class=inputText>
+      <form autocomplete="off">
+        <input type="text" max=999 id="myInput" onkeydown="return myKeyPress(event)" value="">
+        <!-- use type=button, so the page doesnt refresh -->
         <p>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <form autocomplete="off">
-          <input type="text" max=999 id="myInput" value="">
-          <!-- use type=button, so the page doesnt refresh -->
-          <p>
-            <button class="button" type="button" onclick="changeSentence()">Change sentence</button>
-            <button class="button" type="button" onclick="start('time')">Lets go</button>
-          </p>
-        </form>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <p id="time"></p>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <table id=tableValues>
-          <tr>
-            <td class=values>
-              <span id=timeCourse>&nbsp;</span>
-            </td>
-            <td class=values>
-              <span id=valueCpm>&nbsp;</span>
-            </td>
-            <td class=values>
-              <span id=accuracyCount>&nbsp;</span>
-            </td>
-            <td class=values>
-              <span id=accPercent>&nbsp;</span>
-            </td>
-            <td class=values>
-              <span id=cpmCount>&nbsp;</span>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    <tr>
-      <td colspan=3>
-        <p id=notify></p>
-      </td>
-    </tr>
-  </table>
+          <button class="button" type="button" onclick="changeSentence()">Change sentence</button>
+          <button class="button" type="button" onclick="start('time')">Lets go</button>
+        </p>
+      </form>
+    </div>
+    <div class=time>
+      <p id="time"></p>
+    </div>
+    <div class=values>
+      <span id=timeCourse>&nbsp;</span>
+      <span id=accuracyCount>&nbsp;</span>
+      <span id=accPercent>&nbsp;</span>
+      <span id=cpmCount>&nbsp;</span>
+      <span id=valueCpm>&nbsp;</span>
 
-  <p id="tips" onclick="tipsFunction()">Click here for some tips</p>
-  <p id="username"></p>
+    </div>
+    <div class=notify>
+      <p id=notify></p>
+    </div>
+    <div class=keypad>
+      <table id="keyPad">
+        <tr class="keyPadLines">
+          <td colspan="1">
+            <div id="220" class="keys margin">
+              <span> º
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="49" class="keys margin">
+              <span> 1
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="50" class="keys margin">
+              <span> 2
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="51" class="keys margin">
+              <span> 3
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="52" class="keys margin">
+              <span> 4
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="53" class="keys margin">
+              <span> 5
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="54" class="keys margin">
+              <span> 6
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="55" class="keys margin">
+              <span> 7
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="56" class="keys margin">
+              <span> 8
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="57" class="keys margin">
+              <span> 9
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="48" class="keys margin">
+              <span> 0
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="222" class="keys margin">
+              <span> '
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="221" class="keys margin">
+              <span> ¡
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="8" class="keys margin">
+              <span> BACK
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr class="keyPadLines">
+          <td colspan="1">
+            <div id="9" class="keys margin">
+              <span> TAB
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="81" class="keys margin">
+              <span> Q
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="87" class="keys margin">
+              <span> W
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="69" class="keys margin">
+              <span> E
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="82" class="keys margin">
+              <span> R
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="84" class="keys margin">
+              <span> T
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="89" class="keys margin">
+              <span> Y
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="85" class="keys margin">
+              <span> U
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="73" class="keys margin">
+              <span> I
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="79" class="keys margin">
+              <span> O
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="80" class="keys margin">
+              <span> P
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="192" class="keys margin">
+              <span> [
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="171" class="keys margin">
+              <span> ]
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="13" class="keys enter margin">
+              <span> ENTER
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr class="keyPadLines">
+          <td colspan="1">
+            <div id="20" class="keys margin">
+              <span> BLOQ MAYUS
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="65" class="keys margin">
+              <span> A
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="83" class="keys margin">
+              <span> S
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="68" class="keys margin">
+              <span> D
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="70" class="keys margin">
+              <span> F
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="71" class="keys margin">
+              <span> G
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="72" class="keys margin">
+              <span> H
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="74" class="keys margin">
+              <span> J
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="75" class="keys margin">
+              <span> K
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="76" class="keys margin">
+              <span> L
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="192" class="keys margin">
+              <span> Ñ
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="222" class="keys margin">
+              <span> ´
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="191" class="keys margin">
+              <span> Ç
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr class="keyPadLines">
+          <td colspan="1">
+            <div id="16" class="keys margin">
+              <span> MAYUS
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="60" class="keys margin">
+              <span>
+                < </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="90" class="keys margin">
+              <span> Z
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="88" class="keys margin">
+              <span> X
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="67" class="keys margin">
+              <span> C
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="86" class="keys margin">
+              <span> V
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="66" class="keys margin">
+              <span> B
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="78" class="keys margin">
+              <span> N
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="77" class="keys margin">
+              <span> M
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="188" class="keys margin">
+              <span> ,
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="190" class="keys margin">
+              <span> .
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="173" class="keys margin">
+              <span> -
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="16" class="keys margin">
+              <span> MAYUS
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="1">
+            <div id="17" class="keys margin">
+              <span> CONTROL
+              </span>
+            </div>
+          </td>
+          <td id="91" colspan="1">
+            <div class="keys margin">
+              <img class="windows" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn1.iconfinder.com%2Fdata%2Ficons%2Fsimple-icons%2F2048%2Fwindows-2048-black.png&f=1&nofb=1">
+            </div>
+          </td>
+          <td colspan="1" colspan="">
+            <div id="18" class="keys margin">
+              <span> ALT
+              </span>
+            </div>
+          </td>
+          <td id="space" colspan="7">
+            <label>
+              <div id="32" class="keys margin space" class>
+                <span> SPACE
+                </span>
+              </div>
+            </label>
+          </td>
+          <td colspan="1">
+            <div id="17" class="keys margin">
+              <span> ALT GR
+              </span>
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="91" class="keys margin">
+              <img class="windows" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn1.iconfinder.com%2Fdata%2Ficons%2Fsimple-icons%2F2048%2Fwindows-2048-black.png&f=1&nofb=1">
+            </div>
+          </td>
+          <td colspan="1">
+            <div id="93" class="keys margin">
+              <span> F
+              </span>
+            </div>
+          </td>
+          <td id="17" colspan="1">
+            <div class="keys margin">
+              <span> CONTROL
+              </span>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class=tips>
+      <p id="tips" onclick="tipsFunction()">Click here for some tips</p>
+      <p id="username"></p>
+    </div>
 
 
-
+  </div>
+  <script type="text/javascript" src="js/Tr.js"></script>
   <script>
     startup();
   </script>
-
 </body>
 
 </html>

@@ -1,5 +1,4 @@
 body {
-  margin: 6%;
   background-color: rgb(224, 224, 224);
   font-family: Franklin Gothic;
   -webkit-touch-callout: none;
@@ -8,7 +7,7 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-
+  margin: 100px;
 }
 
 #mainTitle {
@@ -35,19 +34,15 @@ body {
   border: none;
   background-color: rgb(224, 224, 224);
   border-bottom: 1px solid rgb(92, 92, 92);
-  text-align: left;
+  text-align: center;
 }
-
-
-
 
 .options {
   width: 10%;
-  float: right;
 }
 
 #image {
-  width: 5%;
+  width: 15%;
 }
 
 #writeSentence {
@@ -61,23 +56,19 @@ body {
 #cpmCount {
   color: #;
 }
+
 .optionsBig {
   font-size: 130%;
 }
-.options {
-  float: right;
 
+.options {
   a:link, a:visited {
     text-decoration: none;
     color: black;
   }
 }
 
-
-
-
 /* CHECKBOXES START */
-
 /* The container */
 .container {
   display: block;
@@ -93,7 +84,7 @@ body {
 }
 
 /* Hide the browser's default checkbox */
-.container input{
+.container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -101,9 +92,8 @@ body {
   width: 0;
 }
 
-
 /* Create a custom checkbox */
-.checkmark{
+.checkmark {
   position: absolute;
   top: 0;
   left: 0;
@@ -113,12 +103,12 @@ body {
 }
 
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+.container:hover input~.checkmark {
   background-color: #ccc;
 }
 
 /* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.container input:checked~.checkmark {
   background-color: #2196F3;
 }
 
@@ -130,7 +120,7 @@ body {
 }
 
 /* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
+.container input:checked~.checkmark:after {
   display: block;
 }
 
@@ -139,7 +129,6 @@ body {
   background-color: #2196F3;
 }
  */
-
 /* Style the checkmark/indicator */
 .container .checkmark:after {
   left: 9px;
@@ -153,8 +142,6 @@ body {
   transform: rotate(45deg);
 }
 
-
-
 #checkMark1, #checkMark2, #checkMark3 {
   height: 18px;
   width: 18px;
@@ -162,12 +149,7 @@ body {
   margin-right: 1%;
 }
 
-
-
 /* CHECKMARKS END */
-
-
-
 .button {
   background-color: light-grey;
   /* Green */
@@ -184,11 +166,9 @@ body {
 }
 
 .button:hover {
-  background-color: rgb(91, 91, 91);
+  background-color: rgb(149, 149, 149);
   color: white;
 }
-
-
 
 /*.buttonsRegister {
   background-color: light-grey;
@@ -203,7 +183,6 @@ body {
   cursor: pointer;
   border-radius: 2px;
 }*/
-
 #tips {
   font-size: 30px;
 }
@@ -213,9 +192,8 @@ body {
   padding: 2%;
 }
 
-table {
-  width: 100%;
-  margin: 0;
+.bigOptions {
+  text-align: right;
 }
 
 .values {
@@ -253,4 +231,119 @@ table {
 
 .creditsText {
   font-size: 200%;
+}
+
+.keys {
+  border: 1px solid rgb(45, 45, 45);
+  text-align: center;
+  width: 70px;
+  height: 40px;
+  vertical-align: baseline;
+  background-color: rgb(170, 170, 170);
+  border-radius: 3px;
+}
+
+.space {
+  width: 94%;
+}
+
+.margin {
+  align-items: center;
+  margin: auto;
+}
+
+#keyPad {
+  width: 100%;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+}
+
+body {}
+
+.main {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 0.3fr 0.5fr 0.1fr 0.3fr 0.3fr 0.5fr 1fr;
+  grid-template-areas:
+    "welcomeText welcomeText welcomeText welcomeText welcomeText opImage"
+    "mainTitle mainTitle mainTitle mainTitle mainTitle allOp"
+    "writeSentence writeSentence writeSentence writeSentence writeSentence smallOp"
+    "inputText inputText inputText inputText inputText smallOp"
+    "time values values values loginText loginText"
+    "keypad keypad keypad keypad notify notify"
+    "tips tips tips tips tips tips";
+}
+
+.windows {
+  height: 60%;
+  width: 35%;
+}
+
+.alloptions {
+  grid-area: allOp;
+  text-align: center;
+}
+
+.values {
+  font-size: 200%;
+  width: 100%;
+  display: flex;
+  margin: auto;
+  grid-area: values;
+  line-height: normal;
+  justify-content: center;
+  text-align: center;
+  vertical-align: center;
+  display: inline-block;
+}
+
+.time {
+  grid-area: time;
+}
+
+.welcomeText {
+  grid-area: welcomeText;
+}
+
+.optionsImage {
+  grid-area: opImage;
+  text-align: right;
+  padding: 10%;
+}
+
+.mainTitle {
+  grid-area: mainTitle;
+}
+
+.smallOptions {
+  grid-area: smallOp;
+  text-align: right;
+}
+
+.loginText {
+  grid-area: loginText;
+  text-align: right;
+}
+
+.writeSentence {
+  grid-area: writeSentence;
+}
+
+.inputText {
+  grid-area: inputText;
+  vertical-align: middel;
+}
+
+.notify {
+  grid-area: notify;
+}
+
+.keypad {
+  grid-area: keypad;
+}
+
+.tips {
+  grid-area: tips;
 }

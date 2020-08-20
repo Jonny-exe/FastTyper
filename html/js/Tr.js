@@ -5,6 +5,8 @@
 // jscs:disable requireSpacesInAnonymousFunctionExpression
 // jscs:disable requirePaddingNewLinesBeforeLineComments
 // jscs:disable requireSpaceAfterKeywords
+// jscs:disable
+// jshint esversion: 6
 
 var sentences = [
   'I love you the more in that I believe you had liked me for my own sake and for nothing else.',
@@ -19,21 +21,49 @@ var tips = [
   'Dont overuse any fingers',
   'Dont look at your keyboard while you are typing',
 ];
+
+//shortchut consts
+const inputEl = document.getElementById("myInput");
+const opLong = document.getElementById("optionsCheckLong");
+const opLongSp = document.getElementById("optionsCheckLongSpan");
+const opShort = document.getElementById("optionsCheckShort");
+const opShortSp = document.getElementById("optionsCheckShortSpan");
+const opNormal = document.getElementById("optionsCheckNormal");
+const opNormalSp = document.getElementById("optionsCheckNormalSpan");
+const opRandom = document.getElementById("optionsCheckRandom");
+const opRandomSp = document.getElementById("optionsCheckRandomSpan");
+const opDark = document.getElementById("optionsCheckDark");
+const opDarkSp = document.getElementById("optionsCheckDarkSpan");
+const opNumbers = document.getElementById("optionsCheckNumbers");
+const opNumbersSp = document.getElementById("optionsCheckNumbersSpan");
+const opKeysSp = document.getElementById("optionsCheckKeysSpan");
+const opKeys = document.getElementById("optionsCheckKeys");
+const welcomeText = document.getElementById("welcomeText");
+const register = document.getElementById("register");
+const unregister = document.getElementById("unregister");
+const timeEl = document.getElementById("time");
+const keys = document.getElementsByClassName("keys");
+const keypad = document.getElementById("keyPad");
+const rankings = document.getElementById("optionsOne");
+const credits = document.getElementById("optionsTwo");
+const moreOp = document.getElementById("optionsThree");
+const wrSentence = document.getElementById("writeSentence");
+
+
 var part1;
 var part2;
 var ranNumber;
 var finalNumber;
+var pressedKey;
 _u = _.noConflict();
 var sentenceWrite;
 var words = "";
 var el = "";
-var link = document.getElementById("link");
 var input;
 var username;
 var sentence = sentences[Math.floor(Math.random() * sentences.length)];
 var takeTimeOne = 0;
 var takeTimeTwo;
-var input;
 var count;
 var takeTimeResult;
 var takeTimeTwo = Date.now();
@@ -41,6 +71,8 @@ var takeTimeBoth = (takeTimeTwo - takeTimeOne);
 var cpmResult = Math.round((count * 60) / takeTimeResult);
 var tip = tips[Math.floor(Math.random() * tips.length)];
 var autocheckOrNot;
+
+//tops
 var lastTop = 0;
 var points = 0;
 var top1 = 0;
@@ -65,7 +97,8 @@ var guy7 = 0;
 var guy8 = 0;
 var guy9 = 0;
 var guy10 = 0;
-var checkOrNot;
+
+var isTyping = false;
 var lastInput = "";
 var accCount = 0;
 var accPercentage = 100;
@@ -90,62 +123,65 @@ console.log("hi");
 //var key = event.keyCode;
 function startup() {
   console.log("startup");
-  document.getElementById("myInput").disabled = true;
-  document.getElementById("myInput").value = "";
+  inputEl.disabled = true;
+  inputEl.value = "";
   console.log("hihiih");
   changeSentence();
-  input = document.getElementById("myInput").value;
+  input = inputEl.value;
   count = input.length;
   setOptionsVisivility();
+  bodyFadeIn();
   // Retrieve
-
   localStorage.getItem("lightningMode");
   if (localStorage.getItem("lightningMode") == "dark") {
     setDarkMode(true);
-    document.getElementById("optionsCheckDark").checked = true;
+    opDark.checked = true;
   } else {
     setDarkMode(false);
-    document.getElementById("optionsCheckDark").checked = false;
+    opDark.checked = false;
   }
   username = localStorage.getItem("username");
   if (username == null) {
     console.log("no user registered");
-    document.getElementById("welcomeText").innerHTML = "Welcome";
+    welcomeText.innerHTML = "Welcome";
   } else {
     console.log("username " + username);
-    document.getElementById("welcomeText").innerHTML = "Welcome " + username;
+    welcomeText.innerHTML = "Welcome " + username;
   }
 }
 
 function setOptionsVisivility() {
-  document.getElementById("optionsOne").style.visibility = "hidden";
-  document.getElementById("optionsTwo").style.visibility = "hidden";
-  document.getElementById("optionsThree").style.visibility = "hidden";
-  document.getElementById("optionsCheckLong").style.visibility = "hidden";
-  document.getElementById("optionsCheckShort").style.visibility = "hidden";
-  document.getElementById("optionsCheckLongSpan").style.visibility = "hidden";
-  document.getElementById("optionsCheckShortSpan").style.visibility = "hidden";
-  document.getElementById("optionsCheckNumbersSpan").style.visibility = "hidden";
-  document.getElementById("optionsCheckRandomSpan").style.visibility = "hidden";
-  document.getElementById("optionsCheckNormalSpan").style.visibility = "hidden";
-  document.getElementById("optionsCheckDark").style.visibility = "hidden";
-  document.getElementById("optionsCheckDarkSpan").style.visibility = "hidden";
-  document.getElementById("optionsCheckLong").checked = true;
-  document.getElementById("optionsCheckShort").checked = true;
-  document.getElementById("optionsCheckNumbers").checked = false;
-  document.getElementById("optionsCheckRandom").checked = false;
-  document.getElementById("optionsCheckNormal").checked = true;
-  document.getElementById("optionsCheckDark").checked = false;
-
+  keypad.style.visibility = "hidden";
+  rankings.style.visibility = "hidden";
+  credits.style.visibility = "hidden";
+  moreOp.style.visibility = "hidden";
+  opLong.style.visibility = "hidden";
+  opShort.style.visibility = "hidden";
+  opLongSp.style.visibility = "hidden";
+  opShortSp.style.visibility = "hidden";
+  opNumbersSp.style.visibility = "hidden";
+  opRandomSp.style.visibility = "hidden";
+  opNormalSp.style.visibility = "hidden";
+  opDark.style.visibility = "hidden";
+  opDarkSp.style.visibility = "hidden";
+  opKeys.style.visibility = "hidden";
+  opKeysSp.style.visibility = "hidden";
+  opLong.checked = true;
+  opShort.checked = true;
+  opNumbers.checked = false;
+  opRandom.checked = false;
+  opNormal.checked = true;
+  opDark.checked = false;
+  opKeys.checked = false;
 }
 
 //	var timerValue = false;
 //	var timeTF = 0;
-function register() {
-  document.getElementById("register").style.visibility = "hidden";
-  document.getElementById("unregister").style.visibility = "visible";
+function registerFunc() {
+  register.style.visibility = "hidden";
+  unregister.style.visibility = "visible";
   username = document.getElementById("loginText").value;
-  document.getElementById("welcomeText").innerHTML = "Welcome " + username;
+  welcomeText.innerHTML = "Welcome " + username;
   // Check browser support
   if (typeof(Storage) !== "undefined") {
     // Store
@@ -155,8 +191,8 @@ function register() {
   }
 }
 
-function unregister() {
-  document.getElementById("welcomeText").innerHTML = "You are not registered anymore, your scores will not be saved.";
+function unregisterFunc() {
+  welcomeText.innerHTML = "You are not registered anymore, your scores will not be saved.";
   // Check browser support
   if (typeof(Storage) !== "undefined") {
     // Store
@@ -190,7 +226,7 @@ function computeRandomSentence(noOfWords, numbers, numbersPerWords) {
           else
             words += " ";
           sentence += words;
-          console.log("sentence is: " + sentence);
+
         }
         sentence = sentence.charAt(0).toUpperCase() + sentence.slice(1);
         writeSentence();
@@ -200,15 +236,14 @@ function computeRandomSentence(noOfWords, numbers, numbersPerWords) {
 }
 
 //TODO: maybe try makeing an number input field, and that will determing the length of the random sentence
-//TODO: maybe try makeing the first caracter CAPS with toUpperCase()
-//TODO: learn VIM
 function changeSentence() {
+  accCount = 0;
   sentence = "";
   el = "";
-  document.getElementById("myInput").disabled = true;
-  document.getElementById("myInput").value = "";
+  inputEl.disabled = true;
+  inputEl.value = "";
 
-  if (document.getElementById("optionsCheckRandom").checked == true) {
+  if (opRandom.checked) {
     getJSON('https://raw.githubusercontent.com/sindresorhus/mnemonic-words/master/words.json',
       function(err, data) {
         if (err !== null) {
@@ -216,29 +251,29 @@ function changeSentence() {
         } else {
           ranNumber = _u.shuffle([10, 20]);
           finalNumber = ranNumber[0];
-          if (document.getElementById("optionsCheckNumbers").checked == true) {
-            if (document.getElementById("optionsCheckShort").checked == false && document.getElementById("optionsCheckLong").checked == true) {
+          if (opNumbers.checked) {
+            if (!opShort.checked && opLong.checked) {
               sentence = computeRandomSentence(20, true, 5);
             }
 
-            if (document.getElementById("optionsCheckShort").checked == true && document.getElementById("optionsCheckLong").checked == false) {
+            if (opShort.checked && !opLong.checked) {
               sentence = computeRandomSentence(10, true, 5);
             }
 
-            if (document.getElementById("optionsCheckShort").checked == true && document.getElementById("optionsCheckLong").checked == true) {
+            if (opShort.checked && opLong.checked) {
               sentence = computeRandomSentence(finalNumber, true, 5);
             }
           }
-          if (document.getElementById("optionsCheckNumbers").checked == false) {
-            if (document.getElementById("optionsCheckShort").checked == true && document.getElementById("optionsCheckLong").checked == false) {
+          if (!opNumbers.checked) {
+            if (opShort.checked && !opLong.checked) {
               sentence = computeRandomSentence(10, false, 5);
             }
 
-            if (document.getElementById("optionsCheckShort").checked == false && document.getElementById("optionsCheckLong").checked == true) {
+            if (!opShort.checked && opLong.checked) {
               sentence = computeRandomSentence(20, false, 5);
             }
 
-            if (document.getElementById("optionsCheckShort").checked == true && document.getElementById("optionsCheckLong").checked == true) {
+            if (opShort.checked && opLong.checked) {
               sentence = computeRandomSentence(finalNumber, false, 5);
             }
           }
@@ -247,7 +282,7 @@ function changeSentence() {
       }
     );
   }
-  if (document.getElementById("optionsCheckNormal").checked == true) {
+  if (opNormal.checked == true) {
     getJSON('https://raw.githubusercontent.com/dwyl/quotes/master/quotes.json',
       function(err, data) {
         if (err !== null) {
@@ -257,10 +292,10 @@ function changeSentence() {
 
           el = data[Math.floor(Math.random() * data.length)];
           sentence = el.text;
-          if (document.getElementById("optionsCheckNumbers").checked == true) {
+          if (opNumbers.checked == true) {
             if (sentence.includes(1, 2, 3, 4, 5, 6, 7, 8, 9)) {
               writeSentence();
-              if (document.getElementById("optionsCheckLong").checked == true) {
+              if (opLong.checked == true) {
                 if (sentence.length > 100) {
                   writeSentence();
                 } else {
@@ -268,7 +303,7 @@ function changeSentence() {
                 }
 
               } else {
-                if (document.getElementById("optionsCheckShort").checked == true) {
+                if (opShort.checked == true) {
                   if (sentence.length < 100) {
                     writeSentence();
                   }
@@ -280,7 +315,7 @@ function changeSentence() {
               changeSentence();
             }
           }
-          if (document.getElementById("optionsCheckShort").checked == false && document.getElementById("optionsCheckLong").checked == true) {
+          if (!opShort.checked && opLong.checked) {
             console.log("long");
             if (sentence.length > 100) {
               writeSentence();
@@ -289,7 +324,7 @@ function changeSentence() {
             }
           }
 
-          if (document.getElementById("optionsCheckShort").checked == true && document.getElementById("optionsCheckLong").checked == false) {
+          if (opShort.checked && !opLong.checked) {
             console.log("short");
             if (sentence.length < 100) {
               writeSentence();
@@ -298,7 +333,7 @@ function changeSentence() {
             }
           }
 
-          if (document.getElementById("optionsCheckLong").checked == true && document.getElementById("optionsCheckShort").checked == true) {
+          if (opLong.checked && opShort.checked) {
             writeSentence();
 
           }
@@ -310,27 +345,39 @@ function changeSentence() {
   }
 }
 
+
 function start(time) {
+  inputEl.disabled = true;
   cpmResult = 0;
+  accCount = 0;
+  isTyping = false;
+  document.getElementById("accuracyCount").innerHTML = "";
   document.getElementById("timeCourse").innerHTML = "";
   document.getElementById("valueCpm").innerHTML = "";
   document.getElementById("timeCourse").innerHTML = "";
   document.getElementById("myInput").value = "";
+  document.getElementById("accPercent").innerHTML = "";
+  document.getElementById("cpmCount").innerHTML = "";
+  inputEl.style.backgroundColor = 'rgb(224, 224, 224)';
+
 
   setTimeout(function() {
-    document.getElementById(time).innerHTML = "3";
+    timeEl.innerHTML = "3";
+    startTimer();
   }, 1000);
 
   setTimeout(function() {
-    document.getElementById(time).innerHTML = "2";
+    timeEl.innerHTML = "2";
   }, 2000);
 
   setTimeout(function() {
-    document.getElementById(time).innerHTML = "1";
+    timeEl.innerHTML = "1";
   }, 3000);
 
   setTimeout(function() {
-    document.getElementById(time).innerHTML = "Go";
+    timeEl.innerHTML = "Go";
+    finishTimer();
+
   }, 4000);
 
   //setTimeout(function () {var takeTimeOne = 1;}, 4000);
@@ -339,23 +386,26 @@ function start(time) {
   setTimeout(able, 4000);
   setTimeout(cpm, 4000);
   setTimeout(setTimer, 4000);
-  setTimeout(finalAutoCheck, 50);
+  setTimeout(finalAutoCheck, 4000);
   setTimeout(changeSentenceColor, 4000);
-
-  autocheckOrNot = 1;
-  checkOrNot = 1;
+  setTimeout(function() {
+    autocheckOrNot = true;
+  }, 3990);
+  setTimeout(function() {
+    isTyping = true;
+  }, 3990);
 }
 
 //document.body.innerHTML = "test"; SO YOU DONT NEED AN ID!!!
 function able() {
-  document.getElementById("myInput").disabled = false;
-  var input = document.getElementById('myInput');
+  inputEl.disabled = false;
+  var input = inputEl;
   input.select();
   input.focus();
 }
 
 function toggleDarkMode() {
-  var toggleDarkMode = document.getElementById("optionsCheckDark").checked;
+  var toggleDarkMode = opDark.checked;
   if (toggleDarkMode == true) {
     setDarkMode(true);
     localStorage.setItem("lightningMode", "dark");
@@ -368,52 +418,73 @@ function toggleDarkMode() {
 //darkMode: boolean...true: set dark mode; false: set light mode;
 //TODO:make this beetter
 function setDarkMode(darkMode) {
-  if (darkMode == true) {
+  var x = document.getElementsByClassName("keys");
+  if (darkMode) {
     document.body.style.backgroundColor = "#333333";
     document.body.style.color = "#ffffff";
+    for(let i = 0; i < x.length; i++) {x[i].style.borderRadius = "5px";}
   } else {
+
     document.body.style.backgroundColor = "#E0E0E0";
     document.body.style.color = "#000000";
+    for(let i = 0; i < x.length; i++) {x[i].style.borderRadius = "4px";}
+  }
+}
+
+function toggleKeys() {
+  var toggleKeys = opKeys.checked;
+  if (toggleKeys == true) {
+    keypad.style.visibility = "visible";
+    localStorage.setItem("keys", "true");
+  } else {
+    keypad.style.visibility = "hidden";
+    localStorage.setItem("keys", "true");
   }
 }
 
 //When you write var you are creating a local scoped var.
 function toggleOptions() {
-  var showHid = document.getElementById("optionsOne").style.visibility;
-
+  console.log("activate");
+  optionsBigFadeIn();
+  var showHid = rankings.style.visibility;
   if (showHid == "hidden") {
-    document.getElementById("optionsOne").style.visibility = "visible";
-    document.getElementById("optionsTwo").style.visibility = "visible";
-    document.getElementById("optionsThree").style.visibility = "visible";
+    rankings.style.visibility = "visible";
+    credits.style.visibility = "visible";
+    moreOp.style.visibility = "visible";
   } else {
-    document.getElementById("optionsOne").style.visibility = "hidden";
-    document.getElementById("optionsTwo").style.visibility = "hidden";
-    document.getElementById("optionsThree").style.visibility = "hidden";
-    document.getElementById("optionsCheckNormalSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckRandomSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckLongSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckNumbersSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckShortSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckDarkSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckLong").style.visibility = "hidden";
-    document.getElementById("optionsCheckShort").style.visibility = "hidden";
-    document.getElementById("optionsCheckDark").style.visibility = "hidden";
+    keypad.style.visibility = "hidden";
+    rankings.style.visibility = "hidden";
+    credits.style.visibility = "hidden";
+    moreOp.style.visibility = "hidden";
+    opNormalSp.style.visibility = "hidden";
+    opRandom.style.visibility = "hidden";
+    opRandomSp.style.visibility = "hidden";
+    opLongSp.style.visibility = "hidden";
+    opNumbersSp.style.visibility = "hidden";
+    opShortSp.style.visibility = "hidden";
+    opDarkSp.style.visibility = "hidden";
+    opLong.style.visibility = "hidden";
+    opShort.style.visibility = "hidden";
+    opDark.style.visibility = "hidden";
+    opKeys.style.visibility = "hidden";
+    opKeysSp.style.visibility = "hidden";
 
   }
 }
 
 function toggleCheckOptionsNormal(optionsNormal) {
   if (optionsNormal == true) {
-    document.getElementById("optionsCheckRandom").checked = false;
-    document.getElementById("optionsCheckNormal").checked = true;
+    opNormal.checked = true;
+    opRandom.checked = false;
   } else {
-    document.getElementById("optionsCheckRandom").checked = true;
-    document.getElementById("optionsCheckNormal").checked = false;
+    opNormal.checked = false;
+    opRandom.checked = true;
   }
 }
 
 function toggleCheckOptions() {
-  var showHid = document.getElementById("optionsCheckLong").style.visibility;
+  optionsFadeIn();
+  var showHid = opLong.style.visibility;
 
   if (showHid == "hidden") {
     document.getElementById("optionsCheckNormalSpan").style.visibility = "visible";
@@ -421,10 +492,12 @@ function toggleCheckOptions() {
     document.getElementById("optionsCheckLongSpan").style.visibility = "visible";
     document.getElementById("optionsCheckShortSpan").style.visibility = "visible";
     document.getElementById("optionsCheckNumbersSpan").style.visibility = "visible";
-    document.getElementById("optionsCheckLong").style.visibility = "visible";
-    document.getElementById("optionsCheckShort").style.visibility = "visible";
-    document.getElementById("optionsCheckDark").style.visibility = "visible";
+    opLong.style.visibility = "visible";
+    opShort.style.visibility = "visible";
+    opDark.style.visibility = "visible";
     document.getElementById("optionsCheckDarkSpan").style.visibility = "visible";
+    opKeys.style.visibility = "visible";
+    document.getElementById("optionsCheckKeysSpan").style.visibility = "visible";
 
   } else {
     document.getElementById("optionsCheckNormalSpan").style.visibility = "hidden";
@@ -432,10 +505,12 @@ function toggleCheckOptions() {
     document.getElementById("optionsCheckLongSpan").style.visibility = "hidden";
     document.getElementById("optionsCheckNumbersSpan").style.visibility = "hidden";
     document.getElementById("optionsCheckShortSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckLong").style.visibility = "hidden";
-    document.getElementById("optionsCheckShort").style.visibility = "hidden";
-    document.getElementById("optionsCheckDark").style.visibility = "hidden";
+    opLong.style.visibility = "hidden";
+    opShort.style.visibility = "hidden";
+    opDark.style.visibility = "hidden";
     document.getElementById("optionsCheckDarkSpan").style.visibility = "hidden";
+    opKeys.style.visibility = "hidden";
+    document.getElementById("optionsCheckKeysSpan").style.visibility = "hidden";
   }
 }
 
@@ -453,14 +528,14 @@ function cpm() {
   takeTimeBoth = (takeTimeTwo - takeTimeOne);
   takeTimeResult = takeTimeBoth / 1000;
   cpmResult = Math.round((count * 60) / takeTimeResult);
-  if (checkOrNot == 1) {
-    input = document.getElementById("myInput").value; //make taketimeresult reactive
+  if (isTyping) {
+    input = inputEl.value; //make taketimeresult reactive
     count = input.length;
     document.getElementById("cpmCount").innerHTML = cpmResult + " cpm";
     setTimeout(cpm, 500);
   }
 
-  if (checkOrNot == 1) {
+  if (isTyping) {
     document.getElementById("timeCourse").innerHTML = "" + Math.round(takeTimeResult) + " s";
   }
 }
@@ -468,13 +543,13 @@ function cpm() {
 // To change body background color document.body.style.backgroundColor = 'green';
 
 function checkError() {
-  input = document.getElementById("myInput").value;
+  input = inputEl.value;
   if (input != lastInput) {
-    if (checkOrNot == 1) {
+    if (isTyping) {
       if (sentence.indexOf(input) == 0)
-        document.getElementById("myInput").style.backgroundColor = 'lightgreen';
+        inputEl.style.backgroundColor = 'lightgreen';
       else {
-        document.getElementById("myInput").style.backgroundColor = 'pink';
+        inputEl.style.backgroundColor = 'pink';
         if (lastInput.length < input.length) {
           accCount = accCount + 1;
           accPercentage = Math.round(100 - (accCount / input.length * 100));
@@ -482,7 +557,7 @@ function checkError() {
       }
 
       setTimeout(checkError, 50);
-      document.getElementById("myInput").disabled = false;
+      inputEl.disabled = false;
       document.getElementById("accuracyCount").innerHTML = accCount + " mistakes";
       document.getElementById("accPercent").innerHTML = accPercentage + " % accuracy";
 
@@ -499,23 +574,48 @@ function checkError() {
 
 
 function writeSentence() {
-  document.getElementById("writeSentence").innerHTML = changeSentenceColor();
+  wrSentence.innerHTML = changeSentenceColor();
 }
 
 function changeSentenceColor() {
-  input = document.getElementById("myInput").value;
+  input = inputEl.value;
   part1 = sentence.substring(0, input.length);
   part2 = sentence.substring(input.length, sentence.length);
-  //TODO: change this color for dark mode a fix a bug that the check error doesenet work good;
   part1 = part1.fontcolor("#ffffff");
   fullPart = part1 + part2;
 
-  if (checkOrNot == 1) {
-    document.getElementById("writeSentence").innerHTML = fullPart;
-    setTimeout(changeSentenceColor, 200);
+  if (isTyping) {
+    wrSentence.innerHTML = fullPart;
+    setTimeout(changeSentenceColor, 25);
   }
   sentenceWrite = fullPart;
   return sentenceWrite;
+}
+//TODO
+function myKeyPress(e) {
+  var keynum;
+
+  if (window.event) { // IE
+    keynum = e.keyCode;
+  } else if (e.which) { // Netscape/Firefox/Opera
+    keynum = e.which;
+  }
+  //use something like charCodeAt to get the number.
+  pressedKey = String.fromCharCode(keynum);
+  pressedKey = pressedKey.charCodeAt();
+
+  return changeKeyColor(pressedKey);
+}
+
+
+
+function changeKeyColor(lastKey) {
+  //  lastKey = lastKey.toLowerCase();
+  document.getElementById(lastKey).style.backgroundColor = "#828282";
+
+  setTimeout(function() {
+    document.getElementById(lastKey).style.backgroundColor = "#aaaaaa";
+  }, 100);
 }
 
 
@@ -525,19 +625,19 @@ function tipsFunction() {
 }
 
 function finalAutoCheck() {
-  console.log("check");
   takeTimeTwo = Date.now();
   takeTimeBoth = (takeTimeTwo - takeTimeOne);
   takeTimeResult = takeTimeBoth / 1000;
   cpmResult = Math.round((count * 60) / takeTimeResult);
-  input = document.getElementById("myInput").value;
-  if (autocheckOrNot == 1) {
+  input = inputEl.value;
+  if (autocheckOrNot) {
     if (input == sentence) {
-      alert("Well done");
-      checkOrNot = 0;
-      document.getElementById("myInput").style.backgroundColor = 'rgb(224, 224, 224)';
+      timeEl.innerHTML = "Finished";
+      endTimer();
+      isTyping = false;
+      inputEl.style.backgroundColor = 'rgb(224, 224, 224)';
       document.getElementById("timeCourse").innerHTML = "This took you " + Math.round(takeTimeResult) + " s";
-      document.getElementById("myInput").disabled = true;
+      inputEl.disabled = true;
       setCheckTops();
       if (cpmResult < 100) {
         document.getElementById("valueCpm").innerHTML = "Keep practicing";
@@ -555,7 +655,7 @@ function finalAutoCheck() {
         }
       }
 
-      autocheckOrNot = 0;
+      autocheckOrNot = false;
     }
   }
 
@@ -654,7 +754,6 @@ function checkTops() {
   }
 
 
-
   localStorage.setItem("top1", top1);
   localStorage.setItem("guy1", guy1);
   localStorage.setItem("top2", top2);
@@ -707,4 +806,98 @@ function getTops() {
   guy9 = localStorage.getItem("guy9");
   top10 = localStorage.getItem("top10");
   guy10 = localStorage.getItem("guy10");
+}
+
+function bodyFadeIn() {
+  var tl = new TimelineMax();
+  var body = document.body;
+
+  //You need the ease, if not it happens instantly and it doesent work
+
+  tl.fromTo(
+    body, 10, {
+      opacity: 0
+    }, {
+      opacity: 100,
+      ease: Power2.easeInOut
+    });
+  console.log("fadeIn");
+
+}
+
+function optionsFadeIn() {
+  var tl = new TimelineMax();
+  var options = document.getElementsByClassName("container");
+  var body = document.body;
+
+  //   tl.fromTo(
+  //     options, 1.5, { y: "0%" },
+  //      { y: "100%", ease: Power2.easeInOut});
+  // }
+  tl.fromTo(
+    options, 0.5, {
+      y: "-500%",
+      opacity: 0
+    }, {
+      y: "0%",
+      opacity: 1,
+      ease: Elastic.easeInOut
+    }
+  );
+}
+
+function optionsBigFadeIn() {
+  var tl = new TimelineMax();
+  var options = document.getElementsByClassName("mainOptions");
+
+  //   tl.fromTo(
+  //     options, 1.5, { y: "0%" },
+  //      { y: "100%", ease: Power2.easeInOut});
+  // }
+  tl.fromTo(
+    ".optionsBig", 0.3, {
+      y: "-500%",
+      opacity: 0
+    }, {
+      y: "0%",
+      opacity: 1,
+      ease: Elastic.easeInOut
+    }
+  );
+
+}
+
+function startTimer() {
+  var tl = new TimelineMax();
+  var text = timeEl;
+  tl.fromTo(
+    text, 0.2, {
+      x: "-100%"
+    }, {
+      x: "30%", ease: Sine.easeInOut
+    }
+  );
+}
+function finishTimer() {
+  var tl = new TimelineMax();
+  var text = timeEl;
+  tl.fromTo(
+    text, 0.2, {
+      x:"0%"
+    }, {
+      x:"1000%",ease: Sine.easeInOut
+    }, "+=0.2"
+  );
+}
+//make all in one function
+function endTimer() {
+  var tl = new TimelineMax();
+  var text = timeEl;
+  tl.fromTo(
+    text, 0.2, {
+      x:"-100%"
+    }, {
+      x:"0%",ease: Sine.easeInOut
+    }, "+=0.2"
+  );
 }
