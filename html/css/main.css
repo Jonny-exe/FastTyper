@@ -1,6 +1,7 @@
 body {
   background-color: rgb(224, 224, 224);
   font-family: Franklin Gothic;
+  color: rgb(102, 102, 102);
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -46,15 +47,7 @@ body {
 }
 
 #writeSentence {
-  font-size: 30px;
-}
-
-#time {
-  font-size: 50px;
-}
-
-#cpmCount {
-  color: #;
+  font-size: 200%;
 }
 
 .optionsBig {
@@ -265,20 +258,23 @@ body {}
   display: grid;
   width: 100%;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 0.3fr 0.5fr 0.1fr 0.3fr 0.3fr 0.5fr 1fr;
+  grid-template-rows: 0.3fr 0.5fr 0.1fr 0.3fr 0.3fr 0.5fr 0.1fr;
   grid-template-areas:
-    "welcomeText welcomeText welcomeText welcomeText welcomeText opImage"
+    "welcomeText welcomeText welcomeText loginText loginText opImage"
     "mainTitle mainTitle mainTitle mainTitle mainTitle allOp"
     "writeSentence writeSentence writeSentence writeSentence writeSentence smallOp"
     "inputText inputText inputText inputText inputText smallOp"
-    "time values values values loginText loginText"
-    "keypad keypad keypad keypad notify notify"
+    "time values values values values values "
+    "keypad keypad keypad keypad nothing nothing"
     "tips tips tips tips tips tips";
 }
 
 .windows {
   height: 60%;
   width: 35%;
+}
+.nothing {
+ grid-area: nothing;
 }
 
 .alloptions {
@@ -287,7 +283,7 @@ body {}
 }
 
 .values {
-  font-size: 200%;
+  font-size: 180%;
   width: 100%;
   display: flex;
   margin: auto;
@@ -300,11 +296,17 @@ body {}
 }
 
 .time {
+  font-size: 325%;
   grid-area: time;
+  margin-bottom: 5%;
 }
+
 
 .welcomeText {
   grid-area: welcomeText;
+  text-align: left;
+  margin-left: 10%;
+  margin-top: 2%
 }
 
 .optionsImage {
@@ -318,6 +320,7 @@ body {}
 }
 
 .smallOptions {
+  margin: auto;
   grid-area: smallOp;
   text-align: right;
 }
@@ -328,6 +331,7 @@ body {}
 }
 
 .writeSentence {
+  text-shadow: 2px 2px 4px #838383;
   grid-area: writeSentence;
 }
 

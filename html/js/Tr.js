@@ -7,6 +7,7 @@
 // jscs:disable requireSpaceAfterKeywords
 // jscs:disable
 // jshint esversion: 6
+//TODO: learn more shortcuts for atom
 
 var sentences = [
   'I love you the more in that I believe you had liked me for my own sake and for nothing else.',
@@ -23,6 +24,11 @@ var tips = [
 ];
 
 //shortchut consts
+const optionsSmall = document.getElementsByClassName('optionsSmall');
+const optionsBig = document.getElementsByClassName('optionsBig');
+const options = document.getElementsByClassName('op');
+const displayFinished = document.getElementById("displayFinished");
+const separator = " ||";
 const inputEl = document.getElementById("myInput");
 const opLong = document.getElementById("optionsCheckLong");
 const opLongSp = document.getElementById("optionsCheckLongSpan");
@@ -48,8 +54,11 @@ const rankings = document.getElementById("optionsOne");
 const credits = document.getElementById("optionsTwo");
 const moreOp = document.getElementById("optionsThree");
 const wrSentence = document.getElementById("writeSentence");
+const image = document.getElementById("image");
 
-
+var isSentenceChanged;
+var finished = false;
+var canRotate = true;
 var part1;
 var part2;
 var ranNumber;
@@ -118,10 +127,11 @@ var getJSON = function(url, callback) {
 };
 
 console.log("hi");
-
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules you cant inport the octokit
 
 //var key = event.keyCode;
 function startup() {
+  toggleKeys();
   console.log("startup");
   inputEl.disabled = true;
   inputEl.value = "";
@@ -146,26 +156,48 @@ function startup() {
     welcomeText.innerHTML = "Welcome";
   } else {
     console.log("username " + username);
-    welcomeText.innerHTML = "Welcome " + username;
+    welcomeText.innerHTML = `Welcome ${username}`;
   }
 }
 
+// inputEl.onchange = function() {
+//   if (finished) {
+//     updateDisplay();
+//   }
+// };
+//
+// function updateDisplay() {
+//   displayFinished.value = "finished";
+//   var request = new XMLHttpRequest();
+//   formData.append(name, value);
+//   request.responesType = 'text';
+//   request.onload = function() {
+//     displayFinished.value = "finished";
+//   };
+//   request.send();
+// }
+
+
 function setOptionsVisivility() {
-  keypad.style.visibility = "hidden";
-  rankings.style.visibility = "hidden";
-  credits.style.visibility = "hidden";
-  moreOp.style.visibility = "hidden";
-  opLong.style.visibility = "hidden";
-  opShort.style.visibility = "hidden";
-  opLongSp.style.visibility = "hidden";
-  opShortSp.style.visibility = "hidden";
-  opNumbersSp.style.visibility = "hidden";
-  opRandomSp.style.visibility = "hidden";
-  opNormalSp.style.visibility = "hidden";
-  opDark.style.visibility = "hidden";
-  opDarkSp.style.visibility = "hidden";
-  opKeys.style.visibility = "hidden";
-  opKeysSp.style.visibility = "hidden";
+  console.log(options.length);
+  for (let i = 0; i < options.length; i++) {
+    options[i].style.visibility = "hidden";
+  }
+  // keypad.style.visibility = "hidden";
+  // rankings.style.visibility = "hidden";
+  // credits.style.visibility = "hidden";
+  // moreOp.style.visibility = "hidden";
+  // opLong.style.visibility = "hidden";
+  // opShort.style.visibility = "hidden";
+  // opLongSp.style.visibility = "hidden";
+  // opShortSp.style.visibility = "hidden";
+  // opNumbersSp.style.visibility = "hidden";
+  // opRandomSp.style.visibility = "hidden";
+  // opNormalSp.style.visibility = "hidden";
+  // opDark.style.visibility = "hidden";
+  // opDarkSp.style.visibility = "hidden";
+  // opKeys.style.visibility = "hidden";
+  // opKeysSp.style.visibility = "hidden";
   opLong.checked = true;
   opShort.checked = true;
   opNumbers.checked = false;
@@ -192,6 +224,8 @@ function registerFunc() {
 }
 
 function unregisterFunc() {
+  register.style.visibility = "visible";
+  unregister.style.visibility = "hidden";
   welcomeText.innerHTML = "You are not registered anymore, your scores will not be saved.";
   // Check browser support
   if (typeof(Storage) !== "undefined") {
@@ -289,7 +323,7 @@ function changeSentence() {
           alert('Something went wrong: ' + err);
         } else {
           //data is an array, inside the array there are dictionari, with 2 key  value pairs, author and text
-
+//TODO: make an infine play mode, or a paragraph play mode.
           el = data[Math.floor(Math.random() * data.length)];
           sentence = el.text;
           if (opNumbers.checked == true) {
@@ -360,7 +394,6 @@ function start(time) {
   document.getElementById("cpmCount").innerHTML = "";
   inputEl.style.backgroundColor = 'rgb(224, 224, 224)';
 
-
   setTimeout(function() {
     timeEl.innerHTML = "3";
     startTimer();
@@ -422,53 +455,57 @@ function setDarkMode(darkMode) {
   if (darkMode) {
     document.body.style.backgroundColor = "#333333";
     document.body.style.color = "#ffffff";
-    for(let i = 0; i < x.length; i++) {x[i].style.borderRadius = "5px";}
+    for (let i = 0; i < x.length; i++) {
+      x[i].style.borderRadius = "5px";
+    }
   } else {
 
     document.body.style.backgroundColor = "#E0E0E0";
     document.body.style.color = "#000000";
-    for(let i = 0; i < x.length; i++) {x[i].style.borderRadius = "4px";}
+    for (let i = 0; i < x.length; i++) {
+      x[i].style.borderRadius = "4px";
+    }
   }
 }
 
 function toggleKeys() {
   var toggleKeys = opKeys.checked;
   if (toggleKeys == true) {
+    keysGoIn();
     keypad.style.visibility = "visible";
     localStorage.setItem("keys", "true");
   } else {
-    keypad.style.visibility = "hidden";
-    localStorage.setItem("keys", "true");
+    keysGoOut();
+    setTimeout(function keypadVisibel() {
+      keypad.style.visibility = "hidden";
+      localStorage.setItem("keys", "true");
+    }, 300);
   }
 }
-
+//TODO: nginx flask on the laptop for a sever;
 //When you write var you are creating a local scoped var.
 function toggleOptions() {
-  console.log("activate");
   optionsBigFadeIn();
   var showHid = rankings.style.visibility;
   if (showHid == "hidden") {
-    rankings.style.visibility = "visible";
-    credits.style.visibility = "visible";
-    moreOp.style.visibility = "visible";
+    rotateShow();
+    canRotate = false;
+    console.log(optionsBig.length);
+    setTimeout(function setrotate() {
+      canRotate = true;
+    }, 500);
+    for (let i = 0; i < optionsBig.length; i++) {
+      optionsBig[i].style.visibility = "visible";
+    }
   } else {
-    keypad.style.visibility = "hidden";
-    rankings.style.visibility = "hidden";
-    credits.style.visibility = "hidden";
-    moreOp.style.visibility = "hidden";
-    opNormalSp.style.visibility = "hidden";
-    opRandom.style.visibility = "hidden";
-    opRandomSp.style.visibility = "hidden";
-    opLongSp.style.visibility = "hidden";
-    opNumbersSp.style.visibility = "hidden";
-    opShortSp.style.visibility = "hidden";
-    opDarkSp.style.visibility = "hidden";
-    opLong.style.visibility = "hidden";
-    opShort.style.visibility = "hidden";
-    opDark.style.visibility = "hidden";
-    opKeys.style.visibility = "hidden";
-    opKeysSp.style.visibility = "hidden";
-
+    rotateHide();
+    canRotate = false;
+    setTimeout(function setrotate() {
+      canRotate = true;
+    }, 500);
+    for (let i = 0; i < options.length; i++) {
+      options[i].style.visibility = "hidden";
+    }
   }
 }
 
@@ -485,42 +522,21 @@ function toggleCheckOptionsNormal(optionsNormal) {
 function toggleCheckOptions() {
   optionsFadeIn();
   var showHid = opLong.style.visibility;
-
+  console.log("checkOptions");
   if (showHid == "hidden") {
-    document.getElementById("optionsCheckNormalSpan").style.visibility = "visible";
-    document.getElementById("optionsCheckRandomSpan").style.visibility = "visible";
-    document.getElementById("optionsCheckLongSpan").style.visibility = "visible";
-    document.getElementById("optionsCheckShortSpan").style.visibility = "visible";
-    document.getElementById("optionsCheckNumbersSpan").style.visibility = "visible";
-    opLong.style.visibility = "visible";
-    opShort.style.visibility = "visible";
-    opDark.style.visibility = "visible";
-    document.getElementById("optionsCheckDarkSpan").style.visibility = "visible";
-    opKeys.style.visibility = "visible";
-    document.getElementById("optionsCheckKeysSpan").style.visibility = "visible";
-
+    for (let i = 0; i < optionsSmall.length; i++) {
+      optionsSmall[i].style.visibility = "visible";
+    }
   } else {
-    document.getElementById("optionsCheckNormalSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckRandomSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckLongSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckNumbersSpan").style.visibility = "hidden";
-    document.getElementById("optionsCheckShortSpan").style.visibility = "hidden";
-    opLong.style.visibility = "hidden";
-    opShort.style.visibility = "hidden";
-    opDark.style.visibility = "hidden";
-    document.getElementById("optionsCheckDarkSpan").style.visibility = "hidden";
-    opKeys.style.visibility = "hidden";
-    document.getElementById("optionsCheckKeysSpan").style.visibility = "hidden";
+    for (let i = 0; i < optionsSmall.length; i++) {
+      optionsSmall[i].style.visibility = "hidden";
+    }
   }
 }
 
 function setTimer() {
   takeTimeOne = Date.now();
   return takeTimeOne;
-}
-
-function test() {
-
 }
 
 function cpm() {
@@ -536,13 +552,14 @@ function cpm() {
   }
 
   if (isTyping) {
-    document.getElementById("timeCourse").innerHTML = "" + Math.round(takeTimeResult) + " s";
+    document.getElementById("timeCourse").innerHTML = `${Math.round(takeTimeResult)} s${separator}`;
   }
 }
 
 // To change body background color document.body.style.backgroundColor = 'green';
 
 function checkError() {
+
   input = inputEl.value;
   if (input != lastInput) {
     if (isTyping) {
@@ -558,8 +575,8 @@ function checkError() {
 
       setTimeout(checkError, 50);
       inputEl.disabled = false;
-      document.getElementById("accuracyCount").innerHTML = accCount + " mistakes";
-      document.getElementById("accPercent").innerHTML = accPercentage + " % accuracy";
+      document.getElementById("accuracyCount").innerHTML = accCount + " mistakes" + separator;
+      document.getElementById("accPercent").innerHTML = accPercentage + " % accuracy" + separator;
 
     }
 
@@ -569,11 +586,9 @@ function checkError() {
   setTimeout(checkError, 50);
 
 }
-//TODO: make a way to not have to use the dark css file.
-//TODO: make the part of the sentece you wrote change the color.
-
 
 function writeSentence() {
+  console.log("changed");
   wrSentence.innerHTML = changeSentenceColor();
 }
 
@@ -625,6 +640,7 @@ function tipsFunction() {
 }
 
 function finalAutoCheck() {
+  finished = true;
   takeTimeTwo = Date.now();
   takeTimeBoth = (takeTimeTwo - takeTimeOne);
   takeTimeResult = takeTimeBoth / 1000;
@@ -636,29 +652,23 @@ function finalAutoCheck() {
       endTimer();
       isTyping = false;
       inputEl.style.backgroundColor = 'rgb(224, 224, 224)';
-      document.getElementById("timeCourse").innerHTML = "This took you " + Math.round(takeTimeResult) + " s";
+      document.getElementById("timeCourse").innerHTML = "This took you " + Math.round(takeTimeResult) + " s" + separator;
       inputEl.disabled = true;
       setCheckTops();
+      let praise = "";
       if (cpmResult < 100) {
-        document.getElementById("valueCpm").innerHTML = "Keep practicing";
+        praise = " Keep practicing";
+      } else if (cpmResult < 200) {
+        praise = " You are getting better";
+      } else if (cpmResult < 300) {
+        praise = " Wow, you are good";
       } else {
-        if (cpmResult > 100, cpmResult < 200) {
-          document.getElementById("valueCpm").innerHTML = "You are getting better";
-        }
-
-        if (cpmResult > 200, cpmResult < 300) {
-          document.getElementById("valueCpm").innerHTML = "Wow, you are good";
-        }
-
-        if (cpmResult > 300) {
-          document.getElementById("valueCpm").innerHTML = "You are a typing god";
-        }
+        praise = " You are a typing god";
       }
-
+      document.getElementById("valueCpm").innerHTML = `${separator} ${praise}`;
       autocheckOrNot = false;
     }
   }
-
   setTimeout(finalAutoCheck, 200);
 }
 
@@ -874,18 +884,21 @@ function startTimer() {
     text, 0.2, {
       x: "-100%"
     }, {
-      x: "30%", ease: Sine.easeInOut
+      x: "30%",
+      ease: Sine.easeInOut
     }
   );
 }
+
 function finishTimer() {
   var tl = new TimelineMax();
   var text = timeEl;
   tl.fromTo(
     text, 0.2, {
-      x:"0%"
+      x: "0%"
     }, {
-      x:"1000%",ease: Sine.easeInOut
+      x: "1000%",
+      ease: Sine.easeInOut
     }, "+=0.2"
   );
 }
@@ -895,9 +908,72 @@ function endTimer() {
   var text = timeEl;
   tl.fromTo(
     text, 0.2, {
-      x:"-100%"
+      x: "-100%"
     }, {
-      x:"0%",ease: Sine.easeInOut
+      x: "0%",
+      ease: Sine.easeInOut
     }, "+=0.2"
   );
 }
+
+function keysGoIn() {
+  var tipsText = document.getElementById('tips');
+  var tl = new TimelineMax();
+  tl.fromTo(
+    tipsText, 0.2, {
+      y: "-1000%"
+    }, {
+      y: "0%",
+      ease: Sine.easeInout
+    }
+  )
+  .fromTo(
+    keypad, 0.5, {
+      x: "-200%"
+    }, {
+      x: "0%",
+      ease: Sine.easeInout
+    }
+  );
+}
+//make only one function keysMove(true)
+function keysGoOut() {
+  var tl = new TimelineMax();
+  var tipsText = document.getElementById('tips');
+
+  tl.fromTo(
+    keypad, 0.2, {
+      x: "0%"
+    }, {
+      x: "-200%",
+      ease: Sine.easeInout
+    }
+  )
+  .fromTo(
+    tipsText, 0.3, {
+      y: "0%"
+    }, {
+      y: "-1000%",
+      ease: Sine.easeInout
+    }
+  );
+}
+
+function rotateShow() {
+  if (canRotate) {
+    TweenLite.to(image, 0.5, {
+      rotation: "+=-90"
+    });
+  }
+}
+
+function rotateHide() {
+  if (canRotate) {
+    TweenLite.to(image, 0.5, {
+      rotation: "+=90"
+    });
+  }
+}
+
+
+//updateDisplay();
