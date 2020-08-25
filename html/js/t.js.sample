@@ -1,0 +1,5 @@
+// After you fork this project, you must 
+// a) rename t.js.sample to t.js
+// b) place your won valid GityHub Gist token into the var value.
+export const t = "Put your own secret GitHub Gist token here";
+// End of file
