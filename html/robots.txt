@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /t.js
+Disallow: /t.js/
+Disallow: t.js
+Disallow: js/t.js
+Disallow: js/t.js/
