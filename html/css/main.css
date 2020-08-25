@@ -60,7 +60,9 @@ body {
     color: black;
   }
 }
-
+#home {
+  font-size: 300%;
+}
 /* CHECKBOXES START */
 /* The container */
 .container {
@@ -250,6 +252,11 @@ body {
   text-align: center;
   align-content: center;
   align-items: center;
+}
+
+#div1 {
+  size: 300;
+  font-size: 400px;
 }
 
 body {}

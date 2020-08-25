@@ -6,8 +6,13 @@
 // jscs:disable requirePaddingNewLinesBeforeLineComments
 // jscs:disable requireSpaceAfterKeywords
 // jscs:disable
-// jshint esversion: 6
+// jshint esversion: 8
 //TODO: learn more shortcuts for atom
+//imports
+import {
+  Octokit
+} from "https://cdn.pika.dev/@octokit/core";
+import {t} from './t.js';
 
 var sentences = [
   'I love you the more in that I believe you had liked me for my own sake and for nothing else.',
@@ -29,6 +34,7 @@ const optionsBig = document.getElementsByClassName('optionsBig');
 const options = document.getElementsByClassName('op');
 const displayFinished = document.getElementById("displayFinished");
 const separator = " ||";
+const maxTop = 100;
 const inputEl = document.getElementById("myInput");
 const opLong = document.getElementById("optionsCheckLong");
 const opLongSp = document.getElementById("optionsCheckLongSpan");
@@ -56,15 +62,17 @@ const moreOp = document.getElementById("optionsThree");
 const wrSentence = document.getElementById("writeSentence");
 const image = document.getElementById("image");
 
+var today = new Date();
+var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 var isSentenceChanged;
 var finished = false;
 var canRotate = true;
 var part1;
 var part2;
+var fullPart;
 var ranNumber;
 var finalNumber;
 var pressedKey;
-_u = _.noConflict();
 var sentenceWrite;
 var words = "";
 var el = "";
@@ -80,6 +88,7 @@ var takeTimeBoth = (takeTimeTwo - takeTimeOne);
 var cpmResult = Math.round((count * 60) / takeTimeResult);
 var tip = tips[Math.floor(Math.random() * tips.length)];
 var autocheckOrNot;
+var rankingStr;
 
 //tops
 var lastTop = 0;
@@ -95,6 +104,7 @@ var top8 = 0;
 var top9 = 0;
 var top10 = 0;
 var lastGuy = 0;
+
 var guy = 0;
 var guy1 = 0;
 var guy2 = 0;
@@ -106,6 +116,12 @@ var guy7 = 0;
 var guy8 = 0;
 var guy9 = 0;
 var guy10 = 0;
+
+// var guys = guy1, guy2, guy3, guy4, guy5, guy6, guy7, guy8, guy9, guy10;
+// var tops = top1, top2, top3, top4, top5, top6, top7, top8, top9, top10;
+var ranking = [];
+var myRankingJson;
+var rank;
 
 var isTyping = false;
 var lastInput = "";
@@ -128,9 +144,88 @@ var getJSON = function(url, callback) {
 
 console.log("hi");
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules you cant inport the octokit
+function setEvents() {
+  image.addEventListener('click', toggleOptions);
+  rankings.addEventListener('click', setRankingsLink);
+  document.getElementById('optionsTwo').addEventListener('click', toggleCheckOptions);
+  document.getElementById('optionsCheckNormal').addEventListener('click', toggleCheckOptionsNormal, true);
+  opRandom.addEventListener('click', toggleCheckOptionsNormal, false);
+  opKeys.addEventListener('click', toggleKeys);
+  opDark.addEventListener('click', toggleDarkMode);
+  document.getElementById('register').addEventListener('click', registerFunc);
+  document.getElementById('unregister').addEventListener('click', unregisterFunc);
+  document.getElementById('changeSentence').addEventListener('click', changeSentence);
+  document.getElementById('start').addEventListener('click', start, time);
+  document.getElementById('tips').addEventListener('click', tipsFunction);
+  document.getElementById('myInput').addEventListener('keydown', function(event) {
+    var keynum;
+    console.log("onkeydown");
+    if (window.event) { // IE
+      keynum = event.keyCode;
+    } else if (event.which) { // Netscape/Firefox/Opera
+      keynum = event.which;
+    }
+    //use something like charCodeAt to get the number.
+    pressedKey = String.fromCharCode(keynum);
+    pressedKey = pressedKey.charCodeAt();
+
+    return changeKeyColor(pressedKey);
+  });
+}
+
+// Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
+const octokit = new Octokit({
+  auth: t
+});
+
+async function getGist() {
+
+  // //working
+  // const response1 = await octokit.request('GET /gists/a8aa0f34f366403f79b4646e8964bc33', {
+  //   gist_id: 'gist_id'
+  // })
+  // console.log(response1);
+  // //working
+  // const response2 = await octokit.request('PATCH /gists/a8aa0f34f366403f79b4646e8964bc33', {
+  //   gist_id: 'gist_id',
+  //   description: 'my-title-2',
+  //   "files": {
+  //     "Tr-gist.json": {
+  //       "content": "{\"name\" : \"jonny\",\"points\": \"300\"}"
+  //     }
+  //   }
+  // })
+  //working
+  //make this work with vars
+
+  const response3 = await octokit.request('PATCH /gists/a8aa0f34f366403f79b4646e8964bc33', {
+    gist_id: 'gist_id',
+    description: 'my-title-2',
+    "files": {
+      "Tr-gist.json": {
+        "content": `${rankingStr}`
+      }
+    }
+  });
+  console.log("gistUpdated");
+
+  // //creates a new one with each call
+  //       const response4 = await octokit.request('POST /gists', {
+  //         description: 'computerGenerated',
+  //         "files": {
+  //           "Computer generated file": {
+  //             "content": "{\"name\" : \"Frank\",\"points\": \"350\"}"
+  //           }
+  //         }
+  //       })
+  //       console.log(response4);
+}
+console.log(Octokit);
+
 
 //var key = event.keyCode;
 function startup() {
+  setEvents();
   toggleKeys();
   console.log("startup");
   inputEl.disabled = true;
@@ -141,6 +236,7 @@ function startup() {
   count = input.length;
   setOptionsVisivility();
   bodyFadeIn();
+  getRanking();
   // Retrieve
   localStorage.getItem("lightningMode");
   if (localStorage.getItem("lightningMode") == "dark") {
@@ -177,27 +273,11 @@ function startup() {
 //   request.send();
 // }
 
-
 function setOptionsVisivility() {
-  console.log(options.length);
   for (let i = 0; i < options.length; i++) {
     options[i].style.visibility = "hidden";
   }
-  // keypad.style.visibility = "hidden";
-  // rankings.style.visibility = "hidden";
-  // credits.style.visibility = "hidden";
-  // moreOp.style.visibility = "hidden";
-  // opLong.style.visibility = "hidden";
-  // opShort.style.visibility = "hidden";
-  // opLongSp.style.visibility = "hidden";
-  // opShortSp.style.visibility = "hidden";
-  // opNumbersSp.style.visibility = "hidden";
-  // opRandomSp.style.visibility = "hidden";
-  // opNormalSp.style.visibility = "hidden";
-  // opDark.style.visibility = "hidden";
-  // opDarkSp.style.visibility = "hidden";
-  // opKeys.style.visibility = "hidden";
-  // opKeysSp.style.visibility = "hidden";
+
   opLong.checked = true;
   opShort.checked = true;
   opNumbers.checked = false;
@@ -283,7 +363,7 @@ function changeSentence() {
         if (err !== null) {
           alert('Something went wrong: ' + err);
         } else {
-          ranNumber = _u.shuffle([10, 20]);
+          ranNumber = _.shuffle([10, 20]);
           finalNumber = ranNumber[0];
           if (opNumbers.checked) {
             if (!opShort.checked && opLong.checked) {
@@ -323,7 +403,7 @@ function changeSentence() {
           alert('Something went wrong: ' + err);
         } else {
           //data is an array, inside the array there are dictionari, with 2 key  value pairs, author and text
-//TODO: make an infine play mode, or a paragraph play mode.
+          //TODO: make an infine play mode, or a paragraph play mode.
           el = data[Math.floor(Math.random() * data.length)];
           sentence = el.text;
           if (opNumbers.checked == true) {
@@ -548,7 +628,7 @@ function cpm() {
     input = inputEl.value; //make taketimeresult reactive
     count = input.length;
     document.getElementById("cpmCount").innerHTML = cpmResult + " cpm";
-    setTimeout(cpm, 500);
+    setTimeout(cpm, 100);
   }
 
   if (isTyping) {
@@ -607,20 +687,20 @@ function changeSentenceColor() {
   return sentenceWrite;
 }
 //TODO
-function myKeyPress(e) {
-  var keynum;
-
-  if (window.event) { // IE
-    keynum = e.keyCode;
-  } else if (e.which) { // Netscape/Firefox/Opera
-    keynum = e.which;
-  }
-  //use something like charCodeAt to get the number.
-  pressedKey = String.fromCharCode(keynum);
-  pressedKey = pressedKey.charCodeAt();
-
-  return changeKeyColor(pressedKey);
-}
+// function myKeyPress(e) {
+//   var keynum;
+//
+//   if (window.event) { // IE
+//     keynum = e.keyCode;
+//   } else if (e.which) { // Netscape/Firefox/Opera
+//     keynum = e.which;
+//   }
+//   //use something like charCodeAt to get the number.
+//   pressedKey = String.fromCharCode(keynum);
+//   pressedKey = pressedKey.charCodeAt();
+//
+//   return changeKeyColor(pressedKey);
+// }
 
 
 
@@ -677,121 +757,46 @@ var topList = [];
 function setCheckTops() {
   guy = username;
   points = cpmResult;
-  checkTops();
+  rank = {
+    'name': username,
+    'points': points,
+    'date': date
+  };
+  console.log(ranking);
+  sortTops();
 }
 
-function checkTops() {
-  if (points > top1) {
-    lastTop = top1;
-    lastGuy = guy1;
-    top1 = points;
-    guy1 = guy;
-    points = lastTop;
-    guy = lastGuy;
-    checkTops();
-  } else if (points > top2) {
-    lastTop = top2;
-    lastGuy = guy2;
-    top2 = points;
-    guy2 = guy;
-    points = lastTop;
-    guy = lastGuy;
-    checkTops();
-  } else if (points > top3) {
-    lastTop = top3;
-    lastGuy = guy3;
-    top3 = points;
-    guy3 = guy;
-    points = lastTop;
-    guy = lastGuy;
-    checkTops();
-  } else if (points > top4) {
-    lastTop = top4;
-    lastGuy = guy4;
-    top4 = points;
-    guy4 = guy;
-    points = lastTop;
-    guy = lastGuy;
-    checkTops();
-  } else if (points > top5) {
-    lastTop = top5;
-    lastGuy = guy5;
-    top5 = points;
-    guy5 = guy;
-    points = lastTop;
-    guy = lastGuy;
-    checkTops();
-  } else if (points > top6) {
-    lastTop = top6;
-    lastGuy = guy6;
-    top6 = points;
-    guy6 = guy;
-    points = lastTop;
-    guy = lastGuy;
-    checkTops();
-  } else if (points > top7) {
-    lastTop = top7;
-    lastGuy = guy7;
-    top7 = points;
-    guy7 = guy;
-    points = lastTop;
-    guy = lastGuy;
-    checkTops();
-  } else if (points > top8) {
-    lastTop = top8;
-    lastGuy = guy8;
-    top8 = points;
-    guy8 = guy;
-    points = lastTop;
-    guy = lastGuy;
-    checkTops();
-  } else if (points > top9) {
-    lastTop = top9;
-    lastGuy = guy9;
-    top9 = points;
-    guy9 = guy;
-    points = lastTop;
-    guy = lastGuy;
-    checkTops();
-  } else if (points > top10) {
-    lastTop = top10;
-    lastGuy = guy10;
-    top10 = points;
-    guy10 = guy;
-    points = lastTop;
-    guy = lastGuy;
-    checkTops();
-  }
+function sortTops() {
+  console.log(rank);
+  ranking.push(rank);
+  ranking = _.sortBy(ranking, ['points', "name"]);
 
-
-  localStorage.setItem("top1", top1);
-  localStorage.setItem("guy1", guy1);
-  localStorage.setItem("top2", top2);
-  localStorage.setItem("guy2", guy2);
-  localStorage.setItem("top3", top3);
-  localStorage.setItem("guy3", guy3);
-  localStorage.setItem("top4", top4);
-  localStorage.setItem("guy4", guy4);
-  localStorage.setItem("top5", top5);
-  localStorage.setItem("guy5", guy5);
-  localStorage.setItem("top6", top6);
-  localStorage.setItem("guy6", guy6);
-  localStorage.setItem("top7", top7);
-  localStorage.setItem("guy7", guy7);
-  localStorage.setItem("top8", top8);
-  localStorage.setItem("guy8", guy8);
-  localStorage.setItem("top9", top9);
-  localStorage.setItem("guy9", guy9);
-  localStorage.setItem("top10", top10);
-  localStorage.setItem("guy10", guy10);
-
+  console.log(_.sortBy(ranking, ['points']));
+  console.log(ranking[0]);
+  ranking.reverse();
+  delete ranking.slice(maxTop - 1, ranking.length);
+  // delete ranking[];
+  rankingStr = JSON.stringify(ranking);
+  console.log(rankingStr);
+  getGist();
 }
+
+function getRanking() {
+  getJSON('https://gist.githubusercontent.com/Jonny-exe/a8aa0f34f366403f79b4646e8964bc33/raw/Tr-gist.json',
+    function(err, data) {
+      if (err !== null) {
+        alert('Something went wrong: ' + err);
+      } else {
+        ranking = data;
+        console.log(ranking);
+      }
+    }
+  );
+}
+
 // TODO: How to write from java script to a public github gist
 function setRankingsLink() {
-  location.href = "TrRankings.html?guy1=" + guy1 + "&top1=" + top1 + "&guy2=" + guy2 + "&top2=" + top2 + "&guy3=" + guy3 +
-    "&top3=" + top3 + "&guy4=" + guy4 + "&top4=" + top4 + "&guy5=" + guy5 + "&top5=" + top5 + "&guy6=" + guy6 + "&top6=" +
-    top6 + "&guy7=" + guy7 + "&top7=" + top7 + "&guy8=" + guy8 + "&top8=" + top8 + "&guy9=" + guy9 + "&top9=" + top9 +
-    "&guy10=" + guy10 + "&top10=" + top10;
+  location.href = "TrRankings.html";
 }
 
 function getTops() {
@@ -920,21 +925,21 @@ function keysGoIn() {
   var tipsText = document.getElementById('tips');
   var tl = new TimelineMax();
   tl.fromTo(
-    tipsText, 0.2, {
-      y: "-1000%"
-    }, {
-      y: "0%",
-      ease: Sine.easeInout
-    }
-  )
-  .fromTo(
-    keypad, 0.5, {
-      x: "-200%"
-    }, {
-      x: "0%",
-      ease: Sine.easeInout
-    }
-  );
+      tipsText, 0.2, {
+        y: "-1000%"
+      }, {
+        y: "0%",
+        ease: Sine.easeInout
+      }
+    )
+    .fromTo(
+      keypad, 0.5, {
+        x: "-200%"
+      }, {
+        x: "0%",
+        ease: Sine.easeInout
+      }
+    );
 }
 //make only one function keysMove(true)
 function keysGoOut() {
@@ -942,21 +947,21 @@ function keysGoOut() {
   var tipsText = document.getElementById('tips');
 
   tl.fromTo(
-    keypad, 0.2, {
-      x: "0%"
-    }, {
-      x: "-200%",
-      ease: Sine.easeInout
-    }
-  )
-  .fromTo(
-    tipsText, 0.3, {
-      y: "0%"
-    }, {
-      y: "-1000%",
-      ease: Sine.easeInout
-    }
-  );
+      keypad, 0.2, {
+        x: "0%"
+      }, {
+        x: "-200%",
+        ease: Sine.easeInout
+      }
+    )
+    .fromTo(
+      tipsText, 0.3, {
+        y: "0%"
+      }, {
+        y: "-1000%",
+        ease: Sine.easeInout
+      }
+    );
 }
 
 function rotateShow() {
@@ -977,3 +982,5 @@ function rotateHide() {
 
 
 //updateDisplay();
+startup();
+console.log(octokit);
