@@ -7,12 +7,16 @@
 // jscs:disable requireSpaceAfterKeywords
 // jscs:disable
 // jshint esversion: 8
+// jshint:disable W051
+
 //TODO: learn more shortcuts for atom
 //imports
 import {
   Octokit
 } from "https://cdn.pika.dev/@octokit/core";
-import {t} from './t.js';
+import {
+  t
+} from './t.js';
 
 var sentences = [
   'I love you the more in that I believe you had liked me for my own sake and for nothing else.',
@@ -35,6 +39,12 @@ const options = document.getElementsByClassName('op');
 const displayFinished = document.getElementById("displayFinished");
 const separator = " ||";
 const maxTop = 100;
+const opStyleWhite = document.getElementById('optionsStyleWhite');
+const opStyleDark = document.getElementById('optionsStyleDark');
+const opStyleBlue = document.getElementById('optionsStyleBlue');
+const styleOptions = document.getElementsByClassName('styleOp');
+
+const button = document.getElementsByClassName('button');
 const inputEl = document.getElementById("myInput");
 const opLong = document.getElementById("optionsCheckLong");
 const opLongSp = document.getElementById("optionsCheckLongSpan");
@@ -59,9 +69,12 @@ const keypad = document.getElementById("keyPad");
 const rankings = document.getElementById("optionsOne");
 const credits = document.getElementById("optionsTwo");
 const moreOp = document.getElementById("optionsThree");
+const styleOp = document.getElementById("optionsFour");
 const wrSentence = document.getElementById("writeSentence");
 const image = document.getElementById("image");
+const imageStyle = document.getElementsByClassName('styleImg');
 
+var changeColor = "#ffffff";
 var today = new Date();
 var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 var isSentenceChanged;
@@ -146,12 +159,26 @@ console.log("hi");
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules you cant inport the octokit
 function setEvents() {
   image.addEventListener('click', toggleOptions);
+  imageStyle[0].addEventListener('click', function() {
+    checkStyle("white");
+  });
+  imageStyle[1].addEventListener('click', function() {
+    checkStyle("blue");
+  });
+  imageStyle[2].addEventListener('click', function() {
+    checkStyle("dark");
+  });
+  imageStyle[3].addEventListener('click', function() {
+    checkStyle("green");
+  });
+
+
   rankings.addEventListener('click', setRankingsLink);
   document.getElementById('optionsTwo').addEventListener('click', toggleCheckOptions);
   document.getElementById('optionsCheckNormal').addEventListener('click', toggleCheckOptionsNormal, true);
   opRandom.addEventListener('click', toggleCheckOptionsNormal, false);
   opKeys.addEventListener('click', toggleKeys);
-  opDark.addEventListener('click', toggleDarkMode);
+  document.getElementById('optionsFour').addEventListener('click', toggleStyles);
   document.getElementById('register').addEventListener('click', registerFunc);
   document.getElementById('unregister').addEventListener('click', unregisterFunc);
   document.getElementById('changeSentence').addEventListener('click', changeSentence);
@@ -225,6 +252,8 @@ console.log(Octokit);
 
 //var key = event.keyCode;
 function startup() {
+  var color = localStorage.getItem('colorStyle');
+  checkStyle(color);
   setEvents();
   toggleKeys();
   console.log("startup");
@@ -238,14 +267,7 @@ function startup() {
   bodyFadeIn();
   getRanking();
   // Retrieve
-  localStorage.getItem("lightningMode");
-  if (localStorage.getItem("lightningMode") == "dark") {
-    setDarkMode(true);
-    opDark.checked = true;
-  } else {
-    setDarkMode(false);
-    opDark.checked = false;
-  }
+
   username = localStorage.getItem("username");
   if (username == null) {
     console.log("no user registered");
@@ -517,36 +539,22 @@ function able() {
   input.focus();
 }
 
-function toggleDarkMode() {
-  var toggleDarkMode = opDark.checked;
-  if (toggleDarkMode == true) {
-    setDarkMode(true);
-    localStorage.setItem("lightningMode", "dark");
+function toggleStyles() {
+  console.log("styles");
+  var hideOptions = opLong.style.visibility;
+  var hideStyle = optionsStyleBlue.visibility;
+  console.log(optionsSmall[0].style.visibility);
+  if (hideOptions == "visible") {
+    toggleCheckOptions();
+    toggleStyleOptions();
   } else {
-    setDarkMode(false);
-    localStorage.setItem("lightningMode", "light");
+    toggleStyleOptions();
+
   }
 }
 
 //darkMode: boolean...true: set dark mode; false: set light mode;
 //TODO:make this beetter
-function setDarkMode(darkMode) {
-  var x = document.getElementsByClassName("keys");
-  if (darkMode) {
-    document.body.style.backgroundColor = "#333333";
-    document.body.style.color = "#ffffff";
-    for (let i = 0; i < x.length; i++) {
-      x[i].style.borderRadius = "5px";
-    }
-  } else {
-
-    document.body.style.backgroundColor = "#E0E0E0";
-    document.body.style.color = "#000000";
-    for (let i = 0; i < x.length; i++) {
-      x[i].style.borderRadius = "4px";
-    }
-  }
-}
 
 function toggleKeys() {
   var toggleKeys = opKeys.checked;
@@ -602,10 +610,12 @@ function toggleCheckOptionsNormal(optionsNormal) {
 function toggleCheckOptions() {
   optionsFadeIn();
   var showHid = opLong.style.visibility;
-  console.log("checkOptions");
   if (showHid == "hidden") {
     for (let i = 0; i < optionsSmall.length; i++) {
       optionsSmall[i].style.visibility = "visible";
+    }
+    for (let a = 0; a < styleOptions.length; a++) {
+      styleOptions[a].style.visibility = "hidden";
     }
   } else {
     for (let i = 0; i < optionsSmall.length; i++) {
@@ -613,6 +623,92 @@ function toggleCheckOptions() {
     }
   }
 }
+
+function checkStyle(color) {
+  var x = document.getElementsByClassName("keys");
+  console.log(color);
+  if (color == "white") {
+    changeColor = "#ffffff";
+    localStorage.setItem("colorStyle", color);
+    document.body.style.backgroundColor = "#E0E0E0";
+    inputEl.style.backgroundColor = "#E0E0E0";
+    loginText.style.backgroundColor = "#E0E0E0";
+    document.body.style.color = "#000000";
+    document.body.style.textShadow = "2px 2px 4px #838383";
+    document.getElementById('writeSentence').style.textShadow = "2px 2px 4px #838383";
+    for (let i = 0; i < x.length; i++) {
+      x[i].style.borderRadius = "4px";
+    }
+  } else if (color == "dark") {
+    changeColor = "#b1b1b1";
+    localStorage.setItem("colorStyle", color);
+    document.body.style.backgroundColor = "#333333";
+    inputEl.style.backgroundColor = "#333333";
+    loginText.style.backgroundColor = "#333333";
+    document.body.style.color = "#ffffff";
+    document.body.style.textShadow = "2px 2px 4px #838383";
+    document.getElementById('writeSentence').style.textShadow = "2px 2px 4px #838383";
+    for (let i = 0; i < x.length; i++) {
+      x[i].style.borderRadius = "5px";
+    }
+    for (let i = 0; i < button.length; i++) {
+      button[i].style.borderRadius = "4px";
+    }
+  } else if (color == "blue") {
+    changeColor = "#dfdfdf";
+    localStorage.setItem("colorStyle", color);
+    document.body.style.backgroundColor = "#b4dcf9";
+    inputEl.style.backgroundColor = "#b4dcf9";
+    loginText.style.backgroundColor = "#b4dcf9";
+    document.body.style.color = "rgb(246, 244, 244)";
+    document.body.style.textShadow = "2px 2px 4px #838383";
+    document.getElementById('writeSentence').style.textShadow = "2px 2px 4px #838383";
+    for (let i = 0; i < x.length; i++) {
+      x[i].style.borderRadius = "5px";
+    }
+    for (let i = 0; i < button.length; i++) {
+      button[i].style.borderRadius = "4px";
+    }
+  } else if (color == "green") {
+    localStorage.setItem("colorStyle", color);
+    document.body.style.backgroundColor = "#333333";
+    inputEl.style.backgroundColor = "#333333";
+    loginText.style.backgroundColor = "#333333";
+    document.body.style.color = "#6bff00";
+     document.body.style.textShadow = "none";
+     document.getElementById('writeSentence').style.textShadow = "none";
+    document.body.style.textDecoration = "none";
+
+    for (let i = 0; i < x.length; i++) {
+      x[i].style.borderRadius = "5px";
+    }
+    for (let i = 0; i < button.length; i++) {
+      button[i].style.borderRadius = "4px";
+    }
+  }
+
+}
+
+//TODO:Make rankings fith this.An element with position: sticky; is positioned based on the user's scroll position.
+
+function toggleStyleOptions() {
+  console.log("togglestyles");
+  var showHid = opStyleWhite.style.visibility;
+  console.log(showHid);
+  if (showHid == "hidden") {
+    for (let i = 0; i < styleOptions.length; i++) {
+      styleOptions[i].style.visibility = "visible";
+      console.log('height 0');
+      document.getElementById("checkOptionsSmall").style.height = "0px";
+    }
+  } else {
+    for (let i = 0; i < styleOptions.length; i++) {
+      styleOptions[i].style.visibility = "hidden";
+      document.getElementById("checkOptionsSmall").style.height = "100%";
+    }
+  }
+}
+
 
 function setTimer() {
   takeTimeOne = Date.now();
@@ -676,7 +772,7 @@ function changeSentenceColor() {
   input = inputEl.value;
   part1 = sentence.substring(0, input.length);
   part2 = sentence.substring(input.length, sentence.length);
-  part1 = part1.fontcolor("#ffffff");
+  part1 = part1.fontcolor(changeColor);
   fullPart = part1 + part2;
 
   if (isTyping) {
@@ -799,29 +895,6 @@ function setRankingsLink() {
   location.href = "TrRankings.html";
 }
 
-function getTops() {
-  console.log("tops");
-  top1 = localStorage.getItem("top1");
-  guy1 = localStorage.getItem("guy1");
-  top2 = localStorage.getItem("top2");
-  guy2 = localStorage.getItem("guy2");
-  top3 = localStorage.getItem("top3");
-  guy3 = localStorage.getItem("guy3");
-  top4 = localStorage.getItem("top4");
-  guy4 = localStorage.getItem("guy4");
-  top5 = localStorage.getItem("top5");
-  guy5 = localStorage.getItem("guy5");
-  top6 = localStorage.getItem("top6");
-  guy6 = localStorage.getItem("guy6");
-  top7 = localStorage.getItem("top7");
-  guy7 = localStorage.getItem("guy7");
-  top8 = localStorage.getItem("top8");
-  guy8 = localStorage.getItem("guy8");
-  top9 = localStorage.getItem("top9");
-  guy9 = localStorage.getItem("guy9");
-  top10 = localStorage.getItem("top10");
-  guy10 = localStorage.getItem("guy10");
-}
 
 function bodyFadeIn() {
   var tl = new TimelineMax();

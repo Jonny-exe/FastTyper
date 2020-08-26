@@ -1,7 +1,8 @@
 body {
   background-color: rgb(224, 224, 224);
   font-family: Franklin Gothic;
-  color: rgb(102, 102, 102);
+  color: rgb(0, 0, 0);
+  text-shadow: 2px 2px 4px #838383;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -9,6 +10,18 @@ body {
   -ms-user-select: none;
   user-select: none;
   margin: 100px;
+}
+
+a:link {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: lightblue;
+  background-color: transparent;
+  text-decoration: none;
 }
 
 #mainTitle {
@@ -60,9 +73,11 @@ body {
     color: black;
   }
 }
+
 #home {
   font-size: 300%;
 }
+
 /* CHECKBOXES START */
 /* The container */
 .container {
@@ -259,8 +274,6 @@ body {
   font-size: 400px;
 }
 
-body {}
-
 .main {
   display: grid;
   width: 100%;
@@ -271,17 +284,18 @@ body {}
     "mainTitle mainTitle mainTitle mainTitle mainTitle allOp"
     "writeSentence writeSentence writeSentence writeSentence writeSentence smallOp"
     "inputText inputText inputText inputText inputText smallOp"
-    "time values values values values values "
-    "keypad keypad keypad keypad nothing nothing"
-    "tips tips tips tips tips tips";
+    "time values values values values smallOp "
+    "keypad keypad keypad keypad nothing smallOp"
+    "tips tips tips tips tips smallOp";
 }
 
 .windows {
   height: 60%;
   width: 35%;
 }
+
 .nothing {
- grid-area: nothing;
+  grid-area: nothing;
 }
 
 .alloptions {
@@ -308,7 +322,6 @@ body {}
   margin-bottom: 5%;
 }
 
-
 .welcomeText {
   grid-area: welcomeText;
   text-align: left;
@@ -324,6 +337,27 @@ body {}
 
 .mainTitle {
   grid-area: mainTitle;
+}
+
+.styleImg {
+  width: 30%;
+  position: relative;
+  top: 3px,
+}
+
+.smallOptions {
+  height: 100%
+}
+
+/*TODO: make the align work*/
+.styleOp {
+  align-items: center;
+  vertical-align: center;
+
+}
+
+.styleCheck {
+  visibility: hidden;
 }
 
 .smallOptions {

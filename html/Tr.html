@@ -3,6 +3,7 @@
 
 <head>
   <title>Tr</title>
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.0/css/solid.css">
   <link id=link href="css/main.css" rel="stylesheet" type="text/css" />
   <link rel="icon" href="favicon-tr.ico" type="image/icon">
 </head>
@@ -40,63 +41,111 @@
           </label>
         </p>
       </div>
+      <div class="style">
+        <p class="optionsBig">
+          <label class="options">
+            <span id="optionsFour" class="op optionsBig">Style</span>
+          </label>
+        </p>
+      </div>
     </div>
     <div class=smallOptions>
-      <div class=normal>
-        <span class=options>
-          <label id=optionsCheckNormalSpan class="container optionsSmall op"> Normal sentences
-            <input type=checkbox class=op checked="checked" class="optionsSmall" id="optionsCheckNormal"> </input>
-            <span class=checkmark></span>
-          </label>
-        </span>
+      <div id=checkOptionsSmall>
+
+        <div class=normal>
+          <span class=options>
+            <label id=optionsCheckNormalSpan class="container optionsSmall op"> Normal sentences
+              <input type=checkbox class=op checked="checked" class="optionsSmall" id="optionsCheckNormal"> </input>
+              <span class=checkmark></span>
+            </label>
+          </span>
+        </div>
+        <div class=random>
+          <span class=options>
+            <label id=optionsCheckRandomSpan class="container op optionsSmall"> Random words
+              <input type=checkbox class="op optionsSmall" id=optionsCheckRandom> </input>
+              <span class=checkmark></span>
+            </label>
+          </span>
+        </div>
+        <div class=long>
+          <span class=options>
+            <label id=optionsCheckLongSpan class="container op optionsSmall"> Long sentences
+              <input type=checkbox checked="checked" class="op optionsSmall" id="optionsCheckLong"> </input>
+              <span class=checkmark></span>
+            </label>
+          </span>
+        </div>
+        <div class=short>
+          <span class=options>
+            <label id=optionsCheckShortSpan class="container op optionsSmall"> Short sentences
+              <input type=checkbox checked="checked" class="op optionsSmall" id="optionsCheckShort"> </input>
+              <span class=checkmark></span>
+            </label>
+          </span>
+        </div>
+        <div class=numbers>
+          <span class=options>
+            <label id=optionsCheckNumbersSpan class="container optionsSmall op"> Numbers
+              <input type=checkbox checked="checked" class="op optionsSmall" id=optionsCheckNumbers> </input>
+              <span class=checkmark></span>
+            </label>
+          </span>
+        </div>
+        <div class=dark>
+          <span class=options>
+            <label id=optionsCheckDarkSpan class="container optionsSmall op"> Dark mode
+              <input type=checkbox onclick="toggleDarkMode()" class="op optionsSmall" id=optionsCheckDark> </input>
+              <span class=checkmark></span>
+            </label>
+          </span>
+        </div>
+        <div class=keysOp>
+          <span class=options>
+            <label id=optionsCheckKeysSpan class="container optionsSmall op"> Keys on/off
+              <input type=checkbox class="op optionsSmall" id=optionsCheckKeys> </input>
+              <span class=checkmark></span>
+            </label>
+          </span>
+        </div>
       </div>
-      <div class=random>
-        <span class=options>
-          <label id=optionsCheckRandomSpan class="container op optionsSmall"> Random words
-            <input type=checkbox class="op optionsSmall" id=optionsCheckRandom> </input>
-            <span class=checkmark></span>
-          </label>
-        </span>
-      </div>
-      <div class=long>
-        <span class=options>
-          <label id=optionsCheckLongSpan class="container op optionsSmall"> Long sentences
-            <input type=checkbox checked="checked" class="op optionsSmall" id="optionsCheckLong"> </input>
-            <span class=checkmark></span>
-          </label>
-        </span>
-      </div>
-      <div class=short>
-        <span class=options>
-          <label id=optionsCheckShortSpan class="container op optionsSmall"> Short sentences
-            <input type=checkbox checked="checked" class="op optionsSmall" id="optionsCheckShort"> </input>
-            <span class=checkmark></span>
-          </label>
-        </span>
-      </div>
-      <div class=numbers>
-        <span class=options>
-          <label id=optionsCheckNumbersSpan class="container optionsSmall op"> Numbers
-            <input type=checkbox checked="checked" class="op optionsSmall" id=optionsCheckNumbers> </input>
-            <span class=checkmark></span>
-          </label>
-        </span>
-      </div>
-      <div class=dark>
-        <span class=options>
-          <label id=optionsCheckDarkSpan class="container optionsSmall op"> Dark mode
-            <input type=checkbox onclick="toggleDarkMode()" class="op optionsSmall" id=optionsCheckDark> </input>
-            <span class=checkmark></span>
-          </label>
-        </span>
-      </div>
-      <div class=keysOp>
-        <span class=options>
-          <label id=optionsCheckKeysSpan class="container optionsSmall op"> Keys on/off
-            <input type=checkbox class="op optionsSmall" id=optionsCheckKeys> </input>
-            <span class=checkmark></span>
-          </label>
-        </span>
+      <input type="checkbox" class="op  styleCheck optionsStyle">
+      <div id=smallOpStyle>
+        <div class=styleOp>
+          <span class="options">
+            <label id="optionsStyleWhite" class="styleOp op">
+              <span class="circlemark"></span>
+              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/iconcolorswhite.svg">
+            </label>
+          </span>
+        </div>
+        <input type="checkbox" class="op  styleCheck optionsStyle">
+        <div class="styleOp">
+          <span class="options">
+            <label id="optionsStyleDark" class="styleOp op">
+              <span class="circlemark"></span>
+              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/iconcolorsblue.svg">
+            </label>
+          </span>
+        </div>
+        <input type="checkbox" class="op styleCheck optionsStyle">
+        <div class="styleOp">
+          <span class="options">
+            <label id="optionsStyleBlue" class="styleOp op">
+              <span class="circlemark"></span>
+              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/iconcolorsdark.svg">
+            </label>
+          </span>
+        </div>
+        <input type="checkbox" class="op styleCheck optionsStyle">
+        <div class="styleOp">
+          <span class="options">
+            <label id="optionsStyleBlue" class="styleOp op">
+              <span class="circlemark"></span>
+              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/iconcolorsdarkgreen.svg">
+            </label>
+          </span>
+        </div>
       </div>
     </div>
     <div class=mainTitle>
