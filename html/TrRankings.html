@@ -58,7 +58,7 @@
               newP.style.fontSize = "225%";
               var newContent = document.createTextNode("Top" + spc + (i + 1) + spc + "-" + spc + "Name" + spc + ranking[i].name + spc + "Points" + spc + ranking[i].points + spc + "Date" + spc + ranking[i].date);
               newP.appendChild(newContent);
-              document.body.insertBefore(newP, currentDiv);
+              document.body.insertBefore(newP, currentDiv.childNodes[0]);
             }
           }
         }

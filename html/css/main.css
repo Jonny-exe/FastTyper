@@ -12,6 +12,10 @@ body {
   margin: 100px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 a:link {
   color: green;
   background-color: transparent;
@@ -278,7 +282,7 @@ a:visited {
   display: grid;
   width: 100%;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 0.3fr 0.5fr 0.1fr 0.3fr 0.3fr 0.5fr 0.1fr;
+  grid-template-rows: 0.2fr 0.3fr 0.1fr 0.3fr 0.3fr 0.5fr 0.1fr 1fr;
   grid-template-areas:
     "welcomeText welcomeText welcomeText loginText loginText opImage"
     "mainTitle mainTitle mainTitle mainTitle mainTitle allOp"
@@ -286,7 +290,8 @@ a:visited {
     "inputText inputText inputText inputText inputText smallOp"
     "time values values values values smallOp "
     "keypad keypad keypad keypad nothing smallOp"
-    "tips tips tips tips tips smallOp";
+    "tips tips tips tips tips smallOp"
+    "ranking ranking ranking ranking ranking ranking";
 }
 
 .windows {
@@ -339,10 +344,22 @@ a:visited {
   grid-area: mainTitle;
 }
 
+
+
+#div1 {
+    grid-area: ranking;
+    max-height: 50%;
+    font-size: 10px;
+    overflow-y: scroll;
+}
+
 .styleImg {
   width: 30%;
   position: relative;
-  top: 3px,
+  margin: auto;
+  vertical-align: center;
+  align-items: center;
+  align-content: center;
 }
 
 .smallOptions {
@@ -353,7 +370,7 @@ a:visited {
 .styleOp {
   align-items: center;
   vertical-align: center;
-
+  margin: 10px;
 }
 
 .styleCheck {

@@ -67,12 +67,14 @@ const timeEl = document.getElementById("time");
 const keys = document.getElementsByClassName("keys");
 const keypad = document.getElementById("keyPad");
 const rankings = document.getElementById("optionsOne");
-const credits = document.getElementById("optionsTwo");
-const moreOp = document.getElementById("optionsThree");
+const credits = document.getElementById("optionsThree");
+const moreOp = document.getElementById("optionsTwo");
 const styleOp = document.getElementById("optionsFour");
 const wrSentence = document.getElementById("writeSentence");
 const image = document.getElementById("image");
 const imageStyle = document.getElementsByClassName('styleImg');
+const queryString = window.location.search;
+
 
 var changeColor = "#ffffff";
 var today = new Date();
@@ -174,6 +176,7 @@ function setEvents() {
 
 
   rankings.addEventListener('click', setRankingsLink);
+  credits.addEventListener('click', setCreditsLink);
   document.getElementById('optionsTwo').addEventListener('click', toggleCheckOptions);
   document.getElementById('optionsCheckNormal').addEventListener('click', toggleCheckOptionsNormal, true);
   opRandom.addEventListener('click', toggleCheckOptionsNormal, false);
@@ -246,6 +249,7 @@ async function getGist() {
   //         }
   //       })
   //       console.log(response4);
+  getRanks();
 }
 console.log(Octokit);
 
@@ -481,6 +485,32 @@ function changeSentence() {
   }
 }
 
+function getRanks() {
+  getJSON('https://gist.githubusercontent.com/Jonny-exe/a8aa0f34f366403f79b4646e8964bc33/raw/Tr-gist.json',
+    function(err, data) {
+      if (err !== null) {
+        alert('Something went wrong: ' + err);
+      } else {
+        console.log();
+        ranking = data;
+        console.log(ranking.length);
+        console.log(ranking[0].date);
+        console.log(ranking[0].points);
+        for (let i = 0; i < ranking.length; i++) {
+          var spc = " ";
+          var currentDiv = document.getElementById("div1");
+          var newP = document.createElement("p");
+          newP.style.fontSize = "225%";
+          var newContent = document.createTextNode("Top" + spc + (i + 1) + spc + "-" + spc + "Name" + spc + ranking[i].name + spc + "Points" + spc + ranking[i].points + spc + "Date" + spc + ranking[i].date);
+          newP.appendChild(newContent);
+          currentDiv.insertBefore(newP, currentDiv.childNodes[ranking.length]);
+        }
+      }
+    }
+  );
+}
+
+getRanks();
 
 function start(time) {
   inputEl.disabled = true;
@@ -892,8 +922,13 @@ function getRanking() {
 
 // TODO: How to write from java script to a public github gist
 function setRankingsLink() {
-  location.href = "TrRankings.html";
+  location.href = "#div1";
 }
+
+function setCreditsLink() {
+  location.href = "TrCredits.html";
+}
+
 
 
 function bodyFadeIn() {
