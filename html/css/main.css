@@ -225,7 +225,6 @@ a:visited {
 
 #ranking {
   width: 100%;
-  font-size: 30px;
 }
 
 .Top1 {
@@ -274,7 +273,6 @@ a:visited {
 }
 
 #div1 {
-  size: 300;
   font-size: 400px;
 }
 
@@ -282,21 +280,40 @@ a:visited {
   display: grid;
   width: 100%;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 0.2fr 0.3fr 0.1fr 0.3fr 0.3fr 0.5fr 0.1fr 1fr;
+  grid-template-rows: 0.2fr 0.2fr 0.1fr 0.2fr 0.1fr 0.5fr 0.1fr 0.5fr 0.3fr;
   grid-template-areas:
-    "welcomeText welcomeText welcomeText loginText loginText opImage"
+    "welcomeText welcomeText loginText loginText loginText opImage"
     "mainTitle mainTitle mainTitle mainTitle mainTitle allOp"
     "writeSentence writeSentence writeSentence writeSentence writeSentence smallOp"
     "inputText inputText inputText inputText inputText smallOp"
     "time values values values values smallOp "
     "keypad keypad keypad keypad nothing smallOp"
     "tips tips tips tips tips smallOp"
-    "ranking ranking ranking ranking ranking ranking";
+    "ranking ranking ranking ranking ranking ranking"
+    "home home home home home home";
 }
 
 .windows {
   height: 60%;
   width: 35%;
+}
+
+
+#home {
+  grid-area: home;
+  font-size: 400%;
+}
+
+.bigOptions {
+  position: relative;
+  text-align: center;
+}
+
+
+
+.bigOptions:hover {
+  animation-name: optionsHover;
+  right: 5%;
 }
 
 .nothing {
@@ -344,13 +361,28 @@ a:visited {
   grid-area: mainTitle;
 }
 
+#fade {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-color: rgb(51, 51, 51,1);
+    -webkit-mask-image: linear-gradient(to top, rgba(51, 51, 51,1), rgba(0,0,0,0),rgba(0,0,0,0),rgba(0,0,0,0), rgba(0,0,0,0)), linear-gradient(to bottom, rgba(51, 51, 51,1), rgba(0,0,0,0));
+}
 
+.div1 {
+  grid-area: ranking;
+  max-height: 100%;
+  font-size: 10px;
+  overflow-y: scroll;
+}
+
+#table {
+  width: 100%;
+}
 
 #div1 {
-    grid-area: ranking;
-    max-height: 50%;
-    font-size: 10px;
-    overflow-y: scroll;
+  height: 100%;
+  width: 100%;
 }
 
 .styleImg {
@@ -381,6 +413,11 @@ a:visited {
   margin: auto;
   grid-area: smallOp;
   text-align: right;
+  align-self: right;
+}
+
+.singleLan {
+  font-size: 150%;
 }
 
 .loginText {

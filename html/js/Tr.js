@@ -33,6 +33,8 @@ var tips = [
 ];
 
 //shortchut consts
+const language = document.getElementById('language');
+
 const optionsSmall = document.getElementsByClassName('optionsSmall');
 const optionsBig = document.getElementsByClassName('optionsBig');
 const options = document.getElementsByClassName('op');
@@ -67,6 +69,7 @@ const timeEl = document.getElementById("time");
 const keys = document.getElementsByClassName("keys");
 const keypad = document.getElementById("keyPad");
 const rankings = document.getElementById("optionsOne");
+const home = document.getElementById("home");
 const credits = document.getElementById("optionsThree");
 const moreOp = document.getElementById("optionsTwo");
 const styleOp = document.getElementById("optionsFour");
@@ -104,6 +107,7 @@ var cpmResult = Math.round((count * 60) / takeTimeResult);
 var tip = tips[Math.floor(Math.random() * tips.length)];
 var autocheckOrNot;
 var rankingStr;
+var lastSentence;
 
 //tops
 var lastTop = 0;
@@ -174,8 +178,10 @@ function setEvents() {
     checkStyle("green");
   });
 
+  document.getElementById('language').addEventListener('click', toggleLanguages);
 
   rankings.addEventListener('click', setRankingsLink);
+  home.addEventListener('click', goHome);
   credits.addEventListener('click', setCreditsLink);
   document.getElementById('optionsTwo').addEventListener('click', toggleCheckOptions);
   document.getElementById('optionsCheckNormal').addEventListener('click', toggleCheckOptionsNormal, true);
@@ -309,7 +315,6 @@ function setOptionsVisivility() {
   opNumbers.checked = false;
   opRandom.checked = false;
   opNormal.checked = true;
-  opDark.checked = false;
   opKeys.checked = false;
 }
 
@@ -353,7 +358,7 @@ function computeRandomSentence(noOfWords, numbers, numbersPerWords) {
         alert('Something went wrong: ' + err);
       } else {
         sentence = "";
-        for (i = 0; i < noOfWords; i++) {
+        for (let i = 0; i < noOfWords; i++) {
           if ((numbers) && ((i % numbersPerWords) == (numbersPerWords - 1))) {
             // use number
             words = data[Math.floor(Math.random() * data.length)] + " " + Math.floor((Math.random() * 9999));
@@ -422,8 +427,9 @@ function changeSentence() {
       }
     );
   }
+  var link = "https://raw.githubusercontent.com/dwyl/quotes/master/quotes.json"; //"https://raw.githubusercontent.com/GianNipitella/SpanishQuotes/gh-pages/javascripts/citas.json";
   if (opNormal.checked == true) {
-    getJSON('https://raw.githubusercontent.com/dwyl/quotes/master/quotes.json',
+    getJSON("https://raw.githubusercontent.com/GianNipitella/SpanishQuotes/gh-pages/javascripts/citas.json",
       function(err, data) {
         if (err !== null) {
           alert('Something went wrong: ' + err);
@@ -431,7 +437,7 @@ function changeSentence() {
           //data is an array, inside the array there are dictionari, with 2 key  value pairs, author and text
           //TODO: make an infine play mode, or a paragraph play mode.
           el = data[Math.floor(Math.random() * data.length)];
-          sentence = el.text;
+          sentence = el.Cita;
           if (opNumbers.checked == true) {
             if (sentence.includes(1, 2, 3, 4, 5, 6, 7, 8, 9)) {
               writeSentence();
@@ -485,6 +491,30 @@ function changeSentence() {
   }
 }
 
+// function getRanks() {
+//   getJSON('https://gist.githubusercontent.com/Jonny-exe/a8aa0f34f366403f79b4646e8964bc33/raw/Tr-gist.json',
+//     function(err, data) {
+//       if (err !== null) {
+//         alert('Something went wrong: ' + err);
+//       } else {
+//         console.log();
+//         ranking = data;
+//         console.log(ranking.length);
+//         console.log(ranking[0].date);
+//         console.log(ranking[0].points);
+//         for (let i = 0; i < ranking.length; i++) {
+//           var spc = " ";
+//           var currentDiv = document.getElementById("div1");
+//           var newP = document.createElement("p");
+//           newP.style.fontSize = "225%";
+//           var newContent = document.createTextNode("Top" + spc + (i + 1) + spc + "-" + spc + "Name" + spc + ranking[i].name + spc + "Points" + spc + ranking[i].points + spc + "Date" + spc + ranking[i].date);
+//           newP.appendChild(newContent);
+//           currentDiv.insertBefore(newP, currentDiv.childNodes[ranking.length]);
+//         }
+//       }
+//     }
+//   );
+// }
 function getRanks() {
   getJSON('https://gist.githubusercontent.com/Jonny-exe/a8aa0f34f366403f79b4646e8964bc33/raw/Tr-gist.json',
     function(err, data) {
@@ -496,27 +526,45 @@ function getRanks() {
         console.log(ranking.length);
         console.log(ranking[0].date);
         console.log(ranking[0].points);
+        var spc = " ";
+
         for (let i = 0; i < ranking.length; i++) {
-          var spc = " ";
-          var currentDiv = document.getElementById("div1");
-          var newP = document.createElement("p");
-          newP.style.fontSize = "225%";
-          var newContent = document.createTextNode("Top" + spc + (i + 1) + spc + "-" + spc + "Name" + spc + ranking[i].name + spc + "Points" + spc + ranking[i].points + spc + "Date" + spc + ranking[i].date);
-          newP.appendChild(newContent);
-          currentDiv.insertBefore(newP, currentDiv.childNodes[ranking.length]);
+          var table = document.getElementById("table");
+          var row;
+          if (i == 0) {
+            console.log("i = 0");
+            row = table.insertRow(0);
+            row = table.insertRow(1);
+            row = table.insertRow(2);
+            row = table.insertRow(3);
+            row.style.height = "100px";
+
+
+          }
+          row = table.insertRow(i + 4);
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          var cell3 = row.insertCell(2);
+
+          cell1.innerHTML = "Top" + spc + (i + 1) + spc + "-" + spc + "Name" + spc + ranking[i].name;
+          cell2.innerHTML = "Points" + spc + ranking[i].points;
+          cell3.innerHTML = "Date" + spc + ranking[i].date;
+          row.style.fontSize = "225%";
         }
       }
     }
   );
 }
-
 getRanks();
-
+//TODO: make idioms
 function start(time) {
   inputEl.disabled = true;
   cpmResult = 0;
   accCount = 0;
   isTyping = false;
+  if (lastSentence == sentence) {
+    changeSentence();
+  }
   document.getElementById("accuracyCount").innerHTML = "";
   document.getElementById("timeCourse").innerHTML = "";
   document.getElementById("valueCpm").innerHTML = "";
@@ -588,6 +636,7 @@ function toggleStyles() {
 
 function toggleKeys() {
   var toggleKeys = opKeys.checked;
+  console.log(toggleKeys);
   if (toggleKeys == true) {
     keysGoIn();
     keypad.style.visibility = "visible";
@@ -627,6 +676,9 @@ function toggleOptions() {
   }
 }
 
+//TODO: make flag icons, or background on the languages;
+//TODO: make the languages work
+
 function toggleCheckOptionsNormal(optionsNormal) {
   if (optionsNormal == true) {
     opNormal.checked = true;
@@ -639,6 +691,9 @@ function toggleCheckOptionsNormal(optionsNormal) {
 
 function toggleCheckOptions() {
   optionsFadeIn();
+  if(document.getElementsByClassName('singleLan')[0].style.visibility == "visible"){
+    toggleLanguages();
+  }
   var showHid = opLong.style.visibility;
   if (showHid == "hidden") {
     for (let i = 0; i < optionsSmall.length; i++) {
@@ -654,11 +709,32 @@ function toggleCheckOptions() {
   }
 }
 
+function toggleLanguages() {
+  console.log("language toggled");
+  if (opStyleWhite.style.visibility == 'visible'){
+    toggleStyleOptions();
+  }
+  if (opLong.style.visibility == 'visible'){
+    toggleCheckOptions();
+  }
+  var showHid = document.getElementsByClassName('singleLan')[0].style.visibility;
+  if (showHid == "visible") {
+    for (let i = 0; i < document.getElementsByClassName('singleLan').length; i++) {
+      document.getElementsByClassName('singleLan')[i].style.visibility = "hidden";
+    }
+  } else {
+    for (let i = 0; i < document.getElementsByClassName('singleLan').length; i++) {
+      document.getElementsByClassName('singleLan')[i].style.visibility = "visible";
+    }
+  }
+}
+
 function checkStyle(color) {
   var x = document.getElementsByClassName("keys");
   console.log(color);
   if (color == "white") {
     changeColor = "#ffffff";
+    document.getElementById('fade').style.backgroundColor = "#E0E0E0";
     localStorage.setItem("colorStyle", color);
     document.body.style.backgroundColor = "#E0E0E0";
     inputEl.style.backgroundColor = "#E0E0E0";
@@ -671,6 +747,7 @@ function checkStyle(color) {
     }
   } else if (color == "dark") {
     changeColor = "#b1b1b1";
+    document.getElementById('fade').style.backgroundColor = "#333333";
     localStorage.setItem("colorStyle", color);
     document.body.style.backgroundColor = "#333333";
     inputEl.style.backgroundColor = "#333333";
@@ -686,6 +763,7 @@ function checkStyle(color) {
     }
   } else if (color == "blue") {
     changeColor = "#dfdfdf";
+    document.getElementById('fade').style.backgroundColor = "#b4dcf9";
     localStorage.setItem("colorStyle", color);
     document.body.style.backgroundColor = "#b4dcf9";
     inputEl.style.backgroundColor = "#b4dcf9";
@@ -700,13 +778,14 @@ function checkStyle(color) {
       button[i].style.borderRadius = "4px";
     }
   } else if (color == "green") {
+    document.getElementById('fade').style.backgroundColor = "#333333";
     localStorage.setItem("colorStyle", color);
     document.body.style.backgroundColor = "#333333";
     inputEl.style.backgroundColor = "#333333";
     loginText.style.backgroundColor = "#333333";
     document.body.style.color = "#6bff00";
-     document.body.style.textShadow = "none";
-     document.getElementById('writeSentence').style.textShadow = "none";
+    document.body.style.textShadow = "none";
+    document.getElementById('writeSentence').style.textShadow = "none";
     document.body.style.textDecoration = "none";
 
     for (let i = 0; i < x.length; i++) {
@@ -722,6 +801,13 @@ function checkStyle(color) {
 //TODO:Make rankings fith this.An element with position: sticky; is positioned based on the user's scroll position.
 
 function toggleStyleOptions() {
+
+  if(document.getElementsByClassName('singleLan')[0].style.visibility == 'visible') {
+    toggleLanguages();
+  }
+  if(opLong.style.visibility == 'visible') {
+    toggleCheckOptions();
+  }
   console.log("togglestyles");
   var showHid = opStyleWhite.style.visibility;
   console.log(showHid);
@@ -856,6 +942,7 @@ function finalAutoCheck() {
     if (input == sentence) {
       timeEl.innerHTML = "Finished";
       endTimer();
+      lastSentence = sentence;
       isTyping = false;
       inputEl.style.backgroundColor = 'rgb(224, 224, 224)';
       document.getElementById("timeCourse").innerHTML = "This took you " + Math.round(takeTimeResult) + " s" + separator;
@@ -919,16 +1006,20 @@ function getRanking() {
     }
   );
 }
-
+//TODO: make a home for the rankigs
 // TODO: How to write from java script to a public github gist
 function setRankingsLink() {
-  location.href = "#div1";
+  location.href = "#fade";
 }
+
 
 function setCreditsLink() {
   location.href = "TrCredits.html";
 }
 
+function goHome() {
+  location.href = "#welcomeText";
+}
 
 
 function bodyFadeIn() {

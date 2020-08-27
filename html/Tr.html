@@ -16,35 +16,47 @@
       <span id="welcomeText"></span>
     </div>
     <div class="nothing"></div>
+<div class="language smallOptions op">
+  <div class="singleLan op"><p>German</p></div>
+  <div class="singleLan op"><p>Spanish</sp></div>
+  <div class="singleLan op"><p>English</p></div>
+</div>
     <div class=optionsImage>
       <img class="options" id="image" src="https://image.flaticon.com/icons/svg/117/117151.svg">
     </div>
     <div class=alloptions>
-      <div class=rankings>
-        <p>
-          <label class="optionsBig options">
+      <div class="rankings bigOptions">
+        <p class="optionsBig">
+          <label class="options">
             <span id="optionsOne" class="op optionsBig">Rankings</span>
           </label>
         </p>
       </div>
-      <div class=credits>
-        <p>
-          <label class="optionsBig options">
+      <div class="credits bigOptions">
+        <p class="optionsBig">
+          <label class="options">
             <span id="optionsThree" class="op optionsBig">Credits</a>
           </label>
         </p>
       </div>
-      <div class=moreOp>
+      <div class="moreOp bigOptions">
         <p class=optionsBig>
           <label class="options">
             <span id="optionsTwo" class="op optionsBig">Text options</span>
           </label>
         </p>
       </div>
-      <div class="style">
+      <div class="style bigOptions">
         <p class="optionsBig">
           <label class="options">
             <span id="optionsFour" class="op optionsBig">Style</span>
+          </label>
+        </p>
+      </div>
+      <div id=language class="language bigOptions">
+        <p class="optionsBig">
+          <label class="options">
+            <span id="optionsFive" class="op optionsBig">Language</span>
           </label>
         </p>
       </div>
@@ -56,7 +68,7 @@
           <span class=options>
             <label id=optionsCheckNormalSpan class="container optionsSmall op"> Normal sentences
               <input type=checkbox class=op checked="checked" class="optionsSmall" id="optionsCheckNormal"> </input>
-              <span class=checkmark></span>
+              <span class="checkmark"></span>
             </label>
           </span>
         </div>
@@ -64,7 +76,7 @@
           <span class=options>
             <label id=optionsCheckRandomSpan class="container op optionsSmall"> Random words
               <input type=checkbox class="op optionsSmall" id=optionsCheckRandom> </input>
-              <span class=checkmark></span>
+              <span class="checkmark"></span>
             </label>
           </span>
         </div>
@@ -92,14 +104,6 @@
             </label>
           </span>
         </div>
-        <div class=dark>
-          <span class=options>
-            <label id=optionsCheckDarkSpan class="container optionsSmall op"> Dark mode
-              <input type=checkbox onclick="toggleDarkMode()" class="op optionsSmall" id=optionsCheckDark> </input>
-              <span class=checkmark></span>
-            </label>
-          </span>
-        </div>
         <div class=keysOp>
           <span class=options>
             <label id=optionsCheckKeysSpan class="container optionsSmall op"> Keys on/off
@@ -115,7 +119,7 @@
           <span class="options">
             <label id="optionsStyleWhite" class="styleOp op">
               <span class="circlemark"></span>
-              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/iconcolorswhite.svg">
+              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/html/iconcolorswhite.svg">
             </label>
           </span>
         </div>
@@ -124,7 +128,7 @@
           <span class="options">
             <label id="optionsStyleDark" class="styleOp op">
               <span class="circlemark"></span>
-              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/iconcolorsblue.svg">
+              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/html/iconcolorsblue.svg">
             </label>
           </span>
         </div>
@@ -133,7 +137,7 @@
           <span class="options">
             <label id="optionsStyleBlue" class="styleOp op">
               <span class="circlemark"></span>
-              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/iconcolorsdark.svg">
+              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/html/iconcolorsdark.svg">
             </label>
           </span>
         </div>
@@ -142,7 +146,7 @@
           <span class="options">
             <label id="optionsStyleBlue" class="styleOp op">
               <span class="circlemark"></span>
-              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/iconcolorsdarkgreen.svg">
+              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/html/iconcolorsdarkgreen.svg">
             </label>
           </span>
         </div>
@@ -579,8 +583,9 @@
       <p id="tips" onclick="tipsFunction()">Click here for some tips</p>
       <p id="username"></p>
     </div>
-    <div id="div1"></div>
-
+    <div class="div1"><table id='table'></table></div>
+    <div id="home"><span class="home">Home</span></div>
+    <div class="div1" id="fade"></div>
   </div>
 
   <script type="module" src="js/Tr.js"></script>
