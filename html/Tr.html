@@ -16,11 +16,19 @@
       <span id="welcomeText"></span>
     </div>
     <div class="nothing"></div>
-<div class="language smallOptions op">
-  <div class="singleLan op"><p>German</p></div>
-  <div class="singleLan op"><p>Spanish</sp></div>
-  <div class="singleLan op"><p>English</p></div>
-</div>
+    <div id='languageDiv' class="op smallOptions">
+      <div class=bigDivLanguage>
+        <div class="singleLan">
+          <img src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/englandflag.svg" class="singleLanImg" id=england>
+        </div>
+        <div class="singleLan">
+          <img src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/germanflag.svg" class="singleLanImg">
+        </div>
+        <div class="singleLan">
+          <img src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/spanishflag.svg" class="singleLanImg">
+        </div>
+      </div>
+    </div>
     <div class=optionsImage>
       <img class="options" id="image" src="https://image.flaticon.com/icons/svg/117/117151.svg">
     </div>
@@ -115,40 +123,43 @@
       </div>
       <input type="checkbox" class="op  styleCheck optionsStyle">
       <div id=smallOpStyle>
-        <div class=styleOp>
-          <span class="options">
-            <label id="optionsStyleWhite" class="styleOp op">
-              <span class="circlemark"></span>
-              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/html/iconcolorswhite.svg">
-            </label>
-          </span>
-        </div>
-        <input type="checkbox" class="op  styleCheck optionsStyle">
-        <div class="styleOp">
-          <span class="options">
-            <label id="optionsStyleDark" class="styleOp op">
-              <span class="circlemark"></span>
-              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/html/iconcolorsblue.svg">
-            </label>
-          </span>
-        </div>
-        <input type="checkbox" class="op styleCheck optionsStyle">
-        <div class="styleOp">
-          <span class="options">
-            <label id="optionsStyleBlue" class="styleOp op">
-              <span class="circlemark"></span>
-              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/html/iconcolorsdark.svg">
-            </label>
-          </span>
-        </div>
-        <input type="checkbox" class="op styleCheck optionsStyle">
-        <div class="styleOp">
-          <span class="options">
-            <label id="optionsStyleBlue" class="styleOp op">
-              <span class="circlemark"></span>
-              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/html/iconcolorsdarkgreen.svg">
-            </label>
-          </span>
+        <div>
+
+          <div class=styleOp>
+            <span class="options">
+              <label id="optionsStyleWhite" class="styleOp op">
+                <span class="circlemark"></span>
+                <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/html/iconcolorswhite.svg">
+              </label>
+            </span>
+          </div>
+          <input type="checkbox" class="op  styleCheck optionsStyle">
+          <div class="styleOp">
+            <span class="options">
+              <label id="optionsStyleDark" class="styleOp op">
+                <span class="circlemark"></span>
+                <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/html/iconcolorsblue.svg">
+              </label>
+            </span>
+          </div>
+          <input type="checkbox" class="op styleCheck optionsStyle">
+          <div class="styleOp">
+            <span class="options">
+              <label id="optionsStyleBlue" class="styleOp op">
+                <span class="circlemark"></span>
+                <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/html/iconcolorsdark.svg">
+              </label>
+            </span>
+          </div>
+          <input type="checkbox" class="op styleCheck optionsStyle">
+          <div class="styleOp">
+            <span class="options">
+              <label id="optionsStyleBlue" class="styleOp op">
+                <span class="circlemark"></span>
+                <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/Tr/master/html/iconcolorsdarkgreen.svg">
+              </label>
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -583,7 +594,9 @@
       <p id="tips" onclick="tipsFunction()">Click here for some tips</p>
       <p id="username"></p>
     </div>
-    <div class="div1"><table id='table'></table></div>
+    <div class="div1">
+      <table id='table'></table>
+    </div>
     <div id="home"><span class="home">Home</span></div>
     <div class="div1" id="fade"></div>
   </div>

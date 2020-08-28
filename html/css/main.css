@@ -163,6 +163,10 @@ a:visited {
   margin-right: 1%;
 }
 
+.singleLan {
+  width: 500%;
+}
+
 /* CHECKMARKS END */
 .button {
   background-color: light-grey;
@@ -298,7 +302,6 @@ a:visited {
   width: 35%;
 }
 
-
 #home {
   grid-area: home;
   font-size: 400%;
@@ -308,8 +311,6 @@ a:visited {
   position: relative;
   text-align: center;
 }
-
-
 
 .bigOptions:hover {
   animation-name: optionsHover;
@@ -365,8 +366,8 @@ a:visited {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  background-color: rgb(51, 51, 51,1);
-    -webkit-mask-image: linear-gradient(to top, rgba(51, 51, 51,1), rgba(0,0,0,0),rgba(0,0,0,0),rgba(0,0,0,0), rgba(0,0,0,0)), linear-gradient(to bottom, rgba(51, 51, 51,1), rgba(0,0,0,0));
+  background-color: rgb(51, 51, 51, 1);
+  -webkit-mask-image: linear-gradient(to top, rgba(51, 51, 51, 1), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), linear-gradient(to bottom, rgba(51, 51, 51, 1), rgba(0, 0, 0, 0));
 }
 
 .div1 {
@@ -394,10 +395,6 @@ a:visited {
   align-content: center;
 }
 
-.smallOptions {
-  height: 100%
-}
-
 /*TODO: make the align work*/
 .styleOp {
   align-items: center;
@@ -413,11 +410,46 @@ a:visited {
   margin: auto;
   grid-area: smallOp;
   text-align: right;
-  align-self: right;
+  align-self: center;
 }
 
 .singleLan {
+  text-align: center;
+  position: relative;
   font-size: 150%;
+  width: 50px;
+  align-self: center;
+  align-items: center;
+  padding-left: 25%;
+  padding-right: 50%;
+  padding-bottom: 10%;
+  top: 10%;
+}
+
+.singleLanImg {
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}
+
+#languageDiv {
+  position: relative;
+  width: 150%;
+  height: 200%;
+  align-self: center;
+  top: 10px;
+  padding: 0%;
+}
+
+.bigDivLanguage {}
+
+.smallOpStyle {
+  position: relative;
+  width: 150%;
+  height: 200%;
+  align-self: center;
+  top: 10px;
+  padding: 0%;
 }
 
 .loginText {

@@ -34,6 +34,7 @@ var tips = [
 
 //shortchut consts
 const language = document.getElementById('language');
+const singleLan = document.getElementsByClassName('singleLan');
 
 const optionsSmall = document.getElementsByClassName('optionsSmall');
 const optionsBig = document.getElementsByClassName('optionsBig');
@@ -78,7 +79,8 @@ const image = document.getElementById("image");
 const imageStyle = document.getElementsByClassName('styleImg');
 const queryString = window.location.search;
 
-
+var key = "";
+var link = "";
 var changeColor = "#ffffff";
 var today = new Date();
 var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -108,6 +110,7 @@ var tip = tips[Math.floor(Math.random() * tips.length)];
 var autocheckOrNot;
 var rankingStr;
 var lastSentence;
+var wordsLink;
 
 //tops
 var lastTop = 0;
@@ -141,6 +144,8 @@ var guy10 = 0;
 var ranking = [];
 var myRankingJson;
 var rank;
+
+var boderColor;
 
 var isTyping = false;
 var lastInput = "";
@@ -179,6 +184,16 @@ function setEvents() {
   });
 
   document.getElementById('language').addEventListener('click', toggleLanguages);
+  singleLan[0].addEventListener('click', function() {
+    changeLanguage("english");
+  });
+  singleLan[1].addEventListener('click', function() {
+    changeLanguage("german");
+  });
+  singleLan[2].addEventListener('click', function() {
+    changeLanguage("spanish");
+  });
+
 
   rankings.addEventListener('click', setRankingsLink);
   home.addEventListener('click', goHome);
@@ -262,6 +277,7 @@ console.log(Octokit);
 
 //var key = event.keyCode;
 function startup() {
+  changeLanguage("english");
   var color = localStorage.getItem('colorStyle');
   checkStyle(color);
   setEvents();
@@ -352,8 +368,11 @@ function unregisterFunc() {
 // noOfWords: integer, number of words, e.g. 10 or 20 or any other number
 // numbersPerWords: add a number after every N-th word, e.g. if set to 5, after 5 words a number will be placed
 function computeRandomSentence(noOfWords, numbers, numbersPerWords) {
-  getJSON('https://raw.githubusercontent.com/sindresorhus/mnemonic-words/master/words.json',
+  getJSON(wordsLink,
     function(err, data) {
+      var otherData = _.shuffle(data);
+
+      console.log(data);
       if (err !== null) {
         alert('Something went wrong: ' + err);
       } else {
@@ -427,17 +446,29 @@ function changeSentence() {
       }
     );
   }
-  var link = "https://raw.githubusercontent.com/dwyl/quotes/master/quotes.json"; //"https://raw.githubusercontent.com/GianNipitella/SpanishQuotes/gh-pages/javascripts/citas.json";
+  // link = "https://raw.githubusercontent.com/dwyl/quotes/master/quotes.json"; //"https://raw.githubusercontent.com/GianNipitella/SpanishQuotes/gh-pages/javascripts/citas.json";
   if (opNormal.checked == true) {
-    getJSON("https://raw.githubusercontent.com/GianNipitella/SpanishQuotes/gh-pages/javascripts/citas.json",
+    getJSON(link,
       function(err, data) {
+        console.log(link);
         if (err !== null) {
           alert('Something went wrong: ' + err);
         } else {
           //data is an array, inside the array there are dictionari, with 2 key  value pairs, author and text
           //TODO: make an infine play mode, or a paragraph play mode.
           el = data[Math.floor(Math.random() * data.length)];
-          sentence = el.Cita;
+          if (key == "text") {
+            sentence = el.text;
+          }
+          if (key == "Cita") {
+            sentence = el.Cita;
+            sentence = sentence.substring(1, sentence.length - 1);
+          }
+          if (key == "") {
+
+            sentence = el[Math.floor(Math.random() * el.length)];
+            console.log(sentence);
+          }
           if (opNumbers.checked == true) {
             if (sentence.includes(1, 2, 3, 4, 5, 6, 7, 8, 9)) {
               writeSentence();
@@ -691,7 +722,7 @@ function toggleCheckOptionsNormal(optionsNormal) {
 
 function toggleCheckOptions() {
   optionsFadeIn();
-  if(document.getElementsByClassName('singleLan')[0].style.visibility == "visible"){
+  if (document.getElementsByClassName('singleLan')[0].style.visibility == "visible") {
     toggleLanguages();
   }
   var showHid = opLong.style.visibility;
@@ -711,10 +742,10 @@ function toggleCheckOptions() {
 
 function toggleLanguages() {
   console.log("language toggled");
-  if (opStyleWhite.style.visibility == 'visible'){
+  if (opStyleWhite.style.visibility == 'visible') {
     toggleStyleOptions();
   }
-  if (opLong.style.visibility == 'visible'){
+  if (opLong.style.visibility == 'visible') {
     toggleCheckOptions();
   }
   var showHid = document.getElementsByClassName('singleLan')[0].style.visibility;
@@ -729,30 +760,61 @@ function toggleLanguages() {
   }
 }
 
+function changeLanguage(language) {
+  console.log(language);
+  if (language == "english") {
+    document.getElementsByClassName("singleLanImg")[0].style.border = "thick solid " + boderColor;
+    document.getElementsByClassName("singleLanImg")[1].style.border = 'none';
+    document.getElementsByClassName("singleLanImg")[2].style.border = 'none';
+    link = "https://raw.githubusercontent.com/dwyl/quotes/master/quotes.json";
+    key = "text";
+    wordsLink = 'https://raw.githubusercontent.com/sindresorhus/mnemonic-words/master/words.json';
+  }
+  if (language == "spanish") {
+    document.getElementsByClassName("singleLanImg")[0].style.border = 'none';
+    document.getElementsByClassName("singleLanImg")[1].style.border = 'none';
+    document.getElementsByClassName("singleLanImg")[2].style.border = "thick solid " + boderColor;
+    link = "https://raw.githubusercontent.com/GianNipitella/SpanishQuotes/gh-pages/javascripts/citas.json";
+    key = "Cita";
+    wordsLink = "https://raw.githubusercontent.com/words/an-array-of-spanish-words/master/index.json";
+  }
+  if (language == "german") {
+    document.getElementsByClassName("singleLanImg")[0].style.border = 'none';
+    document.getElementsByClassName("singleLanImg")[1].style.border = "thick solid " + boderColor;
+    document.getElementsByClassName("singleLanImg")[2].style.border = 'none';
+
+    link = "https://raw.githubusercontent.com/stevencaro/quotation/master/german-quotes.json";
+    key = "";
+    wordsLink = "https://raw.githubusercontent.com/Jonny-exe/Tr/master/GermanWords.json";
+  }
+  changeSentence();
+}
+
 function checkStyle(color) {
+  var fade = document.getElementById('fade').style.backgroundColor;
   var x = document.getElementsByClassName("keys");
+  var bodyStyle = document.body.style;
   console.log(color);
+  var backgroundColor;
+  var mainColor;
+  var secondaryColor;
+  var extraColor;
   if (color == "white") {
-    changeColor = "#ffffff";
-    document.getElementById('fade').style.backgroundColor = "#E0E0E0";
+    mainColor = '#000000';
+    backgroundColor = '#E0E0E0';
+    extraColor = '#ffffff';
+
+    bodyStyle.textShadow = "2px 2px 4px #838383";
+    wrSentence.style.textShadow = "2px 2px 4px #838383";
     localStorage.setItem("colorStyle", color);
-    document.body.style.backgroundColor = "#E0E0E0";
-    inputEl.style.backgroundColor = "#E0E0E0";
-    loginText.style.backgroundColor = "#E0E0E0";
-    document.body.style.color = "#000000";
-    document.body.style.textShadow = "2px 2px 4px #838383";
-    document.getElementById('writeSentence').style.textShadow = "2px 2px 4px #838383";
     for (let i = 0; i < x.length; i++) {
       x[i].style.borderRadius = "4px";
     }
   } else if (color == "dark") {
-    changeColor = "#b1b1b1";
-    document.getElementById('fade').style.backgroundColor = "#333333";
-    localStorage.setItem("colorStyle", color);
-    document.body.style.backgroundColor = "#333333";
-    inputEl.style.backgroundColor = "#333333";
-    loginText.style.backgroundColor = "#333333";
-    document.body.style.color = "#ffffff";
+    mainColor = '#333333';
+    backgroundColor = '#ffffff';
+    extraColor = '#b1b1b1';
+
     document.body.style.textShadow = "2px 2px 4px #838383";
     document.getElementById('writeSentence').style.textShadow = "2px 2px 4px #838383";
     for (let i = 0; i < x.length; i++) {
@@ -762,13 +824,10 @@ function checkStyle(color) {
       button[i].style.borderRadius = "4px";
     }
   } else if (color == "blue") {
-    changeColor = "#dfdfdf";
-    document.getElementById('fade').style.backgroundColor = "#b4dcf9";
-    localStorage.setItem("colorStyle", color);
-    document.body.style.backgroundColor = "#b4dcf9";
-    inputEl.style.backgroundColor = "#b4dcf9";
-    loginText.style.backgroundColor = "#b4dcf9";
-    document.body.style.color = "rgb(246, 244, 244)";
+    mainColor = '#b4dcf9';
+    backgroundColor = '#f6f4f4';
+    extraColor = '#dfdfdf';
+
     document.body.style.textShadow = "2px 2px 4px #838383";
     document.getElementById('writeSentence').style.textShadow = "2px 2px 4px #838383";
     for (let i = 0; i < x.length; i++) {
@@ -778,12 +837,9 @@ function checkStyle(color) {
       button[i].style.borderRadius = "4px";
     }
   } else if (color == "green") {
-    document.getElementById('fade').style.backgroundColor = "#333333";
-    localStorage.setItem("colorStyle", color);
-    document.body.style.backgroundColor = "#333333";
-    inputEl.style.backgroundColor = "#333333";
-    loginText.style.backgroundColor = "#333333";
-    document.body.style.color = "#6bff00";
+    mainColor = '#6bff00';
+    backgroundColor = '#333333';
+    extraColor = '#ffffff';
     document.body.style.textShadow = "none";
     document.getElementById('writeSentence').style.textShadow = "none";
     document.body.style.textDecoration = "none";
@@ -795,17 +851,25 @@ function checkStyle(color) {
       button[i].style.borderRadius = "4px";
     }
   }
-
+  boderColor = mainColor;
+  changeColor = extraColor;
+  fade = backgroundColor;
+  bodyStyle.backgroundColor = backgroundColor;
+  inputEl.style.backgroundColor = backgroundColor;
+  loginText.style.backgroundColor = backgroundColor;
+  bodyStyle.color = mainColor;
+  localStorage.setItem("colorStyle", color);
+  changeLanguage();
 }
 
 //TODO:Make rankings fith this.An element with position: sticky; is positioned based on the user's scroll position.
 
 function toggleStyleOptions() {
 
-  if(document.getElementsByClassName('singleLan')[0].style.visibility == 'visible') {
+  if (document.getElementsByClassName('singleLan')[0].style.visibility == 'visible') {
     toggleLanguages();
   }
-  if(opLong.style.visibility == 'visible') {
+  if (opLong.style.visibility == 'visible') {
     toggleCheckOptions();
   }
   console.log("togglestyles");
