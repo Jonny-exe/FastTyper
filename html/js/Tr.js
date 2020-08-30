@@ -871,7 +871,7 @@ function checkStyle(color) {
       button[i].style.borderRadius = "4px";
     }
   }
-  document.body.style.backgroundColor = 'hsl(' + 1 + ', 100%, 50%)';
+
   boderColor = mainColor;
   changeColor = extraColor;
   bodyStyle.backgroundColor = backgroundColor;
@@ -1264,6 +1264,5 @@ function rotateHide() {
 }
 
 //updateDisplay();
-checkStyle('white');
 startup();
 console.log(octokit);
