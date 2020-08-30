@@ -8,7 +8,6 @@
 // jscs:disable
 // jshint esversion: 8
 // jshint:disable W051
-
 //TODO: learn more shortcuts for atom
 //imports
 import {
@@ -791,7 +790,8 @@ function changeLanguage(language) {
 }
 
 function checkStyle(color) {
-  var fade = document.getElementById('fade').style.backgroundColor;
+  var fade = document.getElementsByClassName('fade');
+
   var x = document.getElementsByClassName("keys");
   var bodyStyle = document.body.style;
   console.log(color);
@@ -800,6 +800,11 @@ function checkStyle(color) {
   var secondaryColor;
   var extraColor;
   if (color == "white") {
+    fade[0].style.visibility = "visible";
+    fade[1].style.visibility = 'hidden';
+    fade[2].style.visibility = "hidden";
+    fade[3].style.visibility = "hidden";
+
     mainColor = '#000000';
     backgroundColor = '#E0E0E0';
     extraColor = '#ffffff';
@@ -811,8 +816,13 @@ function checkStyle(color) {
       x[i].style.borderRadius = "4px";
     }
   } else if (color == "dark") {
-    mainColor = '#333333';
-    backgroundColor = '#ffffff';
+    fade[0].style.visibility = "hidden";
+    fade[1].style.visibility = 'hidden';
+    fade[2].style.visibility = "visible";
+    fade[3].style.visibility = "hidden";
+
+    mainColor = '#ffffff';
+    backgroundColor = '#333333';
     extraColor = '#b1b1b1';
 
     document.body.style.textShadow = "2px 2px 4px #838383";
@@ -824,7 +834,12 @@ function checkStyle(color) {
       button[i].style.borderRadius = "4px";
     }
   } else if (color == "blue") {
-    mainColor = '#b4dcf9';
+    fade[0].style.visibility = "hidden";
+    fade[1].style.visibility = 'visible';
+    fade[2].style.visibility = "hidden";
+    fade[3].style.visibility = "hidden";
+
+    mainColor = '#3ca7f5';
     backgroundColor = '#f6f4f4';
     extraColor = '#dfdfdf';
 
@@ -837,6 +852,11 @@ function checkStyle(color) {
       button[i].style.borderRadius = "4px";
     }
   } else if (color == "green") {
+    fade[0].style.visibility = "hidden";
+    fade[1].style.visibility = 'hidden';
+    fade[2].style.visibility = "hidden";
+    fade[3].style.visibility = "visible";
+
     mainColor = '#6bff00';
     backgroundColor = '#333333';
     extraColor = '#ffffff';
@@ -851,9 +871,9 @@ function checkStyle(color) {
       button[i].style.borderRadius = "4px";
     }
   }
+  document.body.style.backgroundColor = 'hsl(' + 1 + ', 100%, 50%)';
   boderColor = mainColor;
   changeColor = extraColor;
-  fade = backgroundColor;
   bodyStyle.backgroundColor = backgroundColor;
   inputEl.style.backgroundColor = backgroundColor;
   loginText.style.backgroundColor = backgroundColor;
@@ -1243,7 +1263,7 @@ function rotateHide() {
   }
 }
 
-
 //updateDisplay();
+checkStyle('white');
 startup();
 console.log(octokit);
