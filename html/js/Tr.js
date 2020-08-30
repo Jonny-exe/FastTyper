@@ -223,6 +223,21 @@ function setEvents() {
   });
 }
 
+function readTextFile() {
+  getJSON('https://raw.githubusercontent.com/Jonny-exe/German-Words-Library/master/German-words-1600000-words-multilines.json',
+    function(err, data) {
+      console.log(data);
+      if (err !== null) {
+        alert('Something went wrong: ' + err);
+      } else {
+        // console.log(data.length);
+      }
+    }
+  );
+}
+
+readTextFile();
+
 // Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
 const octokit = new Octokit({
   auth: t
@@ -449,6 +464,7 @@ function changeSentence() {
   if (opNormal.checked == true) {
     getJSON(link,
       function(err, data) {
+        // console.log(data.length);
         console.log(link);
         if (err !== null) {
           alert('Something went wrong: ' + err);
