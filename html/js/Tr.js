@@ -165,7 +165,6 @@ var getJSON = function(url, callback) {
   xhr.send();
 };
 
-console.log("hi");
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules you cant inport the octokit
 function setEvents() {
   image.addEventListener('click', toggleOptions);
@@ -209,7 +208,6 @@ function setEvents() {
   document.getElementById('tips').addEventListener('click', tipsFunction);
   document.getElementById('myInput').addEventListener('keydown', function(event) {
     var keynum;
-    console.log("onkeydown");
     if (window.event) { // IE
       keynum = event.keyCode;
     } else if (event.which) { // Netscape/Firefox/Opera
@@ -226,7 +224,6 @@ function setEvents() {
 function readTextFile() {
   getJSON('https://raw.githubusercontent.com/Jonny-exe/German-Words-Library/master/German-words-1600000-words-multilines.json',
     function(err, data) {
-      console.log(data);
       if (err !== null) {
         alert('Something went wrong: ' + err);
       } else {
@@ -272,7 +269,7 @@ async function getGist() {
       }
     }
   });
-  console.log("gistUpdated");
+  console.log("updategist");
 
   // //creates a new one with each call
   //       const response4 = await octokit.request('POST /gists', {
@@ -296,10 +293,8 @@ function startup() {
   checkStyle(color);
   setEvents();
   toggleKeys();
-  console.log("startup");
   inputEl.disabled = true;
   inputEl.value = "";
-  console.log("hihiih");
   changeSentence();
   input = inputEl.value;
   count = input.length;
@@ -385,8 +380,6 @@ function computeRandomSentence(noOfWords, numbers, numbersPerWords) {
   getJSON(wordsLink,
     function(err, data) {
       var otherData = _.shuffle(data);
-
-      console.log(data);
       if (err !== null) {
         alert('Something went wrong: ' + err);
       } else {
@@ -465,7 +458,8 @@ function changeSentence() {
     getJSON(link,
       function(err, data) {
         // console.log(data.length);
-        console.log(link);
+        console.log(data.length);
+
         if (err !== null) {
           alert('Something went wrong: ' + err);
         } else {
@@ -482,7 +476,6 @@ function changeSentence() {
           if (key == "") {
 
             sentence = el[Math.floor(Math.random() * el.length)];
-            console.log(sentence);
           }
           if (opNumbers.checked == true) {
             if (sentence.includes(1, 2, 3, 4, 5, 6, 7, 8, 9)) {
@@ -508,7 +501,6 @@ function changeSentence() {
             }
           }
           if (!opShort.checked && opLong.checked) {
-            console.log("long");
             if (sentence.length > 100) {
               writeSentence();
             } else {
@@ -517,7 +509,6 @@ function changeSentence() {
           }
 
           if (opShort.checked && !opLong.checked) {
-            console.log("short");
             if (sentence.length < 100) {
               writeSentence();
             } else {
@@ -567,7 +558,6 @@ function getRanks() {
       if (err !== null) {
         alert('Something went wrong: ' + err);
       } else {
-        console.log();
         ranking = data;
         console.log(ranking.length);
         console.log(ranking[0].date);
@@ -578,14 +568,11 @@ function getRanks() {
           var table = document.getElementById("table");
           var row;
           if (i == 0) {
-            console.log("i = 0");
             row = table.insertRow(0);
             row = table.insertRow(1);
             row = table.insertRow(2);
             row = table.insertRow(3);
             row.style.height = "100px";
-
-
           }
           row = table.insertRow(i + 4);
           var cell1 = row.insertCell(0);
@@ -664,10 +651,8 @@ function able() {
 }
 
 function toggleStyles() {
-  console.log("styles");
   var hideOptions = opLong.style.visibility;
   var hideStyle = optionsStyleBlue.visibility;
-  console.log(optionsSmall[0].style.visibility);
   if (hideOptions == "visible") {
     toggleCheckOptions();
     toggleStyleOptions();
@@ -682,7 +667,6 @@ function toggleStyles() {
 
 function toggleKeys() {
   var toggleKeys = opKeys.checked;
-  console.log(toggleKeys);
   if (toggleKeys == true) {
     keysGoIn();
     keypad.style.visibility = "visible";
@@ -703,7 +687,6 @@ function toggleOptions() {
   if (showHid == "hidden") {
     rotateShow();
     canRotate = false;
-    console.log(optionsBig.length);
     setTimeout(function setrotate() {
       canRotate = true;
     }, 500);
@@ -756,7 +739,6 @@ function toggleCheckOptions() {
 }
 
 function toggleLanguages() {
-  console.log("language toggled");
   if (opStyleWhite.style.visibility == 'visible') {
     toggleStyleOptions();
   }
@@ -776,7 +758,6 @@ function toggleLanguages() {
 }
 
 function changeLanguage(language) {
-  console.log(language);
   if (language == "english") {
     document.getElementsByClassName("singleLanImg")[0].style.border = "thick solid " + boderColor;
     document.getElementsByClassName("singleLanImg")[1].style.border = 'none';
@@ -810,12 +791,12 @@ function checkStyle(color) {
 
   var x = document.getElementsByClassName("keys");
   var bodyStyle = document.body.style;
-  console.log(color);
   var backgroundColor;
   var mainColor;
   var secondaryColor;
   var extraColor;
-  if (color == "white") {
+  var colors = ['white', 'blue', 'dark', 'green'];
+  if (color == "white", colors != color) {
     fade[0].style.visibility = "visible";
     fade[1].style.visibility = 'hidden';
     fade[2].style.visibility = "hidden";
@@ -908,13 +889,10 @@ function toggleStyleOptions() {
   if (opLong.style.visibility == 'visible') {
     toggleCheckOptions();
   }
-  console.log("togglestyles");
   var showHid = opStyleWhite.style.visibility;
-  console.log(showHid);
   if (showHid == "hidden") {
     for (let i = 0; i < styleOptions.length; i++) {
       styleOptions[i].style.visibility = "visible";
-      console.log('height 0');
       document.getElementById("checkOptionsSmall").style.height = "0px";
     }
   } else {
@@ -980,7 +958,6 @@ function checkError() {
 }
 
 function writeSentence() {
-  console.log("changed");
   wrSentence.innerHTML = changeSentenceColor();
 }
 
@@ -1075,17 +1052,17 @@ function setCheckTops() {
     'points': points,
     'date': date
   };
-  console.log(ranking);
   sortTops();
 }
 
 function sortTops() {
   console.log(rank);
   ranking.push(rank);
+  console.log(ranking);
   ranking = _.sortBy(ranking, ['points', "name"]);
 
   console.log(_.sortBy(ranking, ['points']));
-  console.log(ranking[0]);
+  console.log(ranking);
   ranking.reverse();
   delete ranking.slice(maxTop - 1, ranking.length);
   // delete ranking[];
@@ -1107,7 +1084,6 @@ function getRanking() {
   );
 }
 //TODO: make a home for the rankigs
-// TODO: How to write from java script to a public github gist
 function setRankingsLink() {
   location.href = "#fade";
 }
@@ -1135,8 +1111,6 @@ function bodyFadeIn() {
       opacity: 100,
       ease: Power2.easeInOut
     });
-  console.log("fadeIn");
-
 }
 
 function optionsFadeIn() {
@@ -1281,4 +1255,3 @@ function rotateHide() {
 
 //updateDisplay();
 startup();
-console.log(octokit);
