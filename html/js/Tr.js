@@ -15,9 +15,9 @@ import {
 } from "https://cdn.pika.dev/@octokit/core";
 import {
   t
-} from './t.js';
+} from '/js/t.js'; //  SERVER  from root /var/www/html
 
-//shortcut consts
+//CONSTS
 export var language;
 export var singleLan;
 export var optionsSmall;
@@ -112,26 +112,12 @@ export var isTyping;
 export var lastInput;
 export var accCount;
 export var accPercentage;
-export var getJSON = function(url, callback) {
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', url, true);
-  xhr.responseType = 'json';
-  xhr.onload = function() {
-    var status = xhr.status;
-    if (status === 200) {
-      callback(null, xhr.response);
-    } else {
-      callback(status, xhr.response);
-    }
-  };
-  xhr.send();
-};
+export var getJSON;
 
 
 function initConsts() {
   language = document.getElementById('language');
   singleLan = document.getElementsByClassName('singleLan');
-
   optionsSmall = document.getElementsByClassName('optionsSmall');
   optionsBig = document.getElementsByClassName('optionsBig');
   options = document.getElementsByClassName('op');
@@ -142,7 +128,6 @@ function initConsts() {
   opStyleDark = document.getElementById('optionsStyleDark');
   opStyleBlue = document.getElementById('optionsStyleBlue');
   styleOptions = document.getElementsByClassName('styleOp');
-
   button = document.getElementsByClassName('button');
   inputEl = document.getElementById("myInput");
   opLong = document.getElementById("optionsCheckLong");
@@ -233,8 +218,9 @@ function initVars() {
     };
     xhr.send();
   };
-
 }
+
+
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules you cant inport the octokit
 export function setEvents() {
   image.addEventListener('click', toggleOptions);
@@ -1333,4 +1319,4 @@ export function rotateHide() {
 
 setTimeout(function() {
   startup();
-}, 3000);
+}, 1000);
