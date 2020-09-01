@@ -110,6 +110,7 @@ var autocheckOrNot;
 var rankingStr;
 var lastSentence;
 var wordsLink;
+var delRanking = 0;
 
 //tops
 var lastTop = 0;
@@ -170,9 +171,11 @@ function setEvents() {
   image.addEventListener('click', toggleOptions);
   imageStyle[0].addEventListener('click', function() {
     checkStyle("white");
+    console.log("white");
   });
   imageStyle[1].addEventListener('click', function() {
     checkStyle("blue");
+    console.log("blue");
   });
   imageStyle[2].addEventListener('click', function() {
     checkStyle("dark");
@@ -558,14 +561,21 @@ function getRanks() {
       if (err !== null) {
         alert('Something went wrong: ' + err);
       } else {
+        var table = document.getElementById("table");
         ranking = data;
+        if (delRanking != 0) {
+          console.log("delete row");
+          for (let i = 0; i < ranking.length + 4; i++) {
+            table.deleteRow(0);
+          }
+        }
+        delRanking = delRanking + 1;
         console.log(ranking.length);
         console.log(ranking[0].date);
         console.log(ranking[0].points);
         var spc = " ";
 
         for (let i = 0; i < ranking.length; i++) {
-          var table = document.getElementById("table");
           var row;
           if (i == 0) {
             row = table.insertRow(0);
@@ -796,7 +806,7 @@ function checkStyle(color) {
   var secondaryColor;
   var extraColor;
   var colors = ['white', 'blue', 'dark', 'green'];
-  if (color == "white", colors != color) {
+  if (color == "white", colors.includes(color) == false) {
     fade[0].style.visibility = "visible";
     fade[1].style.visibility = 'hidden';
     fade[2].style.visibility = "hidden";
@@ -1085,7 +1095,7 @@ function getRanking() {
 }
 //TODO: make a home for the rankigs
 function setRankingsLink() {
-  location.href = "#fade";
+  location.href = "#fade1";
 }
 
 

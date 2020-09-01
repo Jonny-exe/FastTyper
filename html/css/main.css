@@ -45,7 +45,7 @@ a:visited {
   font-size: 23px;
   font-family: consolas;
   width: 98%;
-  padding: 2%;
+  padding: 10px;
 }
 
 #loginText {
@@ -294,7 +294,7 @@ a:visited {
   display: grid;
   width: 100%;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 0.2fr 0.2fr 0.1fr 0.2fr 0.1fr 0.5fr 0.1fr 1.3fr 0.3fr;
+  grid-template-rows: 0.2fr 0.2fr 0.1fr 0.2fr 0.1fr 0.5fr 0.1fr 1fr 0.3fr;
   grid-template-areas:
     "welcomeText welcomeText loginText loginText loginText opImage"
     "mainTitle mainTitle mainTitle mainTitle mainTitle allOp"
@@ -407,7 +407,7 @@ a:visited {
 
 .div1 {
   grid-area: ranking;
-  max-height: 120%;
+  max-height: 100%;
   font-size: 65%;
   overflow-y: scroll;
 }
@@ -416,13 +416,10 @@ a:visited {
   width: 100%;
 }
 
-#div1 {
-  height: 120%;
-  width: 100%;
-}
+
 
 .styleImg {
-  width: 30%;
+  width: 20%;
   position: relative;
   margin: auto;
   vertical-align: center;
@@ -513,4 +510,71 @@ a:visited {
 
 .tips {
   grid-area: tips;
+}
+
+}
+.HTML-keyboard {
+  max-width: 1800px;
+}
+
+:root {
+  /* only used to hold our CSS variables */
+  /*change color to change the letters blink color*/
+  --blink-color: rgb(130, 130, 130);
+  /*change color to change the letters background color*/
+  --back-color: rgb(170, 170, 170);
+  /*change color to change the letters foreground color*/
+  --fore-color: black;
+}
+
+.keys::selection {
+  background: var(--blink-color);
+  // color: not-used;
+}
+
+.keys {
+  color: var(--fore-color);
+  border: 1px solid rgb(45, 45, 45);
+  text-align: center;
+  width: 100%;
+  height: 40px;
+  vertical-align: baseline;
+  background-color: var(--back-color);
+  border-radius: 3px;
+  font-family: Franklin Gothic;
+}
+
+.keys {
+  min-width: 70px;
+  width: 100%;
+}
+.keyPad {
+  width: 110%;
+}
+
+.º {
+  width: 100%;
+}
+
+.margin {
+  align-items: center;
+  margin: auto;
+}
+
+.back {
+  width: 100%;
+}
+
+.bloq {
+  width: 110%;
+}
+
+
+.windows {
+  height: 60%;
+  width: 35%;
+}
+
+.space {
+  width: 99%;
 }
