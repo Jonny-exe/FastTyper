@@ -17,141 +17,102 @@ import {
   t
 } from './t.js';
 
-var sentences = [
-  'I love you the more in that I believe you had liked me for my own sake and for nothing else.',
-  "There is nothing permanent except change.",
-  "You cannot shake hands with a clenched fist.",
-  "Let us sacrifice our today so that our children can have a better tomorrow.",
-  "The most difficult thing is the decision to act, the rest is merely tenacity. The fears are paper tigers. You can do anything you decide to do. You act to change and control your life; and the procedure, the process is its own reward.",
-  "Do not mind anything that anyone tells you about anyone else. Judge everyone and everything for yourself.",
-];
-var tips = [
-  'Try using all your fingers',
-  'Dont overuse any fingers',
-  'Dont look at your keyboard while you are typing',
-];
+//shortcut consts
+export var language;
+export var singleLan;
+export var optionsSmall;
+export var optionsBig;
+export var options;
+export var displayFinished;
+export var separator;
+export var maxTop;
+export var opStyleWhite;
+export var opStyleDark;
+export var opStyleBlue;
+export var styleOptions;
+export var button;
+export var inputEl;
+export var opLong;
+export var opLongSp;
+export var opShort;
+export var opShortSp;
+export var opNormal;
+export var opNormalSp;
+export var opRandom;
+export var opRandomSp;
+export var opDark;
+export var opDarkSp;
+export var opNumbers;
+export var opNumbersSp;
+export var opKeysSp;
+export var opKeys;
+export var welcomeText;
+export var register;
+export var unregister;
+export var timeEl;
+export var keys;
+export var keypad;
+export var rankings;
+export var home;
+export var credits;
+export var moreOp;
+export var styleOp;
+export var wrSentence;
+export var image;
+export var imageStyle;
+export var queryString;
+// Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
+export var octokit;
 
-//shortchut consts
-const language = document.getElementById('language');
-const singleLan = document.getElementsByClassName('singleLan');
-
-const optionsSmall = document.getElementsByClassName('optionsSmall');
-const optionsBig = document.getElementsByClassName('optionsBig');
-const options = document.getElementsByClassName('op');
-const displayFinished = document.getElementById("displayFinished");
-const separator = " ||";
-const maxTop = 100;
-const opStyleWhite = document.getElementById('optionsStyleWhite');
-const opStyleDark = document.getElementById('optionsStyleDark');
-const opStyleBlue = document.getElementById('optionsStyleBlue');
-const styleOptions = document.getElementsByClassName('styleOp');
-
-const button = document.getElementsByClassName('button');
-const inputEl = document.getElementById("myInput");
-const opLong = document.getElementById("optionsCheckLong");
-const opLongSp = document.getElementById("optionsCheckLongSpan");
-const opShort = document.getElementById("optionsCheckShort");
-const opShortSp = document.getElementById("optionsCheckShortSpan");
-const opNormal = document.getElementById("optionsCheckNormal");
-const opNormalSp = document.getElementById("optionsCheckNormalSpan");
-const opRandom = document.getElementById("optionsCheckRandom");
-const opRandomSp = document.getElementById("optionsCheckRandomSpan");
-const opDark = document.getElementById("optionsCheckDark");
-const opDarkSp = document.getElementById("optionsCheckDarkSpan");
-const opNumbers = document.getElementById("optionsCheckNumbers");
-const opNumbersSp = document.getElementById("optionsCheckNumbersSpan");
-const opKeysSp = document.getElementById("optionsCheckKeysSpan");
-const opKeys = document.getElementById("optionsCheckKeys");
-const welcomeText = document.getElementById("welcomeText");
-const register = document.getElementById("register");
-const unregister = document.getElementById("unregister");
-const timeEl = document.getElementById("time");
-const keys = document.getElementsByClassName("keys");
-const keypad = document.getElementById("keyPad");
-const rankings = document.getElementById("optionsOne");
-const home = document.getElementById("home");
-const credits = document.getElementById("optionsThree");
-const moreOp = document.getElementById("optionsTwo");
-const styleOp = document.getElementById("optionsFour");
-const wrSentence = document.getElementById("writeSentence");
-const image = document.getElementById("image");
-const imageStyle = document.getElementsByClassName('styleImg');
-const queryString = window.location.search;
-
-var key = "";
-var link = "";
-var changeColor = "#ffffff";
-var today = new Date();
-var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-var isSentenceChanged;
-var finished = false;
-var canRotate = true;
-var part1;
-var part2;
-var fullPart;
-var ranNumber;
-var finalNumber;
-var pressedKey;
-var sentenceWrite;
-var words = "";
-var el = "";
-var input;
-var username;
-var sentence = sentences[Math.floor(Math.random() * sentences.length)];
-var takeTimeOne = 0;
-var takeTimeTwo;
-var count;
-var takeTimeResult;
-var takeTimeTwo = Date.now();
-var takeTimeBoth = (takeTimeTwo - takeTimeOne);
-var cpmResult = Math.round((count * 60) / takeTimeResult);
-var tip = tips[Math.floor(Math.random() * tips.length)];
-var autocheckOrNot;
-var rankingStr;
-var lastSentence;
-var wordsLink;
-var delRanking = 0;
-
+// VARs
+export var sentences;
+export var tips;
+export var key;
+export var link;
+export var changeColor;
+export var today;
+export var date;
+export var isSentenceChanged;
+export var finished;
+export var canRotate;
+export var part1;
+export var part2;
+export var fullPart;
+export var ranNumber;
+export var finalNumber;
+export var pressedKey;
+export var sentenceWrite;
+export var words;
+export var el;
+export var input;
+export var username;
+export var sentence;
+export var takeTimeOne;
+export var count;
+export var takeTimeResult;
+export var takeTimeTwo;
+export var takeTimeBoth;
+export var cpmResult;
+export var tip;
+export var autocheckOrNot;
+export var rankingStr;
+export var lastSentence;
+export var wordsLink;
+export var delRanking;
 //tops
-var lastTop = 0;
-var points = 0;
-var top1 = 0;
-var top2 = 0;
-var top3 = 0;
-var top4 = 0;
-var top5 = 0;
-var top6 = 0;
-var top7 = 0;
-var top8 = 0;
-var top9 = 0;
-var top10 = 0;
-var lastGuy = 0;
-
-var guy = 0;
-var guy1 = 0;
-var guy2 = 0;
-var guy3 = 0;
-var guy4 = 0;
-var guy5 = 0;
-var guy6 = 0;
-var guy7 = 0;
-var guy8 = 0;
-var guy9 = 0;
-var guy10 = 0;
-
-// var guys = guy1, guy2, guy3, guy4, guy5, guy6, guy7, guy8, guy9, guy10;
-// var tops = top1, top2, top3, top4, top5, top6, top7, top8, top9, top10;
-var ranking = [];
-var myRankingJson;
-var rank;
-
-var boderColor;
-
-var isTyping = false;
-var lastInput = "";
-var accCount = 0;
-var accPercentage = 100;
-var getJSON = function(url, callback) {
+export var lastTop;
+export var points;
+export var lastGuy;
+export var guy;
+export var ranking;
+export var myRankingJson;
+export var rank;
+export var boderColor;
+export var isTyping;
+export var lastInput;
+export var accCount;
+export var accPercentage;
+export var getJSON = function(url, callback) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', url, true);
   xhr.responseType = 'json';
@@ -166,8 +127,116 @@ var getJSON = function(url, callback) {
   xhr.send();
 };
 
+
+function initConsts() {
+  language = document.getElementById('language');
+  singleLan = document.getElementsByClassName('singleLan');
+
+  optionsSmall = document.getElementsByClassName('optionsSmall');
+  optionsBig = document.getElementsByClassName('optionsBig');
+  options = document.getElementsByClassName('op');
+  displayFinished = document.getElementById("displayFinished");
+  separator = " ||";
+  maxTop = 100;
+  opStyleWhite = document.getElementById('optionsStyleWhite');
+  opStyleDark = document.getElementById('optionsStyleDark');
+  opStyleBlue = document.getElementById('optionsStyleBlue');
+  styleOptions = document.getElementsByClassName('styleOp');
+
+  button = document.getElementsByClassName('button');
+  inputEl = document.getElementById("myInput");
+  opLong = document.getElementById("optionsCheckLong");
+  opLongSp = document.getElementById("optionsCheckLongSpan");
+  opShort = document.getElementById("optionsCheckShort");
+  opShortSp = document.getElementById("optionsCheckShortSpan");
+  opNormal = document.getElementById("optionsCheckNormal");
+  opNormalSp = document.getElementById("optionsCheckNormalSpan");
+  opRandom = document.getElementById("optionsCheckRandom");
+  opRandomSp = document.getElementById("optionsCheckRandomSpan");
+  opDark = document.getElementById("optionsCheckDark");
+  opDarkSp = document.getElementById("optionsCheckDarkSpan");
+  opNumbers = document.getElementById("optionsCheckNumbers");
+  opNumbersSp = document.getElementById("optionsCheckNumbersSpan");
+  opKeysSp = document.getElementById("optionsCheckKeysSpan");
+  opKeys = document.getElementById("optionsCheckKeys");
+  welcomeText = document.getElementById("welcomeText");
+  register = document.getElementById("register");
+  unregister = document.getElementById("unregister");
+  timeEl = document.getElementById("time");
+  keys = document.getElementsByClassName("keys");
+  keypad = document.getElementById("keyPad");
+  rankings = document.getElementById("optionsOne");
+  home = document.getElementById("home");
+  credits = document.getElementById("optionsThree");
+  moreOp = document.getElementById("optionsTwo");
+  styleOp = document.getElementById("optionsFour");
+  wrSentence = document.getElementById("writeSentence");
+  image = document.getElementById("image");
+  imageStyle = document.getElementsByClassName('styleImg');
+  queryString = window.location.search;
+  // Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
+  octokit = new Octokit({
+    auth: t
+  });
+}
+
+function initVars() {
+  sentences = [
+    'I love you the more in that I believe you had liked me for my own sake and for nothing else.',
+    "There is nothing permanent except change.",
+    "You cannot shake hands with a clenched fist.",
+    "Let us sacrifice our today so that our children can have a better tomorrow.",
+    "The most difficult thing is the decision to act, the rest is merely tenacity. The fears are paper tigers. You can do anything you decide to do. You act to change and control your life; and the procedure, the process is its own reward.",
+    "Do not mind anything that anyone tells you about anyone else. Judge everyone and everything for yourself.",
+  ];
+  tips = [
+    'Try using all your fingers',
+    'Dont overuse any fingers',
+    'Dont look at your keyboard while you are typing',
+  ];
+  key = "";
+  link = "";
+  changeColor = "#ffffff";
+  today = new Date();
+  date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  finished = false;
+  canRotate = true;
+  words = "";
+  el = "";
+  sentence = sentences[Math.floor(Math.random() * sentences.length)];
+  takeTimeOne = 0;
+  takeTimeTwo = Date.now();
+  takeTimeBoth = (takeTimeTwo - takeTimeOne);
+  cpmResult = Math.round((count * 60) / takeTimeResult);
+  tip = tips[Math.floor(Math.random() * tips.length)];
+  delRanking = 0;
+  lastTop = 0;
+  points = 0;
+  lastGuy = 0;
+  guy = 0;
+  ranking = [];
+  isTyping = false;
+  lastInput = "";
+  accCount = 0;
+  accPercentage = 100;
+  getJSON = function(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status === 200) {
+        callback(null, xhr.response);
+      } else {
+        callback(status, xhr.response);
+      }
+    };
+    xhr.send();
+  };
+
+}
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules you cant inport the octokit
-function setEvents() {
+export function setEvents() {
   image.addEventListener('click', toggleOptions);
   imageStyle[0].addEventListener('click', function() {
     checkStyle("white");
@@ -224,7 +293,7 @@ function setEvents() {
   });
 }
 
-function readTextFile() {
+export function readTextFile() {
   getJSON('https://raw.githubusercontent.com/Jonny-exe/German-Words-Library/master/German-words-1600000-words-multilines.json',
     function(err, data) {
       if (err !== null) {
@@ -236,22 +305,17 @@ function readTextFile() {
   );
 }
 
-readTextFile();
+// readTextFile();
 
-// Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
-const octokit = new Octokit({
-  auth: t
-});
-
-async function getGist() {
+export async function getGist() {
 
   // //working
-  // const response1 = await octokit.request('GET /gists/a8aa0f34f366403f79b4646e8964bc33', {
+  // export const response1 = await octokit.request('GET /gists/a8aa0f34f366403f79b4646e8964bc33', {
   //   gist_id: 'gist_id'
   // })
   // console.log(response1);
   // //working
-  // const response2 = await octokit.request('PATCH /gists/a8aa0f34f366403f79b4646e8964bc33', {
+  // export const response2 = await octokit.request('PATCH /gists/a8aa0f34f366403f79b4646e8964bc33', {
   //   gist_id: 'gist_id',
   //   description: 'my-title-2',
   //   "files": {
@@ -275,7 +339,7 @@ async function getGist() {
   console.log("updategist");
 
   // //creates a new one with each call
-  //       const response4 = await octokit.request('POST /gists', {
+  //       export const response4 = await octokit.request('POST /gists', {
   //         description: 'computerGenerated',
   //         "files": {
   //           "Computer generated file": {
@@ -289,8 +353,13 @@ async function getGist() {
 console.log(Octokit);
 
 
-//var key = event.keyCode;
-function startup() {
+//export var key = event.keyCode;
+
+export function startup() {
+  console.log("startup() starting...");
+  initConsts();
+  initVars();
+  getRanks();
   changeLanguage("english");
   var color = localStorage.getItem('colorStyle');
   checkStyle(color);
@@ -324,7 +393,7 @@ function startup() {
 //
 // function updateDisplay() {
 //   displayFinished.value = "finished";
-//   var request = new XMLHttpRequest();
+//   export var request = new XMLHttpRequest();
 //   formData.append(name, value);
 //   request.responesType = 'text';
 //   request.onload = function() {
@@ -333,7 +402,7 @@ function startup() {
 //   request.send();
 // }
 
-function setOptionsVisivility() {
+export function setOptionsVisivility() {
   for (let i = 0; i < options.length; i++) {
     options[i].style.visibility = "hidden";
   }
@@ -346,9 +415,9 @@ function setOptionsVisivility() {
   opKeys.checked = false;
 }
 
-//	var timerValue = false;
-//	var timeTF = 0;
-function registerFunc() {
+//	export var timerValue = false;
+//	export var timeTF = 0;
+export function registerFunc() {
   register.style.visibility = "hidden";
   unregister.style.visibility = "visible";
   username = document.getElementById("loginText").value;
@@ -362,7 +431,7 @@ function registerFunc() {
   }
 }
 
-function unregisterFunc() {
+export function unregisterFunc() {
   register.style.visibility = "visible";
   unregister.style.visibility = "hidden";
   welcomeText.innerHTML = "You are not registered anymore, your scores will not be saved.";
@@ -379,7 +448,7 @@ function unregisterFunc() {
 // numbers: boolean, true ... mix numbers into words; false ... do not use any numbers
 // noOfWords: integer, number of words, e.g. 10 or 20 or any other number
 // numbersPerWords: add a number after every N-th word, e.g. if set to 5, after 5 words a number will be placed
-function computeRandomSentence(noOfWords, numbers, numbersPerWords) {
+export function computeRandomSentence(noOfWords, numbers, numbersPerWords) {
   getJSON(wordsLink,
     function(err, data) {
       var otherData = _.shuffle(data);
@@ -410,7 +479,7 @@ function computeRandomSentence(noOfWords, numbers, numbersPerWords) {
 }
 
 //TODO: maybe try makeing an number input field, and that will determing the length of the random sentence
-function changeSentence() {
+export function changeSentence() {
   accCount = 0;
   sentence = "";
   el = "";
@@ -555,7 +624,7 @@ function changeSentence() {
 //     }
 //   );
 // }
-function getRanks() {
+export function getRanks() {
   getJSON('https://gist.githubusercontent.com/Jonny-exe/a8aa0f34f366403f79b4646e8964bc33/raw/Tr-gist.json',
     function(err, data) {
       if (err !== null) {
@@ -598,9 +667,8 @@ function getRanks() {
     }
   );
 }
-getRanks();
 //TODO: make idioms
-function start(time) {
+export function start(time) {
   inputEl.disabled = true;
   cpmResult = 0;
   accCount = 0;
@@ -653,14 +721,14 @@ function start(time) {
 }
 
 //document.body.innerHTML = "test"; SO YOU DONT NEED AN ID!!!
-function able() {
+export function able() {
   inputEl.disabled = false;
   var input = inputEl;
   input.select();
   input.focus();
 }
 
-function toggleStyles() {
+export function toggleStyles() {
   var hideOptions = opLong.style.visibility;
   var hideStyle = optionsStyleBlue.visibility;
   if (hideOptions == "visible") {
@@ -675,7 +743,7 @@ function toggleStyles() {
 //darkMode: boolean...true: set dark mode; false: set light mode;
 //TODO:make this beetter
 
-function toggleKeys() {
+export function toggleKeys() {
   var toggleKeys = opKeys.checked;
   if (toggleKeys == true) {
     keysGoIn();
@@ -691,7 +759,7 @@ function toggleKeys() {
 }
 //TODO: nginx flask on the laptop for a sever;
 //When you write var you are creating a local scoped var.
-function toggleOptions() {
+export function toggleOptions() {
   optionsBigFadeIn();
   var showHid = rankings.style.visibility;
   if (showHid == "hidden") {
@@ -718,7 +786,7 @@ function toggleOptions() {
 //TODO: make flag icons, or background on the languages;
 //TODO: make the languages work
 
-function toggleCheckOptionsNormal(optionsNormal) {
+export function toggleCheckOptionsNormal(optionsNormal) {
   if (optionsNormal == true) {
     opNormal.checked = true;
     opRandom.checked = false;
@@ -728,7 +796,7 @@ function toggleCheckOptionsNormal(optionsNormal) {
   }
 }
 
-function toggleCheckOptions() {
+export function toggleCheckOptions() {
   optionsFadeIn();
   if (document.getElementsByClassName('singleLan')[0].style.visibility == "visible") {
     toggleLanguages();
@@ -748,7 +816,7 @@ function toggleCheckOptions() {
   }
 }
 
-function toggleLanguages() {
+export function toggleLanguages() {
   if (opStyleWhite.style.visibility == 'visible') {
     toggleStyleOptions();
   }
@@ -767,7 +835,7 @@ function toggleLanguages() {
   }
 }
 
-function changeLanguage(language) {
+export function changeLanguage(language) {
   if (language == "english") {
     document.getElementsByClassName("singleLanImg")[0].style.border = "thick solid " + boderColor;
     document.getElementsByClassName("singleLanImg")[1].style.border = 'none';
@@ -796,7 +864,7 @@ function changeLanguage(language) {
   changeSentence();
 }
 
-function checkStyle(color) {
+export function checkStyle(color) {
   var fade = document.getElementsByClassName('fade');
 
   var x = document.getElementsByClassName("keys");
@@ -891,7 +959,7 @@ function checkStyle(color) {
 
 //TODO:Make rankings fith this.An element with position: sticky; is positioned based on the user's scroll position.
 
-function toggleStyleOptions() {
+export function toggleStyleOptions() {
 
   if (document.getElementsByClassName('singleLan')[0].style.visibility == 'visible') {
     toggleLanguages();
@@ -914,12 +982,12 @@ function toggleStyleOptions() {
 }
 
 
-function setTimer() {
+export function setTimer() {
   takeTimeOne = Date.now();
   return takeTimeOne;
 }
 
-function cpm() {
+export function cpm() {
   takeTimeTwo = Date.now();
   takeTimeBoth = (takeTimeTwo - takeTimeOne);
   takeTimeResult = takeTimeBoth / 1000;
@@ -938,7 +1006,7 @@ function cpm() {
 
 // To change body background color document.body.style.backgroundColor = 'green';
 
-function checkError() {
+export function checkError() {
 
   input = inputEl.value;
   if (input != lastInput) {
@@ -967,11 +1035,11 @@ function checkError() {
 
 }
 
-function writeSentence() {
+export function writeSentence() {
   wrSentence.innerHTML = changeSentenceColor();
 }
 
-function changeSentenceColor() {
+export function changeSentenceColor() {
   input = inputEl.value;
   part1 = sentence.substring(0, input.length);
   part2 = sentence.substring(input.length, sentence.length);
@@ -1003,7 +1071,7 @@ function changeSentenceColor() {
 
 
 
-function changeKeyColor(lastKey) {
+export function changeKeyColor(lastKey) {
   //  lastKey = lastKey.toLowerCase();
   document.getElementById(lastKey).style.backgroundColor = "#828282";
 
@@ -1013,12 +1081,12 @@ function changeKeyColor(lastKey) {
 }
 
 
-function tipsFunction() {
+export function tipsFunction() {
   tip = tips[Math.floor(Math.random() * tips.length)];
   document.getElementById("tips").innerHTML = "Tips: " + tip;
 }
 
-function finalAutoCheck() {
+export function finalAutoCheck() {
   finished = true;
   takeTimeTwo = Date.now();
   takeTimeBoth = (takeTimeTwo - takeTimeOne);
@@ -1054,7 +1122,7 @@ function finalAutoCheck() {
 
 var topList = [];
 
-function setCheckTops() {
+export function setCheckTops() {
   guy = username;
   points = cpmResult;
   rank = {
@@ -1065,7 +1133,7 @@ function setCheckTops() {
   sortTops();
 }
 
-function sortTops() {
+export function sortTops() {
   console.log(rank);
   ranking.push(rank);
   console.log(ranking);
@@ -1081,7 +1149,7 @@ function sortTops() {
   getGist();
 }
 
-function getRanking() {
+export function getRanking() {
   getJSON('https://gist.githubusercontent.com/Jonny-exe/a8aa0f34f366403f79b4646e8964bc33/raw/Tr-gist.json',
     function(err, data) {
       if (err !== null) {
@@ -1094,21 +1162,21 @@ function getRanking() {
   );
 }
 //TODO: make a home for the rankigs
-function setRankingsLink() {
+export function setRankingsLink() {
   location.href = "#fade1";
 }
 
 
-function setCreditsLink() {
+export function setCreditsLink() {
   location.href = "TrCredits.html";
 }
 
-function goHome() {
+export function goHome() {
   location.href = "#welcomeText";
 }
 
 
-function bodyFadeIn() {
+export function bodyFadeIn() {
   var tl = new TimelineMax();
   var body = document.body;
 
@@ -1123,7 +1191,7 @@ function bodyFadeIn() {
     });
 }
 
-function optionsFadeIn() {
+export function optionsFadeIn() {
   var tl = new TimelineMax();
   var options = document.getElementsByClassName("container");
   var body = document.body;
@@ -1144,7 +1212,7 @@ function optionsFadeIn() {
   );
 }
 
-function optionsBigFadeIn() {
+export function optionsBigFadeIn() {
   var tl = new TimelineMax();
   var options = document.getElementsByClassName("mainOptions");
 
@@ -1165,7 +1233,7 @@ function optionsBigFadeIn() {
 
 }
 
-function startTimer() {
+export function startTimer() {
   var tl = new TimelineMax();
   var text = timeEl;
   tl.fromTo(
@@ -1178,7 +1246,7 @@ function startTimer() {
   );
 }
 
-function finishTimer() {
+export function finishTimer() {
   var tl = new TimelineMax();
   var text = timeEl;
   tl.fromTo(
@@ -1191,7 +1259,7 @@ function finishTimer() {
   );
 }
 //make all in one function
-function endTimer() {
+export function endTimer() {
   var tl = new TimelineMax();
   var text = timeEl;
   tl.fromTo(
@@ -1204,7 +1272,7 @@ function endTimer() {
   );
 }
 
-function keysGoIn() {
+export function keysGoIn() {
   var tipsText = document.getElementById('tips');
   var tl = new TimelineMax();
   tl.fromTo(
@@ -1225,7 +1293,7 @@ function keysGoIn() {
     );
 }
 //make only one function keysMove(true)
-function keysGoOut() {
+export function keysGoOut() {
   var tl = new TimelineMax();
   var tipsText = document.getElementById('tips');
 
@@ -1247,7 +1315,7 @@ function keysGoOut() {
     );
 }
 
-function rotateShow() {
+export function rotateShow() {
   if (canRotate) {
     TweenLite.to(image, 0.5, {
       rotation: "+=-90"
@@ -1255,7 +1323,7 @@ function rotateShow() {
   }
 }
 
-function rotateHide() {
+export function rotateHide() {
   if (canRotate) {
     TweenLite.to(image, 0.5, {
       rotation: "+=90"
@@ -1263,5 +1331,6 @@ function rotateHide() {
   }
 }
 
-//updateDisplay();
-startup();
+setTimeout(function() {
+  startup();
+}, 3000);
