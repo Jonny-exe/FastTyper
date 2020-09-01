@@ -13,9 +13,9 @@
 import {
   Octokit
 } from "https://cdn.pika.dev/@octokit/core";
-import {
-  t
-} from '/js/t.js'; //  SERVER  from root /var/www/html
+//import {
+//  t
+//} from '/js/t.js'; //  SERVER  from root /var/www/html
 
 //CONSTS
 export var language;
@@ -114,6 +114,9 @@ export var accCount;
 export var accPercentage;
 export var getJSON;
 
+export function setT(arg) {
+  t = arg;
+}
 
 function initConsts() {
   language = document.getElementById('language');
