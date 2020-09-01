@@ -18,6 +18,7 @@ import {
 //} from '/js/t.js'; //  SERVER  from root /var/www/html
 
 //CONSTS
+export var t;
 export var language;
 export var singleLan;
 export var optionsSmall;
