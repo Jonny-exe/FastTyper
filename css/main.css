@@ -251,42 +251,6 @@ a:visited {
   font-size: 200%;
 }
 
-.keys {
-  border: 1px solid rgb(45, 45, 45);
-  text-align: center;
-  width: 70px;
-  height: 40px;
-  vertical-align: baseline;
-  background-color: rgb(170, 170, 170);
-  border-radius: 3px;
-}
-
-.keys:hover {
-  border: 1px solid rgb(45, 45, 45);
-  text-align: center;
-  width: 70px;
-  height: 40px;
-  vertical-align: baseline;
-  background-color: rgb(105, 105, 105);
-  border-radius: 3px;
-  width: 100%;
-}
-
-.space {
-  width: 94%;
-}
-
-.margin {
-  align-items: center;
-  margin: auto;
-}
-
-#keyPad {
-  width: 100%;
-  text-align: center;
-  align-content: center;
-  align-items: center;
-}
 
 #div1 {
   font-size: 400px;

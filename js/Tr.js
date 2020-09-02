@@ -12,12 +12,18 @@
 //imports
 import {
   Octokit
-} from "https://cdn.pika.dev/@octokit/core";
-//import {
-//  t
-//} from '/js/t.js'; //  SERVER  from root /var/www/html
+} from "https://cdn.skypack.dev/@octokit/core";
 
-import {startKeyboard, setKeyboard,startSetKeyboard} from "https://raw.githack.com/Jonny-exe/HTML-keyboard/master/keyboard.js";
+// //imports
+// import {
+//   Octokit
+// } from "https://cdn.jsdelivr.net/npm/@octokit/core@3.1.2/dist-node/index.js";
+
+import {
+  startKeyboard,
+  setKeyboard,
+  startSetKeyboard
+} from "https://raw.githack.com/Jonny-exe/HTML-keyboard/master/keyboard.js";
 
 
 //CONSTS
@@ -343,7 +349,8 @@ export async function getGist() {
   //       console.log(response4);
   getRanks();
 }
-console.log(Octokit);
+
+// console.log(Octokit);
 
 
 //export var key = event.keyCode;
@@ -353,7 +360,6 @@ export function startup() {
   initConsts();
   initVars();
   getRanks();
-  startSetKeyboard("HTML-keyboard");
   changeLanguage("english");
   var color = localStorage.getItem('colorStyle');
   checkStyle(color);
@@ -367,6 +373,7 @@ export function startup() {
   setOptionsVisivility();
   bodyFadeIn();
   getRanking();
+  startSetKeyboard("HTML-keyboard");
   // Retrieve
 
   username = localStorage.getItem("username");
