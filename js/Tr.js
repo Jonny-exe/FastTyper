@@ -17,6 +17,9 @@ import {
 //  t
 //} from '/js/t.js'; //  SERVER  from root /var/www/html
 
+import {startKeyboard, setKeyboard,startSetKeyboard} from "https://raw.githack.com/Jonny-exe/HTML-keyboard/master/keyboard.js";
+
+
 //CONSTS
 export var t;
 export var language;
@@ -153,7 +156,7 @@ function initConsts() {
   unregister = document.getElementById("unregister");
   timeEl = document.getElementById("time");
   keys = document.getElementsByClassName("keys");
-  keypad = document.getElementById("keyPad");
+  keypad = document.getElementById("HTML-keyboard");
   rankings = document.getElementById("optionsOne");
   home = document.getElementById("home");
   credits = document.getElementById("optionsThree");
@@ -350,6 +353,7 @@ export function startup() {
   initConsts();
   initVars();
   getRanks();
+  startSetKeyboard("HTML-keyboard");
   changeLanguage("english");
   var color = localStorage.getItem('colorStyle');
   checkStyle(color);

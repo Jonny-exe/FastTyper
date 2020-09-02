@@ -1,3 +1,4 @@
+
 body {
   background-color: rgb(224, 224, 224);
   font-family: Franklin Gothic;
@@ -268,6 +269,7 @@ a:visited {
   vertical-align: baseline;
   background-color: rgb(105, 105, 105);
   border-radius: 3px;
+  width: 100%;
 }
 
 .space {
