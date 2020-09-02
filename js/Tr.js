@@ -874,7 +874,7 @@ export function checkStyle(color) {
   var secondaryColor;
   var extraColor;
   var colors = ['white', 'blue', 'dark', 'green'];
-  if (color == "white", colors.includes(color) == false) {
+  if (color == "white" || colors.includes(color) == false) {
     fade[0].style.visibility = "visible";
     fade[1].style.visibility = 'hidden';
     fade[2].style.visibility = "hidden";
