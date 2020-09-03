@@ -17,6 +17,10 @@ html {
   scroll-behavior: smooth;
 }
 
+#england:hover {
+  background-color: black;
+}
+
 a:link {
   color: green;
   background-color: transparent;

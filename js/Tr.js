@@ -252,7 +252,7 @@ export function setEvents() {
   });
 
   document.getElementById('language').addEventListener('click', toggleLanguages);
-  singleLan[0].addEventListener('click', function() {
+  document.getElementsByClassName('singleLanImg')[0].addEventListener('click', function() {
     changeLanguage("english");
   });
   singleLan[1].addEventListener('click', function() {
@@ -261,7 +261,6 @@ export function setEvents() {
   singleLan[2].addEventListener('click', function() {
     changeLanguage("spanish");
   });
-
 
   rankings.addEventListener('click', setRankingsLink);
   home.addEventListener('click', goHome);
@@ -819,18 +818,31 @@ export function toggleCheckOptions() {
 export function toggleLanguages() {
   if (opStyleWhite.style.visibility == 'visible') {
     toggleStyleOptions();
+
   }
   if (opLong.style.visibility == 'visible') {
     toggleCheckOptions();
   }
   var showHid = document.getElementsByClassName('singleLan')[0].style.visibility;
   if (showHid == "visible") {
+    // document.getElementById('checkOptionsSmall').style.pointerEvents = 'auto';
+    // document.getElementById('checkOptionsSmall').style.height = '100%';
+    // document.getElementById('smallOpStyle').style.height = '100%';
     for (let i = 0; i < document.getElementsByClassName('singleLan').length; i++) {
       document.getElementsByClassName('singleLan')[i].style.visibility = "hidden";
+      document.getElementsByClassName('singleLan')[i].style.zIndex = "-2";
     }
   } else {
+    // document.getElementById('checkOptionsSmall').style.pointerEvents = 'none';
+    // document.getElementById('checkOptionsSmall').style.height = '0%';
+    // document.getElementById('smallOpStyle').style.height = '0%';
+    // document.getElementsByClassName('styleOp')[0].style.height = '0%';
+    // for (let i = 0; i < document.getElementsByClassName('opStyle').length; i++) {
+    //   document.getElementsByClassName('singleLan')[i].style.height = "0%";
+    // }
     for (let i = 0; i < document.getElementsByClassName('singleLan').length; i++) {
       document.getElementsByClassName('singleLan')[i].style.visibility = "visible";
+      document.getElementsByClassName('singleLan')[i].style.zIndex = "10";
     }
   }
 }
@@ -967,13 +979,17 @@ export function toggleStyleOptions() {
   if (opLong.style.visibility == 'visible') {
     toggleCheckOptions();
   }
+
   var showHid = opStyleWhite.style.visibility;
   if (showHid == "hidden") {
+    document.getElementById('smallOpStyle').style.height = '100%';
     for (let i = 0; i < styleOptions.length; i++) {
       styleOptions[i].style.visibility = "visible";
       document.getElementById("checkOptionsSmall").style.height = "0px";
     }
   } else {
+    document.getElementById('smallOpStyle').style.height = '0%';
+
     for (let i = 0; i < styleOptions.length; i++) {
       styleOptions[i].style.visibility = "hidden";
       document.getElementById("checkOptionsSmall").style.height = "100%";
