@@ -29,6 +29,7 @@ import {
 export var t;
 export var language;
 export var singleLan;
+export var singleLanImg;
 export var optionsSmall;
 export var optionsBig;
 export var options;
@@ -130,6 +131,7 @@ export function setT(arg) {
 function initConsts() {
   language = document.getElementById('language');
   singleLan = document.getElementsByClassName('singleLan');
+  singleLanImg = document.getElementsByClassName('singleLanimg');
   optionsSmall = document.getElementsByClassName('optionsSmall');
   optionsBig = document.getElementsByClassName('optionsBig');
   options = document.getElementsByClassName('op');
@@ -828,26 +830,20 @@ export function toggleLanguages() {
   if (opLong.style.visibility == 'visible') {
     toggleCheckOptions();
   }
-  var showHid = document.getElementsByClassName('singleLan')[0].style.visibility;
+  var showHid = singleLan[0].style.visibility;
   if (showHid == "visible") {
     document.getElementById('checkOptionsSmall').style.pointerEvents = 'auto';
-    // document.getElementById('checkOptionsSmall').style.height = '100%';
-    // document.getElementById('smallOpStyle').style.height = '100%';
     for (let i = 0; i < document.getElementsByClassName('singleLan').length; i++) {
-      document.getElementsByClassName('singleLan')[i].style.visibility = "hidden";
-      document.getElementsByClassName('singleLan')[i].style.zIndex = "-2";
+      singleLan[i].style.visibility = "hidden";
+      singleLan[i].style.zIndex = "-2";
+      document.getElementById('languageDiv').style.height = '100%';
     }
   } else {
     document.getElementById('checkOptionsSmall').style.pointerEvents = 'none';
-    // document.getElementById('checkOptionsSmall').style.height = '0%';
-    // document.getElementById('smallOpStyle').style.height = '0%';
-    // document.getElementsByClassName('styleOp')[0].style.height = '0%';
-    // for (let i = 0; i < document.getElementsByClassName('opStyle').length; i++) {
-    //   document.getElementsByClassName('singleLan')[i].style.height = "0%";
-    // }
-    for (let i = 0; i < document.getElementsByClassName('singleLan').length; i++) {
-      document.getElementsByClassName('singleLan')[i].style.visibility = "visible";
-      document.getElementsByClassName('singleLan')[i].style.zIndex = "10";
+    document.getElementById('languageDiv').style.height = '100%';
+    for (let i = 0; i < singleLan.length; i++) {
+      singleLan[i].style.visibility = "visible";
+      singleLan[i].style.zIndex = "10";
     }
   }
 }
