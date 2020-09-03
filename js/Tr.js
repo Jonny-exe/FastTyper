@@ -802,13 +802,18 @@ export function toggleCheckOptions() {
   }
   var showHid = opLong.style.visibility;
   if (showHid == "hidden") {
+    document.getElementById('smallOpStyle').style.height = '0%';
     for (let i = 0; i < optionsSmall.length; i++) {
       optionsSmall[i].style.visibility = "visible";
     }
-    if(styleOptions.visibility == 'visible') {
-      toggleStyleOptions();
+    for (let a = 0; a < styleOptions.length; a++) {
+      styleOptions[a].style.visibility = "hidden";
+    }
+    for (let b = 0; b < singleLanImg.length; b++) {
+      singleLanImg[b].style.visibility = "hidden";
     }
   } else {
+    document.getElementById('smallOpStyle').style.height = '100%';
     for (let i = 0; i < optionsSmall.length; i++) {
       optionsSmall[i].style.visibility = "hidden";
     }
@@ -982,10 +987,11 @@ export function toggleStyleOptions() {
 
   var showHid = opStyleWhite.style.visibility;
   if (showHid == "hidden") {
-    document.getElementById('smallOpStyle').style.height = '100%';
+    document.getElementById('languageDiv').style.height = '0%';
+    document.getElementById('optionsCheckNormal').style.height = '0%';
     for (let i = 0; i < styleOptions.length; i++) {
       styleOptions[i].style.visibility = "visible";
-      document.getElementById("checkOptionsSmall").style.height = "0px";
+      document.getElementById("checkOptionsSmall").style.height = "0%";
     }
   } else {
     document.getElementById('smallOpStyle').style.height = '0%';
