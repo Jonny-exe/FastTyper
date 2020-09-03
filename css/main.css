@@ -168,10 +168,6 @@ a:visited {
   margin-right: 1%;
 }
 
-.singleLan {
-  width: 500%;
-}
-
 /* CHECKMARKS END */
 .button {
   background-color: light-grey;
@@ -391,17 +387,16 @@ a:visited {
 .styleImg {
   width: 20%;
   position: relative;
-  margin: auto;
-  vertical-align: center;
-  align-items: center;
-  align-content: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*TODO: make the align work*/
 .styleOp {
-  align-items: center;
-  vertical-align: center;
-  margin: 10%;
+
+  margin: 5%;
+  width: auto;
 }
 
 .styleCheck {
@@ -420,11 +415,12 @@ a:visited {
   text-align: center;
   position: relative;
   font-size: 150%;
-  width: 50px;
+  width: 30%;
   align-self: center;
   align-items: center;
-  padding-left: 25%;
-  padding-right: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   padding-bottom: 10%;
   top: 10%;
 }
@@ -438,10 +434,9 @@ a:visited {
 #languageDiv {
   position: relative;
   width: 100%;
-  height: 100%;
-  align-self: center;
-  margin-top: 10%;
-  padding: 10%;
+  height: 40%;
+  margin-top: 0%;
+  vertical-align: center;
 }
 
 .bigDivLanguage {}

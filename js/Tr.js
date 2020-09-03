@@ -805,8 +805,8 @@ export function toggleCheckOptions() {
     for (let i = 0; i < optionsSmall.length; i++) {
       optionsSmall[i].style.visibility = "visible";
     }
-    for (let a = 0; a < styleOptions.length; a++) {
-      styleOptions[a].style.visibility = "hidden";
+    if(styleOptions.visibility == 'visible') {
+      toggleStyleOptions();
     }
   } else {
     for (let i = 0; i < optionsSmall.length; i++) {
@@ -825,7 +825,7 @@ export function toggleLanguages() {
   }
   var showHid = document.getElementsByClassName('singleLan')[0].style.visibility;
   if (showHid == "visible") {
-    // document.getElementById('checkOptionsSmall').style.pointerEvents = 'auto';
+    document.getElementById('checkOptionsSmall').style.pointerEvents = 'auto';
     // document.getElementById('checkOptionsSmall').style.height = '100%';
     // document.getElementById('smallOpStyle').style.height = '100%';
     for (let i = 0; i < document.getElementsByClassName('singleLan').length; i++) {
@@ -833,7 +833,7 @@ export function toggleLanguages() {
       document.getElementsByClassName('singleLan')[i].style.zIndex = "-2";
     }
   } else {
-    // document.getElementById('checkOptionsSmall').style.pointerEvents = 'none';
+    document.getElementById('checkOptionsSmall').style.pointerEvents = 'none';
     // document.getElementById('checkOptionsSmall').style.height = '0%';
     // document.getElementById('smallOpStyle').style.height = '0%';
     // document.getElementsByClassName('styleOp')[0].style.height = '0%';

@@ -1,14 +1,55 @@
 <!-- This is an HTML snippet, to be imported into main HTML page -->
 
-  <div class='main'>
-    <div class=welcomeText>
-      <span id="welcomeText"></span>
+<div class='main'>
+  <div class=welcomeText>
+    <span id="welcomeText"></span>
+  </div>
+  <div class="nothing"></div>
+
+  <div class=optionsImage>
+    <i id=image class="fas fa-sliders-h options"></i>
+  </div>
+  <div class=alloptions>
+    <div class="rankings bigOptions">
+      <p class="optionsBig">
+        <label class="options">
+          <span id="optionsOne" class="op optionsBig">Rankings</span>
+        </label>
+      </p>
     </div>
-    <div class="nothing"></div>
+    <div class="credits bigOptions">
+      <p class="optionsBig">
+        <label class="options">
+          <span id="optionsThree" class="op optionsBig">Credits</a>
+        </label>
+      </p>
+    </div>
+    <div class="moreOp bigOptions">
+      <p class=optionsBig>
+        <label class="options">
+          <span id="optionsTwo" class="op optionsBig">Text options</span>
+        </label>
+      </p>
+    </div>
+    <div class="style bigOptions">
+      <p class="optionsBig">
+        <label class="options">
+          <span id="optionsFour" class="op optionsBig">Style</span>
+        </label>
+      </p>
+    </div>
+    <div id=language class="language bigOptions">
+      <p class="optionsBig">
+        <label class="options">
+          <span id="optionsFive" class="op optionsBig">Language</span>
+        </label>
+      </p>
+    </div>
+  </div>
+  <div class=smallOptions>
     <div id='languageDiv' class="op smallOptions">
       <div class="singleLan">
-        <!-- <img src="https://raw.githubusercontent.com/Jonny-exe/FastTyper/master/images/englandflag.svg" class="singleLanImg" id=england> -->
-        <button class='singleLanImg' id='england'>English</button>
+        <img src="https://raw.githubusercontent.com/Jonny-exe/FastTyper/master/images/englandflag.svg" class="singleLanImg" id=england>
       </div>
       <div class="singleLan">
         <img src="https://raw.githubusercontent.com/Jonny-exe/FastTyper/master/images/germanflag.svg" class="singleLanImg">
@@ -17,188 +58,126 @@
         <img src="https://raw.githubusercontent.com/Jonny-exe/FastTyper/master/images/spainflag.svg" class="singleLanImg">
       </div>
     </div>
-    <div class=optionsImage>
-      <i id=image class="fas fa-sliders-h options"></i>
+    <div id=checkOptionsSmall>
+      <div class=normal>
+        <span class=options>
+          <label id=optionsCheckNormalSpan class="container optionsSmall op"> Normal sentences
+            <input type=checkbox class=op checked="checked" class="optionsSmall" id="optionsCheckNormal"> </input>
+            <span class="checkmark"></span>
+          </label>
+        </span>
+      </div>
+      <div class=random>
+        <span class=options>
+          <label id=optionsCheckRandomSpan class="container op optionsSmall"> Random words
+            <input type=checkbox class="op optionsSmall" id=optionsCheckRandom> </input>
+            <span class="checkmark"></span>
+          </label>
+        </span>
+      </div>
+      <div class=long>
+        <span class=options>
+          <label id=optionsCheckLongSpan class="container op optionsSmall"> Long sentences
+            <input type=checkbox checked="checked" class="op optionsSmall" id="optionsCheckLong"> </input>
+            <span class=checkmark></span>
+          </label>
+        </span>
+      </div>
+      <div class=short>
+        <span class=options>
+          <label id=optionsCheckShortSpan class="container op optionsSmall"> Short sentences
+            <input type=checkbox checked="checked" class="op optionsSmall" id="optionsCheckShort"> </input>
+            <span class=checkmark></span>
+          </label>
+        </span>
+      </div>
+      <div class=numbers>
+        <span class=options>
+          <label id=optionsCheckNumbersSpan class="container optionsSmall op"> Numbers
+            <input type=checkbox checked="checked" class="op optionsSmall" id=optionsCheckNumbers> </input>
+            <span class=checkmark></span>
+          </label>
+        </span>
+      </div>
+      <div class=keysOp>
+        <span class=options>
+          <label id=optionsCheckKeysSpan class="container optionsSmall op"> Keys on/off
+            <input type=checkbox class="op optionsSmall" id=optionsCheckKeys> </input>
+            <span class=checkmark></span>
+          </label>
+        </span>
+      </div>
     </div>
-    <div class=alloptions>
-      <div class="rankings bigOptions">
-        <p class="optionsBig">
-          <label class="options">
-            <span id="optionsOne" class="op optionsBig">Rankings</span>
-          </label>
-        </p>
+    <div id=smallOpStyle>
+      <div class='styleOp op' id='optionsStyleWhite'>
+        <img class="styleImg options" src="https://raw.githubusercontent.com/Jonny-exe/FastTyper/master/images/iconcolorswhite.svg">
       </div>
-      <div class="credits bigOptions">
-        <p class="optionsBig">
-          <label class="options">
-            <span id="optionsThree" class="op optionsBig">Credits</a>
-          </label>
-        </p>
+      <div class="styleOp op" id='optionsStyleBlue'>
+        <img class="styleImg options" src="https://raw.githubusercontent.com/Jonny-exe/FastTyper/master/images/iconcolorsblue.svg">
       </div>
-      <div class="moreOp bigOptions">
-        <p class=optionsBig>
-          <label class="options">
-            <span id="optionsTwo" class="op optionsBig">Text options</span>
-          </label>
-        </p>
+      <div class="styleOp op" id='optionsStyleDark'>
+        <img class="styleImg options" src="https://raw.githubusercontent.com/Jonny-exe/FastTyper/master/images/iconcolorsdark.svg">
       </div>
-      <div class="style bigOptions">
-        <p class="optionsBig">
-          <label class="options">
-            <span id="optionsFour" class="op optionsBig">Style</span>
-          </label>
-        </p>
-      </div>
-      <div id=language class="language bigOptions">
-        <p class="optionsBig">
-          <label class="options">
-            <span id="optionsFive" class="op optionsBig">Language</span>
-          </label>
-        </p>
+      <div class="styleOp op" id='optionsStyleGreen'>
+        <img class="styleImg options" src="https://raw.githubusercontent.com/Jonny-exe/FastTyper/master/images/iconcolorsdarkgreen.svg">
       </div>
     </div>
-    <div class=smallOptions>
-      <div id=checkOptionsSmall>
+  </div>
+  <div class=mainTitle>
+    <h1 id="mainTitle">Copy the sentence without mistakes</h1>
+  </div>
+  <div class=loginText>
+    <p>Write a username so your score can go on the leaderboard.</p>
+    <p>
+      <input type="text" max=15 value="" id=loginText placeholder="Enter name">
+      <button type="button" class="button" id=register>Register</button>
+      <button type="button" class="button" id=unregister>Logout</button>
+    </p>
+  </div>
 
-        <div class=normal>
-          <span class=options>
-            <label id=optionsCheckNormalSpan class="container optionsSmall op"> Normal sentences
-              <input type=checkbox class=op checked="checked" class="optionsSmall" id="optionsCheckNormal"> </input>
-              <span class="checkmark"></span>
-            </label>
-          </span>
-        </div>
-        <div class=random>
-          <span class=options>
-            <label id=optionsCheckRandomSpan class="container op optionsSmall"> Random words
-              <input type=checkbox class="op optionsSmall" id=optionsCheckRandom> </input>
-              <span class="checkmark"></span>
-            </label>
-          </span>
-        </div>
-        <div class=long>
-          <span class=options>
-            <label id=optionsCheckLongSpan class="container op optionsSmall"> Long sentences
-              <input type=checkbox checked="checked" class="op optionsSmall" id="optionsCheckLong"> </input>
-              <span class=checkmark></span>
-            </label>
-          </span>
-        </div>
-        <div class=short>
-          <span class=options>
-            <label id=optionsCheckShortSpan class="container op optionsSmall"> Short sentences
-              <input type=checkbox checked="checked" class="op optionsSmall" id="optionsCheckShort"> </input>
-              <span class=checkmark></span>
-            </label>
-          </span>
-        </div>
-        <div class=numbers>
-          <span class=options>
-            <label id=optionsCheckNumbersSpan class="container optionsSmall op"> Numbers
-              <input type=checkbox checked="checked" class="op optionsSmall" id=optionsCheckNumbers> </input>
-              <span class=checkmark></span>
-            </label>
-          </span>
-        </div>
-        <div class=keysOp>
-          <span class=options>
-            <label id=optionsCheckKeysSpan class="container optionsSmall op"> Keys on/off
-              <input type=checkbox class="op optionsSmall" id=optionsCheckKeys> </input>
-              <span class=checkmark></span>
-            </label>
-          </span>
-        </div>
-      </div>
-      <div id=smallOpStyle>
-        <div class=styleOp>
-          <span class="options">
-            <label id="optionsStyleWhite" class="styleOp op">
-              <span class="circlemark"></span>
-              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/FastTyper/master/images/iconcolorswhite.svg">
-            </label>
-          </span>
-        </div>
-        <div class="styleOp">
-          <span class="options">
-            <label id="optionsStyleDark" class="styleOp op">
-              <span class="circlemark"></span>
-              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/FastTyper/master/images/iconcolorsblue.svg">
-            </label>
-          </span>
-        </div>
-        <div class="styleOp">
-          <span class="options">
-            <label id="optionsStyleBlue" class="styleOp op">
-              <span class="circlemark"></span>
-              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/FastTyper/master/images/iconcolorsdark.svg">
-            </label>
-          </span>
-        </div>
-        <div class="styleOp">
-          <span class="options">
-            <label id="optionsStyleBlue" class="styleOp op">
-              <span class="circlemark"></span>
-              <img class="styleImg" src="https://raw.githubusercontent.com/Jonny-exe/FastTyper/master/images/iconcolorsdarkgreen.svg">
-            </label>
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class=mainTitle>
-      <h1 id="mainTitle">Copy the sentence without mistakes</h1>
-    </div>
-    <div class=loginText>
-      <p>Write a username so your score can go on the leaderboard.</p>
+  <div class=writeSentence>
+    <h2 id="writeSentence"></h2>
+    <p>
+  </div>
+  <div class=inputText>
+    <form autocomplete="off">
+      <input type="text" max=999 id="myInput" value="">
+      <!-- use type=button, so the page doesnt refresh -->
       <p>
-        <input type="text" max=15 value="" id=loginText placeholder="Enter name">
-        <button type="button" class="button" id=register>Register</button>
-        <button type="button" class="button" id=unregister>Logout</button>
+        <button class="button" id="changeSentence" type="button">Change sentence</button>
+        <button class="button" id=start type="button">Lets go</button>
       </p>
-    </div>
-
-    <div class=writeSentence>
-      <h2 id="writeSentence"></h2>
-      <p>
-    </div>
-    <div class=inputText>
-      <form autocomplete="off">
-        <input type="text" max=999 id="myInput" value="">
-        <!-- use type=button, so the page doesnt refresh -->
-        <p>
-          <button class="button" id="changeSentence" type="button">Change sentence</button>
-          <button class="button" id=start type="button">Lets go</button>
-        </p>
-      </form>
-    </div>
-    <div class=time>
-      <p id="time"></p>
-    </div>
-    <div class=values>
-      <span id=timeCourse>&nbsp;</span>
-      <span id=accuracyCount>&nbsp;</span>
-      <span id=accPercent>&nbsp;</span>
-      <span id=cpmCount>&nbsp;</span>
-      <span id=valueCpm>&nbsp;</span>
-
-    </div>
-    <div class=notify>
-      <p id=notify></p>
-    </div>
-    <div class='keypad HTML-keyboard' id="HTML-keyboard">
-
-    </div>
-
-    <div class=tips>
-      <p id="tips" onclick="tipsFunction()">Click here for some tips</p>
-      <p id="username"></p>
-    </div>
-    <div class="div1">
-      <table id='table'></table>
-    </div>
-    <div id="home"><span class="home">Home</span></div>
-    <div class="div1 fade" id="fade1"></div>
-    <div class="div1 fade" id="fade2"></div>
-    <div class="div1 fade" id="fade3"></div>
-    <div class="div1 fade" id="fade4"></div>
+    </form>
+  </div>
+  <div class=time>
+    <p id="time"></p>
+  </div>
+  <div class=values>
+    <span id=timeCourse>&nbsp;</span>
+    <span id=accuracyCount>&nbsp;</span>
+    <span id=accPercent>&nbsp;</span>
+    <span id=cpmCount>&nbsp;</span>
+    <span id=valueCpm>&nbsp;</span>
 
   </div>
+  <div class=notify>
+    <p id=notify></p>
+  </div>
+  <div class='keypad HTML-keyboard' id="HTML-keyboard">
+
+  </div>
+
+  <div class=tips>
+    <p id="tips" onclick="tipsFunction()">Click here for some tips</p>
+    <p id="username"></p>
+  </div>
+  <div class="div1">
+    <table id='table'></table>
+  </div>
+  <div id="home"><span class="home">Home</span></div>
+  <div class="div1 fade" id="fade1"></div>
+  <div class="div1 fade" id="fade2"></div>
+  <div class="div1 fade" id="fade3"></div>
+  <div class="div1 fade" id="fade4"></div>
+
+</div>
