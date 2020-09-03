@@ -411,6 +411,17 @@ a:visited {
   z-index: 2;
 }
 
+#checkOptionsSmall {
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.checkOptions {
+margin: 10%,
+}
+
 .singleLan {
   text-align: center;
   position: relative;

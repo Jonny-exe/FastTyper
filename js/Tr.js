@@ -805,6 +805,7 @@ export function toggleCheckOptions() {
   var showHid = opLong.style.visibility;
   if (showHid == "hidden") {
     document.getElementById('smallOpStyle').style.height = '0%';
+    document.getElementById('languageDiv').style.height = '0%';
     for (let i = 0; i < optionsSmall.length; i++) {
       optionsSmall[i].style.visibility = "visible";
     }
@@ -815,6 +816,7 @@ export function toggleCheckOptions() {
       singleLanImg[b].style.visibility = "hidden";
     }
   } else {
+    document.getElementById('languageDiv').style.height = '100%';
     document.getElementById('smallOpStyle').style.height = '100%';
     for (let i = 0; i < optionsSmall.length; i++) {
       optionsSmall[i].style.visibility = "hidden";
