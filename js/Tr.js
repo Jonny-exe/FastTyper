@@ -7,7 +7,6 @@
 // jscs:disable requireSpaceAfterKeywords
 // jscs:disable
 // jshint esversion: 8
-// jshint:disable W051
 //TODO: learn more shortcuts for atom
 //imports
 import {
