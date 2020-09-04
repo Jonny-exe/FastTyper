@@ -56,6 +56,8 @@ export var opNumbers;
 export var opNumbersSp;
 export var opKeysSp;
 export var opKeys;
+export var infinite;
+export var infiniteValue;
 export var welcomeText;
 export var register;
 export var unregister;
@@ -71,6 +73,7 @@ export var wrSentence;
 export var image;
 export var imageStyle;
 export var queryString;
+export var enterPressed;
 // Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
 export var octokit;
 
@@ -158,6 +161,7 @@ function initConsts() {
   opNumbersSp = document.getElementById("optionsCheckNumbersSpan");
   opKeysSp = document.getElementById("optionsCheckKeysSpan");
   opKeys = document.getElementById("optionsCheckKeys");
+  infinite = document.getElementById("optionsCheckInfinite");
   welcomeText = document.getElementById("welcomeText");
   register = document.getElementById("register");
   unregister = document.getElementById("unregister");
@@ -269,25 +273,26 @@ export function setEvents() {
   document.getElementById('optionsCheckNormal').addEventListener('click', toggleCheckOptionsNormal, true);
   opRandom.addEventListener('click', toggleCheckOptionsNormal, false);
   opKeys.addEventListener('click', toggleKeys);
+  infinite.addEventListener('click', toggleInfinite);
   document.getElementById('optionsFour').addEventListener('click', toggleStyles);
   document.getElementById('register').addEventListener('click', registerFunc);
   document.getElementById('unregister').addEventListener('click', unregisterFunc);
   document.getElementById('changeSentence').addEventListener('click', changeSentence);
   document.getElementById('start').addEventListener('click', start, time);
   document.getElementById('tips').addEventListener('click', tipsFunction);
-//   document.getElementById('myInput').addEventListener('keydown', function(event) {
-//     var keynum;
-//     if (window.event) { // IE
-//       keynum = event.keyCode;
-//     } else if (event.which) { // Netscape/Firefox/Opera
-//       keynum = event.which;
-//     }
-//     //use something like charCodeAt to get the number.
-//     pressedKey = String.fromCharCode(keynum);
-//     pressedKey = pressedKey.charCodeAt();
-//
-//     return changeKeyColor(pressedKey);
-//   });
+  //   document.getElementById('myInput').addEventListener('keydown', function(event) {
+  //     var keynum;
+  //     if (window.event) { // IE
+  //       keynum = event.keyCode;
+  //     } else if (event.which) { // Netscape/Firefox/Opera
+  //       keynum = event.which;
+  //     }
+  //     //use something like charCodeAt to get the number.
+  //     pressedKey = String.fromCharCode(keynum);
+  //     pressedKey = pressedKey.charCodeAt();
+  //
+  //     return changeKeyColor(pressedKey);
+  //   });
 }
 
 export function readTextFile() {
@@ -750,6 +755,17 @@ export function toggleKeys() {
     }, 300);
   }
 }
+
+function toggleInfinite() {
+  console.log("infinite");
+  var toggleInfinite = infinite.checked;
+  if (toggleInfinite == true) {
+    infiniteValue = true;
+  } else {
+    infiniteValue = false;
+  }
+}
+
 //TODO: nginx flask on the laptop for a sever;
 //When you write var you are creating a local scoped var.
 export function toggleOptions() {
@@ -1098,6 +1114,37 @@ export function tipsFunction() {
   document.getElementById("tips").innerHTML = "Tips: " + tip;
 }
 
+export function activateInfinite(start) {
+  console.log(start);
+  if (start == true) {
+    var pressedKey;
+    document.body.addEventListener('keydown', function(event) {
+      var keynum;
+      if (window.event) { // IE
+        keynum = event.keyCode;
+      } else if (event.which) { // Netscape/Firefox/Opera
+        keynum = event.which;
+      }
+      //use something like charCodeAt to get the number.
+      pressedKey = String.fromCharCode(keynum);
+      enterPressed = pressedKey.charCodeAt();
+    });
+    if (enterPressed == 32) {
+      changeSentence();
+      enterPressed = -1;
+      activateInfinite('stop');
+    } else if (enterPressed == -1) {
+      activateInfinite('stop');
+    } else {
+      setTimeout(function(){
+        activateInfinite('true');
+      }, 20);
+    }
+  } else {
+    activateInfinite('stop');
+  }
+}
+
 export function finalAutoCheck() {
   finished = true;
   takeTimeTwo = Date.now();
@@ -1107,26 +1154,31 @@ export function finalAutoCheck() {
   input = inputEl.value;
   if (autocheckOrNot) {
     if (input == sentence) {
-      timeEl.innerHTML = "Finished";
-      endTimer();
-      lastSentence = sentence;
-      isTyping = false;
-      inputEl.style.backgroundColor = 'rgb(224, 224, 224)';
-      document.getElementById("timeCourse").innerHTML = "This took you " + Math.round(takeTimeResult) + " s" + separator;
-      inputEl.disabled = true;
-      setCheckTops();
-      let praise = "";
-      if (cpmResult < 100) {
-        praise = " Keep practicing";
-      } else if (cpmResult < 200) {
-        praise = " You are getting better";
-      } else if (cpmResult < 300) {
-        praise = " Wow, you are good";
+      if (infiniteValue == true) {
+        activateInfinite('start');
       } else {
-        praise = " You are a typing god";
+
+        timeEl.innerHTML = "Finished";
+        endTimer();
+        lastSentence = sentence;
+        isTyping = false;
+        inputEl.style.backgroundColor = 'rgb(224, 224, 224)';
+        document.getElementById("timeCourse").innerHTML = "This took you " + Math.round(takeTimeResult) + " s" + separator;
+        inputEl.disabled = true;
+        setCheckTops();
+        let praise = "";
+        if (cpmResult < 100) {
+          praise = " Keep practicing";
+        } else if (cpmResult < 200) {
+          praise = " You are getting better";
+        } else if (cpmResult < 300) {
+          praise = " Wow, you are good";
+        } else {
+          praise = " You are a typing god";
+        }
+        document.getElementById("valueCpm").innerHTML = `${separator} ${praise}`;
+        autocheckOrNot = false;
       }
-      document.getElementById("valueCpm").innerHTML = `${separator} ${praise}`;
-      autocheckOrNot = false;
     }
   }
   setTimeout(finalAutoCheck, 200);
