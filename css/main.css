@@ -373,7 +373,7 @@ a:visited {
 
 .div1 {
   grid-area: ranking;
-  max-height: 100%;
+  max-height: 500px;
   font-size: 65%;
   overflow-y: scroll;
 }

@@ -20,7 +20,8 @@ import {
 import {
   startKeyboard,
   setKeyboard,
-  startSetKeyboard
+  startSetKeyboard,
+  changeKeyColor
 } from "https://raw.githack.com/Jonny-exe/HTML-keyboard/master/keyboard.js";
 
 
@@ -239,11 +240,9 @@ export function setEvents() {
   image.addEventListener('click', toggleOptions);
   imageStyle[0].addEventListener('click', function() {
     checkStyle("white");
-    console.log("white");
   });
   imageStyle[1].addEventListener('click', function() {
     checkStyle("blue");
-    console.log("blue");
   });
   imageStyle[2].addEventListener('click', function() {
     checkStyle("dark");
@@ -276,19 +275,19 @@ export function setEvents() {
   document.getElementById('changeSentence').addEventListener('click', changeSentence);
   document.getElementById('start').addEventListener('click', start, time);
   document.getElementById('tips').addEventListener('click', tipsFunction);
-  document.getElementById('myInput').addEventListener('keydown', function(event) {
-    var keynum;
-    if (window.event) { // IE
-      keynum = event.keyCode;
-    } else if (event.which) { // Netscape/Firefox/Opera
-      keynum = event.which;
-    }
-    //use something like charCodeAt to get the number.
-    pressedKey = String.fromCharCode(keynum);
-    pressedKey = pressedKey.charCodeAt();
-
-    return changeKeyColor(pressedKey);
-  });
+//   document.getElementById('myInput').addEventListener('keydown', function(event) {
+//     var keynum;
+//     if (window.event) { // IE
+//       keynum = event.keyCode;
+//     } else if (event.which) { // Netscape/Firefox/Opera
+//       keynum = event.which;
+//     }
+//     //use something like charCodeAt to get the number.
+//     pressedKey = String.fromCharCode(keynum);
+//     pressedKey = pressedKey.charCodeAt();
+//
+//     return changeKeyColor(pressedKey);
+//   });
 }
 
 export function readTextFile() {
@@ -530,8 +529,6 @@ export function changeSentence() {
     getJSON(link,
       function(err, data) {
         // console.log(data.length);
-        console.log(data.length);
-
         if (err !== null) {
           alert('Something went wrong: ' + err);
         } else {
@@ -633,15 +630,11 @@ export function getRanks() {
         var table = document.getElementById("table");
         ranking = data;
         if (delRanking != 0) {
-          console.log("delete row");
           for (let i = 0; i < ranking.length + 4; i++) {
             table.deleteRow(0);
           }
         }
         delRanking = delRanking + 1;
-        console.log(ranking.length);
-        console.log(ranking[0].date);
-        console.log(ranking[0].points);
         var spc = " ";
 
         for (let i = 0; i < ranking.length; i++) {
@@ -1090,14 +1083,14 @@ export function changeSentenceColor() {
 
 
 
-export function changeKeyColor(lastKey) {
-  //  lastKey = lastKey.toLowerCase();
-  document.getElementById(lastKey).style.backgroundColor = "#828282";
-
-  setTimeout(function() {
-    document.getElementById(lastKey).style.backgroundColor = "#aaaaaa";
-  }, 100);
-}
+// export function changeKeyColor(lastKey) {
+//   //  lastKey = lastKey.toLowerCase();
+//   document.getElementById(lastKey).style.backgroundColor = "#828282";
+//
+//   setTimeout(function() {
+//     document.getElementById(lastKey).style.backgroundColor = "#aaaaaa";
+//   }, 100);
+// }
 
 
 export function tipsFunction() {
@@ -1153,18 +1146,12 @@ export function setCheckTops() {
 }
 
 export function sortTops() {
-  console.log(rank);
   ranking.push(rank);
-  console.log(ranking);
   ranking = _.sortBy(ranking, ['points', "name"]);
-
-  console.log(_.sortBy(ranking, ['points']));
-  console.log(ranking);
   ranking.reverse();
   delete ranking.slice(maxTop - 1, ranking.length);
   // delete ranking[];
   rankingStr = JSON.stringify(ranking);
-  console.log(rankingStr);
   getGist();
 }
 
@@ -1175,7 +1162,6 @@ export function getRanking() {
         alert('Something went wrong: ' + err);
       } else {
         ranking = data;
-        console.log(ranking);
       }
     }
   );
