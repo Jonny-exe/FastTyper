@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>FastTyper</title>
   <meta charset="ISO-8859-1">
@@ -9,7 +10,7 @@
   <link rel="stylesheet" id=link href="/css/main.css"> <!-- SERVER -->
   <link rel="stylesheet" id=link href="https://raw.githack.com/Jonny-exe/HTML-keyboard/master/keyboard.css"> <!-- SERVER -->
 
-   <!-- SERVER
+  <!-- SERVER
    see: https://raw.githack.com/
    see: https://gitcdn.link/
    see: https://stackoverflow.com/questions/7780550/referencing-a-css-file-in-github-repo-as-stylesheet-in-a-html-file
@@ -56,8 +57,27 @@
 
 <body>
   <div w3-include-html="FastTyper-main.html"></div> <!-- SERVER -->
-  <script>includeHTML();</script>
+  <script>
+    includeHTML();
+  </script>
+  <!-- <script src="/js/t.js"> </script> -->
+  <script type="module">
+    import {
+      t
+    } from '/js/t.js';
+    import {
+      setT
+    } from 'https://raw.githack.com/Jonny-exe/FastTyper/master/js/FastTyper.js'; // '/js/FastTyper.js';
+    //'https://gitcdn.link/repo/Jonny-exe/FastTyper/master/js/FastTyper.js'; //  SERVER  from root /var/www/html
+    setT(t);
+  </script>
+
+
+
   <script type="module" src="/js/FastTyper.js"></script> <!-- SERVER -->
-  <script>console.log("FastTyper.js imported");</script>
+  <script>
+    console.log("FastTyper.js imported");
+  </script>
 </body>
+
 </html>

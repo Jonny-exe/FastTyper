@@ -12,11 +12,9 @@
 import {
   Octokit
 } from "https://cdn.skypack.dev/@octokit/core";
-// TODO: use Ft icon
-// import {
-//   Octokit
-// } from "https://cdn.jsdelivr.net/npm/@octokit/core@3.1.2/dist-node/index.js";
+// or from "https://cdn.jsdelivr.net/npm/@octokit/core@3.1.2/dist-node/
 
+// TODO: use Ft icon
 //TODO: change color of buttons, enter login name .
 
 import {
