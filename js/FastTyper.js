@@ -26,6 +26,7 @@ import {
 
 
 //CONSTS
+export var trueFalse;
 export var t;
 export var language;
 export var singleLan;
@@ -58,6 +59,7 @@ export var opKeysSp;
 export var opKeys;
 export var infinite;
 export var infiniteValue;
+export var infiniteBoolean;
 export var welcomeText;
 export var register;
 export var unregister;
@@ -761,8 +763,10 @@ function toggleInfinite() {
   var toggleInfinite = infinite.checked;
   if (toggleInfinite == true) {
     infiniteValue = true;
+    infiniteBoolean = true;
   } else {
     infiniteValue = false;
+    infiniteBoolean = false;
   }
 }
 
@@ -1081,6 +1085,7 @@ export function changeSentenceColor() {
   sentenceWrite = fullPart;
   return sentenceWrite;
 }
+
 //TODO
 // function myKeyPress(e) {
 //   var keynum;
@@ -1114,34 +1119,36 @@ export function tipsFunction() {
   document.getElementById("tips").innerHTML = "Tips: " + tip;
 }
 
+export function infiniteEventListener(event) {
+  console.log('infiniteEventListener');
+  var keynum, pressedKey, enterPressed;
+  if (window.event) { // IE
+    keynum = event.keyCode;
+  } else if (event.which) { // Netscape/Firefox/Opera
+    keynum = event.which;
+  }
+  //use something like charCodeAt to get the number.
+  pressedKey = String.fromCharCode(keynum);
+  enterPressed = pressedKey.charCodeAt();
+  console.log(enterPressed);
+  if (enterPressed == '32') {
+    changeSentence();
+    setTimer();
+    enterPressed = -1;
+    activateInfinite(false);
+  }
+
+}
+
 export function activateInfinite(start) {
   console.log(start);
   if (start == true) {
-    var pressedKey;
-    document.body.addEventListener('keydown', function(event) {
-      var keynum;
-      if (window.event) { // IE
-        keynum = event.keyCode;
-      } else if (event.which) { // Netscape/Firefox/Opera
-        keynum = event.which;
-      }
-      //use something like charCodeAt to get the number.
-      pressedKey = String.fromCharCode(keynum);
-      enterPressed = pressedKey.charCodeAt();
-    });
-    if (enterPressed == 32) {
-      changeSentence();
-      enterPressed = -1;
-      activateInfinite('stop');
-    } else if (enterPressed == -1) {
-      activateInfinite('stop');
-    } else {
-      setTimeout(function(){
-        activateInfinite('true');
-      }, 20);
-    }
-  } else {
-    activateInfinite('stop');
+    document.body.addEventListener('keydown', infiniteEventListener, event);
+  }
+  if (start == false) {
+    document.body.removeEventListener('keydown', infiniteEventListener, event);
+    console.log('deactivateInfinite');
+    infiniteBoolean = false;
   }
 }
 
@@ -1154,10 +1161,17 @@ export function finalAutoCheck() {
   input = inputEl.value;
   if (autocheckOrNot) {
     if (input == sentence) {
+      console.log("input = sentence");
       if (infiniteValue == true) {
-        activateInfinite('start');
+        if (infiniteBoolean == true) {
+          infiniteBoolean = false;
+          setTimeout(function() {
+            infiniteBoolean = true;
+          }, 200);
+          console.log('activateInfinite');
+          activateInfinite(true);
+        }
       } else {
-
         timeEl.innerHTML = "Finished";
         endTimer();
         lastSentence = sentence;
@@ -1179,9 +1193,10 @@ export function finalAutoCheck() {
         document.getElementById("valueCpm").innerHTML = `${separator} ${praise}`;
         autocheckOrNot = false;
       }
+
     }
   }
-  setTimeout(finalAutoCheck, 200);
+  setTimeout(finalAutoCheck, 10);
 }
 
 var topList = [];
