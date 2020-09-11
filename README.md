@@ -23,9 +23,9 @@ To test your typing skills and take `FastTyper` for a spin, go to https://fastty
 
 # Screenshots
 
-![FastTyper screenshot](images/Screenshot-main.PNG)
+![FastTyper screenshot](images/Screenshot-main.png)
 
-![FastTyper screenshot](images/Screenshot-settings.PNG)
+![FastTyper screenshot](images/Screenshot-settings.png)
 
 # Enjoy
 
