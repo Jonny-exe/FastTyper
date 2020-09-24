@@ -256,7 +256,10 @@ export function setEvents() {
   imageStyle[3].addEventListener('click', function() {
     checkStyle("green");
   });
-
+  document.getElementById('githubImageId').addEventListener('click', function() {
+    console.log('clicked');
+    location.href='https://github.com/Jonny-exe/FastTyper';
+  });
   document.getElementById('language').addEventListener('click', toggleLanguages);
   document.getElementsByClassName('singleLanImg')[0].addEventListener('click', function() {
     changeLanguage("english");
@@ -282,19 +285,6 @@ export function setEvents() {
   document.getElementById('changeSentence').addEventListener('click', changeSentence);
   document.getElementById('start').addEventListener('click', start, time);
   document.getElementById('tips').addEventListener('click', tipsFunction);
-  //   document.getElementById('myInput').addEventListener('keydown', function(event) {
-  //     var keynum;
-  //     if (window.event) { // IE
-  //       keynum = event.keyCode;
-  //     } else if (event.which) { // Netscape/Firefox/Opera
-  //       keynum = event.which;
-  //     }
-  //     //use something like charCodeAt to get the number.
-  //     pressedKey = String.fromCharCode(keynum);
-  //     pressedKey = pressedKey.charCodeAt();
-  //
-  //     return changeKeyColor(pressedKey);
-  //   });
 }
 
 export function readTextFile() {
@@ -379,34 +369,19 @@ export function startup() {
   bodyFadeIn();
   getRanking();
   startSetKeyboard("HTML-keyboard");
-  // Retrieve
-
+  console.log(navigator.platform);
   username = localStorage.getItem("username");
+  var platform = navigator.platform;
+  if (platform.includes('Linux')) {
+    document.body.style.font = "regular normal 20px DejaVu,Serif";
+  }
   if (username == null) {
     console.log("no user registered");
     welcomeText.innerHTML = "Welcome";
-  } else {
     console.log("username " + username);
     welcomeText.innerHTML = `Welcome ${username}`;
   }
 }
-
-// inputEl.onchange = function() {
-//   if (finished) {
-//     updateDisplay();
-//   }
-// };
-//
-// function updateDisplay() {
-//   displayFinished.value = "finished";
-//   export var request = new XMLHttpRequest();
-//   formData.append(name, value);
-//   request.responesType = 'text';
-//   request.onload = function() {
-//     displayFinished.value = "finished";
-//   };
-//   request.send();
-// }
 
 export function setOptionsVisivility() {
   for (let i = 0; i < options.length; i++) {
