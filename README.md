@@ -30,4 +30,4 @@ To test your typing skills and take `FastTyper` for a spin, go to https://fastty
 # Enjoy
 
 - If you like it, give it a :star: on :octocat:
-- Fork it and sent PR. 
+- Fork it and send PR. 
