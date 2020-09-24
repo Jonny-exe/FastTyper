@@ -258,7 +258,7 @@ export function setEvents() {
   });
   document.getElementById('githubImageId').addEventListener('click', function() {
     console.log('clicked');
-    location.href='https://github.com/Jonny-exe/FastTyper';
+    location.href = 'https://github.com/Jonny-exe/FastTyper';
   });
   document.getElementById('language').addEventListener('click', toggleLanguages);
   document.getElementsByClassName('singleLanImg')[0].addEventListener('click', function() {
@@ -785,6 +785,7 @@ export function toggleCheckOptionsNormal(optionsNormal) {
 }
 
 export function toggleCheckOptions() {
+  console.log('toggle check options');
   optionsFadeIn();
   if (document.getElementsByClassName('singleLan')[0].style.visibility == "visible") {
     toggleLanguages();
@@ -1242,11 +1243,6 @@ export function optionsFadeIn() {
   var tl = new TimelineMax();
   var options = document.getElementsByClassName("container");
   var body = document.body;
-
-  //   tl.fromTo(
-  //     options, 1.5, { y: "0%" },
-  //      { y: "100%", ease: Power2.easeInOut});
-  // }
   tl.fromTo(
     options, 0.5, {
       y: "-500%",
@@ -1254,7 +1250,7 @@ export function optionsFadeIn() {
     }, {
       y: "0%",
       opacity: 1,
-      ease: Elastic.easeInOut
+      ease: Power2.easeInOut
     }
   );
 }
@@ -1274,7 +1270,7 @@ export function optionsBigFadeIn() {
     }, {
       y: "0%",
       opacity: 1,
-      ease: Elastic.easeInOut
+      ease: Power2.easeInOut
     }
   );
 
