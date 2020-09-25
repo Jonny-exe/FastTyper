@@ -373,7 +373,7 @@ export function startup() {
   username = localStorage.getItem("username");
   var platform = navigator.platform;
   if (platform.includes('Linux')) {
-    document.body.style.font = "regular normal 20px DejaVu,Serif";
+    document.body.style.font = "normal normal 20px Ubuntu,serif";
   }
   if (username == null) {
     console.log("no user registered");

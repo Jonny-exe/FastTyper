@@ -1,6 +1,7 @@
 body {
   background-color: rgb(224, 224, 224);
-  font-family: DejaVu Serif;
+  font-family: Franklin Gothic;
+  /* font-family: Ubuntu; */
   color: rgb(0, 0, 0);
   text-shadow: 2px 2px 4px #838383;
   -webkit-touch-callout: none;
