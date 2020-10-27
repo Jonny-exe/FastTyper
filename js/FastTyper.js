@@ -275,8 +275,13 @@ export function setEvents() {
   home.addEventListener('click', goHome);
   credits.addEventListener('click', setCreditsLink);
   document.getElementById('optionsTwo').addEventListener('click', toggleCheckOptions);
-  document.getElementById('optionsCheckNormal').addEventListener('click', toggleCheckOptionsNormal, true);
-  opRandom.addEventListener('click', toggleCheckOptionsNormal, false);
+  document.getElementById('optionsCheckNormal').addEventListener('click', function() {
+    toggleCheckOptionsNormal(false);
+  });
+  opRandom.addEventListener('click', function() {
+    toggleCheckOptionsNormal(true);
+  });
+
   opKeys.addEventListener('click', toggleKeys);
   infinite.addEventListener('click', toggleInfinite);
   document.getElementById('optionsFour').addEventListener('click', toggleStyles);
@@ -473,34 +478,20 @@ export function changeSentence() {
         if (err !== null) {
           alert('Something went wrong: ' + err);
         } else {
-          ranNumber = _.shuffle([10, 20]);
-          finalNumber = ranNumber[0];
+          let amountOfWords = 20;
+          let numberOnOrOff = false;
+          let numberPerWords = 5;
           if (opNumbers.checked) {
-            if (!opShort.checked && opLong.checked) {
-              sentence = computeRandomSentence(20, true, 5);
-            }
-
-            if (opShort.checked && !opLong.checked) {
-              sentence = computeRandomSentence(10, true, 5);
-            }
-
-            if (opShort.checked && opLong.checked) {
-              sentence = computeRandomSentence(finalNumber, true, 5);
-            }
+            numberOnOrOff = true;
           }
-          if (!opNumbers.checked) {
-            if (opShort.checked && !opLong.checked) {
-              sentence = computeRandomSentence(10, false, 5);
-            }
-
-            if (!opShort.checked && opLong.checked) {
-              sentence = computeRandomSentence(20, false, 5);
-            }
-
-            if (opShort.checked && opLong.checked) {
-              sentence = computeRandomSentence(finalNumber, false, 5);
-            }
+          if (opShort.checked && opLong.checked) {
+            let finalNumber = _.shuffle([10, 20])[0];
+            amountOfWords = finalNumber;
+          } else if (opShort.checked) {
+            amountOfWords = 10
           }
+
+          computeRandomSentence(amountOfWords, numberOnOrOff, numberPerWords);
         }
 
       }
@@ -741,19 +732,17 @@ export function toggleOptions() {
 
 //TODO: make flag icons, or background on the languages;
 //TODO: make the languages work
-
-export function toggleCheckOptionsNormal(optionsNormal) {
-  if (optionsNormal == true) {
-    opNormal.checked = true;
-    opRandom.checked = false;
-  } else {
+export function toggleCheckOptionsNormal(optionsNormalBoolean) {
+  if (optionsNormalBoolean) {
     opNormal.checked = false;
     opRandom.checked = true;
+  } else {
+    opNormal.checked = true;
+    opRandom.checked = false;
   }
 }
 
 export function toggleCheckOptions() {
-  console.log('toggle check options');
   optionsFadeIn();
   if (document.getElementsByClassName('singleLan')[0].style.visibility == "visible") {
     toggleLanguages();
@@ -1074,7 +1063,6 @@ export function infiniteEventListener(event) {
   //use something like charCodeAt to get the number.
   pressedKey = String.fromCharCode(keynum);
   enterPressed = pressedKey.charCodeAt();
-  console.log(enterPressed);
   if (enterPressed == '32') {
     changeSentence();
     setTimer();
