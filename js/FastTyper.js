@@ -519,6 +519,7 @@ export function changeSentence() {
           if (!sentence.includes(1, 2, 3, 4, 5, 6, 7, 8, 9) && opNumbers.checked) {
             changeSentence();
           }
+
           if (!opShort.checked && opLong.checked) {
             if (sentence.length < 100) {
               changeSentence();
@@ -532,9 +533,7 @@ export function changeSentence() {
           writeSentence();
         }
       }
-
     );
-
   }
 }
 
@@ -581,20 +580,20 @@ export function getRanks() {
         for (let i = 0; i < ranking.length; i++) {
           var row;
           if (i == 0) {
-            row = table.insertRow(0);
-            row = table.insertRow(1);
-            row = table.insertRow(2);
-            row = table.insertRow(3);
+            for (let n = 0; n < 4; n++) {
+              row = table.insertRow(i);
+            }
             row.style.height = "100px";
           }
           row = table.insertRow(i + 4);
-          var cell1 = row.insertCell(0);
-          var cell2 = row.insertCell(1);
-          var cell3 = row.insertCell(2);
+          var cell = []
+          for (let n = 0; n < 3; n++) {
+            cell.push(row.insertCell(n));
+          }
 
-          cell1.innerHTML = "Top" + spc + (i + 1) + spc + "-" + spc + "Name" + spc + ranking[i].name;
-          cell2.innerHTML = "Points" + spc + ranking[i].points;
-          cell3.innerHTML = "Date" + spc + ranking[i].date;
+          cell[0].innerHTML = `Top: ${(i + 1)} - Name: ${ranking[i].name}`;
+          cell[1].innerHTML = `Points: ${ranking[i].points}`;
+          cell[2].innerHTML = `Date: ${ranking[i].date}`;
           row.style.fontSize = "225%";
         }
       }
@@ -694,7 +693,7 @@ export function toggleKeys() {
 function toggleInfinite() {
   console.log("infinite");
   var toggleInfinite = infinite.checked;
-  if (toggleInfinite == true) {
+  if (toggleInfinite) {
     infiniteValue = true;
     infiniteBoolean = true;
   } else {
@@ -831,11 +830,11 @@ export function checkStyle(color) {
   var secondaryColor;
   var extraColor;
   var colors = ['white', 'blue', 'dark', 'green'];
+  for (let i = 0; i < 4; i++) {
+    fade[i].style.visibility = "hidden";
+  }
   if (color == "white" || colors.includes(color) == false) {
     fade[0].style.visibility = "visible";
-    fade[1].style.visibility = 'hidden';
-    fade[2].style.visibility = "hidden";
-    fade[3].style.visibility = "hidden";
 
     mainColor = '#000000';
     backgroundColor = '#E0E0E0';
@@ -848,10 +847,7 @@ export function checkStyle(color) {
       x[i].style.borderRadius = "4px";
     }
   } else if (color == "dark") {
-    fade[0].style.visibility = "hidden";
-    fade[1].style.visibility = 'hidden';
     fade[2].style.visibility = "visible";
-    fade[3].style.visibility = "hidden";
 
     mainColor = '#ffffff';
     backgroundColor = '#333333';
@@ -866,10 +862,7 @@ export function checkStyle(color) {
       button[i].style.borderRadius = "4px";
     }
   } else if (color == "blue") {
-    fade[0].style.visibility = "hidden";
     fade[1].style.visibility = 'visible';
-    fade[2].style.visibility = "hidden";
-    fade[3].style.visibility = "hidden";
 
     mainColor = '#3ca7f5';
     backgroundColor = '#f6f4f4';
@@ -884,9 +877,6 @@ export function checkStyle(color) {
       button[i].style.borderRadius = "4px";
     }
   } else if (color == "green") {
-    fade[0].style.visibility = "hidden";
-    fade[1].style.visibility = 'hidden';
-    fade[2].style.visibility = "hidden";
     fade[3].style.visibility = "visible";
 
     mainColor = '#6bff00';
@@ -958,7 +948,7 @@ export function cpm() {
   if (isTyping) {
     input = inputEl.value; //make taketimeresult reactive
     count = input.length;
-    document.getElementById("cpmCount").innerHTML = cpmResult + " cpm";
+    document.getElementById("cpmCount").innerHTML = `${cpmResult} cpm`;
     setTimeout(cpm, 100);
   }
 
@@ -986,8 +976,8 @@ export function checkError() {
 
       setTimeout(checkError, 50);
       inputEl.disabled = false;
-      document.getElementById("accuracyCount").innerHTML = accCount + " mistakes" + separator;
-      document.getElementById("accPercent").innerHTML = accPercentage + " % accuracy" + separator;
+      document.getElementById("accuracyCount").innerHTML = `${accCount} mistakes ${separator}`;
+      document.getElementById("accPercent").innerHTML = `${accPercentage} % accuracy" ${separator}`;
 
     }
 
