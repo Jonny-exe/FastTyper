@@ -664,7 +664,6 @@ export function able() {
 
 export function toggleStyles() {
   var hideOptions = opLong.style.visibility;
-  var hideStyle = optionsStyleBlue.visibility;
   if (hideOptions == "visible") {
     toggleCheckOptions();
     toggleStyleOptions();
@@ -772,26 +771,25 @@ export function toggleCheckOptions() {
 export function toggleLanguages() {
   if (opStyleWhite.style.visibility == 'visible') {
     toggleStyleOptions();
-
   }
   if (opLong.style.visibility == 'visible') {
     toggleCheckOptions();
   }
   var showHid = singleLan[0].style.visibility;
   if (showHid == "visible") {
-    document.getElementById('checkOptionsSmall').style.pointerEvents = 'auto';
-    for (let i = 0; i < document.getElementsByClassName('singleLan').length; i++) {
-      singleLan[i].style.visibility = "hidden";
-      singleLan[i].style.zIndex = "-2";
-      document.getElementById('languageDiv').style.height = '100%';
-    }
+    var pointerEvents = 'auto'
+    var zIndex = '-2'
+    var visibility = 'hidden'
   } else {
-    document.getElementById('checkOptionsSmall').style.pointerEvents = 'none';
-    document.getElementById('languageDiv').style.height = '100%';
-    for (let i = 0; i < singleLan.length; i++) {
-      singleLan[i].style.visibility = "visible";
-      singleLan[i].style.zIndex = "10";
-    }
+    var pointerEvents = 'none'
+    var zIndex = '10'
+    var visibility = 'visible'
+  }
+  document.getElementById('languageDiv').style.height = '100%';
+  for (let i = 0; i < singleLan.length; i++) {
+    singleLan[i].style.visibility = visibility;
+    singleLan[i].style.zIndex = zIndex;
+    document.getElementById('checkOptionsSmall').style.pointerEvents = pointerEvents;
   }
 }
 
