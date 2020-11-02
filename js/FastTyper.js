@@ -794,32 +794,31 @@ export function toggleLanguages() {
 }
 
 export function changeLanguage(language) {
+  for (let i = 0; i < singleLanImg; i++) {
+    singleLanImg[i].style.border = 'none';
+  }
+  console.log(language)
   if (language == "english") {
-    document.getElementsByClassName("singleLanImg")[0].style.border = "thick solid " + boderColor;
-    document.getElementsByClassName("singleLanImg")[1].style.border = 'none';
-    document.getElementsByClassName("singleLanImg")[2].style.border = 'none';
+    var index = 0
     link = "https://raw.githubusercontent.com/dwyl/quotes/master/quotes.json";
     key = "text";
     wordsLink = 'https://raw.githubusercontent.com/sindresorhus/mnemonic-words/master/words.json';
-  }
-  if (language == "spanish") {
-    document.getElementsByClassName("singleLanImg")[0].style.border = 'none';
-    document.getElementsByClassName("singleLanImg")[1].style.border = 'none';
-    document.getElementsByClassName("singleLanImg")[2].style.border = "thick solid " + boderColor;
+  } else if (language == "spanish") {
+    var index = 2
     link = "https://raw.githubusercontent.com/GianNipitella/SpanishQuotes/gh-pages/javascripts/citas.json";
     key = "Cita";
     wordsLink = "https://raw.githubusercontent.com/words/an-array-of-spanish-words/master/index.json";
-  }
-  if (language == "german") {
-    document.getElementsByClassName("singleLanImg")[0].style.border = 'none';
-    document.getElementsByClassName("singleLanImg")[1].style.border = "thick solid " + boderColor;
-    document.getElementsByClassName("singleLanImg")[2].style.border = 'none';
-
+  } else if (language == "german") {
+    var index = 1
     link = "https://raw.githubusercontent.com/stevencaro/quotation/master/german-quotes.json";
     key = "";
     wordsLink = "https://raw.githubusercontent.com/Jonny-exe/Tr/master/GermanWords.json";
   }
-  changeSentence();
+
+  if (language != undefined) {
+    document.getElementsByClassName('singleLanImg')[index].style.border = "thick solid " + boderColor;
+    changeSentence();
+  }
 }
 
 export function checkStyle(color) {
@@ -914,6 +913,7 @@ export function checkStyle(color) {
   localStorage.setItem("colorStyle", color);
   changeLanguage();
 }
+
 
 //TODO:Make rankings fith this.An element with position: sticky; is positioned based on the user's scroll position.
 
