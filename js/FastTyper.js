@@ -977,7 +977,6 @@ export function checkError() {
       setTimeout(checkError, 50);
       inputEl.disabled = false;
       document.getElementById("accuracyCount").innerHTML = `${accCount} mistakes ${separator}`;
-      document.getElementById("accPercent").innerHTML = `${accPercentage} % accuracy" ${separator}`;
 
     }
 
